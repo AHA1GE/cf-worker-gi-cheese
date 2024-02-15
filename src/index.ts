@@ -1,4 +1,4 @@
-// 本文件是Cloudflare Worker的入口文件。地址：https://
+// https://github.com/AHA1GE/cf-worker-gi-cheese
 import { request } from "@octokit/request";
 import { css } from "./css.js"; //写死的css样式
 const config = {
@@ -129,7 +129,14 @@ async function createCard(project: any): Promise<string> {
  **/
 async function createPage(): Promise<string> {
     const cards = await Promise.all(config.projects.map(createCard));
-    return htmlBase.page.replace("CARDS", cards.join("")).replace("STYLESHEET", css);
+    // try fetch css from github, if failed, use local css
+    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/main/src/index.css").then((res) => {
+        if (res.status === 200) return res.text();
+        else { console.log("Failed to fetch css from github, use hard-coded css"); return css; };
+    }).catch(() => {
+        return css;
+    });
+    return htmlBase.page.replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
 }
 
 export default {
