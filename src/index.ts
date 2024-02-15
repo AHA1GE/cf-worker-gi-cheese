@@ -130,9 +130,14 @@ async function createCard(project: any): Promise<string> {
 async function createPage(): Promise<string> {
     const cards = await Promise.all(config.projects.map(createCard));
     // try fetch css from github, if failed, use local css
-    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/main/src/index.css").then((res) => {
-        if (res.status === 200) return res.text();
-        else { console.log("Failed to fetch css from github, use hard-coded css"); return css; };
+    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
+        if (res.status === 200) {
+            console.log(res)
+            return res.text();
+        } else {
+            console.log("Failed to fetch css from github, use hard-coded css");
+            return css;
+        }
     }).catch(() => {
         return css;
     });
