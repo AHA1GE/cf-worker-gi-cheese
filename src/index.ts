@@ -132,7 +132,6 @@ async function createPage(): Promise<string> {
     // try fetch css from github, if failed, use local css
     const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
         if (res.status === 200) {
-            console.log(res)
             return res.text();
         } else {
             console.log("Failed to fetch css from github, use hard-coded css");
