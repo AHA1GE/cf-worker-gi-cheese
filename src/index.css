@@ -49,6 +49,9 @@ main {
     text-align: center;
     margin: 1rem 0rem 1rem 0rem;
     padding: 0rem;
+}
+
+main .cards-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -47,7 +47,12 @@ const htmlBase = {
         </head>
         <body>
           <header><h1>原神辅助</h1></header>
-          <main>CARDS</main>
+          <main>
+            <p>本站收录了一些原神辅助工具。在网络条件允许的情况下请直接访问您的目的地，通过代理访问可能会出现各种意料之外的情况，敬请谅解！</p>
+            <div class="cards-container">
+                CARDS
+            </div>
+          </main>
           <footer><p>本站保留所有权利</p></footer>
           <script src=""></script>
         </body>
