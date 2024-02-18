@@ -1,80 +1,9 @@
 // https://github.com/AHA1GE/cf-worker-gi-cheese
 import { request } from "@octokit/request";
+import { config } from "./config.js"; //页面设置
+import { htmlBase } from "./htmlBase.js"; //写死的html基础模板
 import { css } from "./css.js"; //写死的css样式
-const config = {
-    proxier: "https://p.ahaigege.com/proxy/",
-    projects: [
-        {
-            name: "Better-GI",
-            url: "https://github.com/babalae/better-genshin-impact",
-            website: "https://github.com/babalae/better-genshin-impact",
-            desc: "基于计算机视觉的辅助工具，所有服务器及云游戏均可使用。",
-        },
-        {
-            name: "Minty",
-            url: "https://github.com/kindawindytoday/Minty-Releases",
-            website: "https://discord.gg/kindawindytoday",
-            desc: "免费！功能简略的作弊器，仅限国际服。",
-        },
-        {
-            name: "Korepi",
-            url: "https://github.com/Cotton-Buds/calculator",
-            website: "https://korepi.com/zh/",
-            desc: "免费&收费！功能丰富的作弊器，支持国际服；非高危功能支持国服。",
-        },
-        {
-            name: "Akebi",
-            url: "https://genshincheat.net/#linkk",
-            website: "https://docs.bibika.fun/",
-            desc: "收费！功能丰富的作弊器，支持国际服；国服有较高封号概率。",
-        },
-    ],
-}
-const htmlBase = {
-    page: `
-      <!DOCTYPE html>
-      <html lang="zh-cn">
-        <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="原神辅助">
-        <meta name="keywords" content="原神">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>原神辅助</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" href="/favicon.ico">
-        <style>STYLESHEET</style>
-        </head>
-        <body>
-          <header><h1>原神辅助</h1></header>
-          <main>
-            <div class="readme">
-                <h2>说明</h2>
-                <p>本站收录了一些原神辅助工具。</p>
-                <p>本站不对任何工具的安全性和使用后果负责。</p>
-                <p>在网络条件允许的情况下请直接访问，通过代理访问可能会出现各种意料之外的情况，敬请谅解！</p>
-                <p>如果遇到无法访问的情况，请寻求技术人员的帮助！付费帮助！</p>
-            </div>
-            <div class="cards-container">
-                CARDS
-            </div>
-          </main>
-          <footer><p>本站保留所有权利</p></footer>
-          <script src=""></script>
-        </body>
-      </html>
-    `,
-    card: `<div class="card">
-    <h2 >PROJECT_NAME</h2>
-    <p class="info">DESCRIPTION</p>
-    <a class="button" href="PROJECT_WEBSITE">访问官网或Discord</a>
-    <a class="button" href="PROXIED_PROJECT_WEBSITE">通过代理访问官网或Discord</a><br>
-    <a class="button" href="PROJECT_URL">访问下载页面</a>
-    <a class="button" href="PROXIED_PROJECT_URL">通过代理访问下载页面</a><br>
-    <a class="button" href="DOWNLOAD_LINK">下载最新版本</a>
-    <a class="button" href="PROXIED_DOWNLOAD_LINK">通过代理下载最新版本</a><br>
-    </div><br>`,
-}
+
 /** 用来获取下载地址的函数
  * @param url 项目地址，例如：“https://github.com/kindawindytoday/Minty-Releases”
  * @param astIndex Asset的索引，默认0，第一个
@@ -151,7 +80,7 @@ async function createPage(): Promise<string> {
     }).catch(() => {
         return css;
     });
-    return htmlBase.page.replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
+    return htmlBase.page.replace("README_CONTENT", config.readmeContent).replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
 }
 
 export default {
