@@ -14,6 +14,7 @@ export const htmlBase = {
         <link rel="icon" href="/favicon.ico">
         <style>STYLESHEET</style>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script>
         </head>
         <body>
           <header><h1>原神辅助</h1></header>
