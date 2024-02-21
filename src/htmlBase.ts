@@ -26,9 +26,8 @@ export const htmlBase = {
             </div>
           </main>
           <footer><p>本站保留所有权利</p></footer>
-          <script src=""></script>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script>
         </body>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script>
       </html>
     `,
   card: `<div class="card">
