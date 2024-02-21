@@ -1,5 +1,5 @@
 export const htmlBase = {
-    page: `
+  page: `
       <!DOCTYPE html>
       <html lang="zh-cn">
         <head>
@@ -8,6 +8,7 @@ export const htmlBase = {
         <meta name="keywords" content="原神">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-adsense-account" content="ca-pub-5526526482489599">
         <title>原神辅助</title>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" href="/favicon.ico">
@@ -29,7 +30,7 @@ export const htmlBase = {
         </body>
       </html>
     `,
-    card: `<div class="card">
+  card: `<div class="card">
     <h2 >PROJECT_NAME</h2>
     <p class="info">DESCRIPTION</p>
     <a class="button" href="PROJECT_WEBSITE">访问官网或Discord</a>
