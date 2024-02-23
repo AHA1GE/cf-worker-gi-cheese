@@ -50,6 +50,14 @@ main {
     text-align: center;
     margin: 1rem 0rem 1rem 0rem;
     padding: 0rem;
+}
+
+main .readme {
+    margin: .5rem 1rem 1rem 1rem;
+    padding: 1rem;
+}
+
+main .cards-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -66,15 +74,15 @@ main {
     max-height: 100%;
     height: auto;
 
-    margin: 3rem;
+    margin: 2rem 3rem;
     padding: 0rem 2rem 2rem 2rem;
 
     border-radius: 2rem;
 
     /* glossed glass */
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(177, 177, 177, 0.5);
     backdrop-filter: blur(10px);
-    
+
 }
 
 /* Info styles */
@@ -82,8 +90,26 @@ main {
     margin-bottom: 1.5rem;
 }
 
+.card .manual {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.7rem;
+    display: block;
+    text-align: left;
+}
+
+.popover-dialog {
+    padding: 1rem 1rem 2rem 1rem;
+    border-radius: 1rem;
+}
+
+.popover-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+}
+
 /* Button styles */
-.card .button {
+.button {
     background-color: #ccc;
     color: #333;
     padding: .5rem 1rem;
@@ -93,7 +119,7 @@ main {
     margin-top: .5rem;
 }
 
-.card .button:hover {
+.button:hover {
     background-color: #999;
     color: #fff;
 }

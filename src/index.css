@@ -79,7 +79,7 @@ main .cards-container {
     border-radius: 2rem;
 
     /* glossed glass */
-    background: rgba(127, 127, 127, 0.5);
+    background: rgba(177, 177, 177, 0.5);
     backdrop-filter: blur(10px);
 
 }
@@ -89,8 +89,26 @@ main .cards-container {
     margin-bottom: 1.5rem;
 }
 
+.card .manual {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.7rem;
+    display: block;
+    text-align: left;
+}
+
+.popover-dialog {
+    padding: 1rem 1rem 2rem 1rem;
+    border-radius: 1rem;
+}
+
+.popover-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+}
+
 /* Button styles */
-.card .button {
+.button {
     background-color: #ccc;
     color: #333;
     padding: .5rem 1rem;
@@ -100,7 +118,7 @@ main .cards-container {
     margin-top: .5rem;
 }
 
-.card .button:hover {
+.button:hover {
     background-color: #999;
     color: #fff;
 }

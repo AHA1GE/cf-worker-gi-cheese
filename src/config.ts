@@ -1,7 +1,9 @@
 export const config = {
     proxier: "https://p.ahaigege.com/proxy/",
+    robotsTXT: ``,
+    adsTXT: `google.com, pub-5526526482489599, DIRECT, f08c47fec0942fa0`,
     readmeContent: `
-                <p>本站收录了一些原神辅助工具。</p>
+                <p>本站提供了一些原神辅助工具的使用教程。</p>
                 <p>本站不对任何工具的安全性和使用后果负责。</p>
                 <p>在网络条件允许的情况下请直接访问，通过代理访问可能会出现各种意料之外的情况，敬请谅解！</p>
                 <p>如果遇到无法访问的情况，请寻求网络技术人员的帮助！</p>
@@ -12,24 +14,28 @@ export const config = {
             url: "https://github.com/babalae/better-genshin-impact",
             website: "https://github.com/babalae/better-genshin-impact",
             desc: "免费！基于计算机视觉的辅助工具，所有服务器及云游戏均可使用。",
+            manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请根据Github上的ReadMe所展示的教程操作各个功能。",
         },
         {
             name: "Minty",
             url: "https://github.com/kindawindytoday/Minty-Releases",
             website: "https://discord.gg/kindawindytoday",
             desc: "免费！功能简略的作弊器，仅限国际服。",
+            manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
         },
         {
             name: "Korepi",
             url: "https://github.com/Cotton-Buds/calculator",
             website: "https://korepi.com/zh/",
             desc: "免费！功能丰富的作弊器，支持国际服。付费获取更多功能和国服支持！",
+            manual: "首先前往官方Discord，获取免费使用密钥。前往官方Discord内的链接下载最新版。使用管理员权限启动你下载的程序。程序启动后会产生你的HWID。将你的HWID发送给官方Discord内的机器人，然后你会收到一个密钥文件。将密钥文件复制到程序所在的目录即可使用。",
         },
         {
             name: "Akebi",
             url: "https://genshincheat.net/#linkk",
             website: "https://docs.bibika.fun/",
             desc: "收费！功能丰富的作弊器，支持国际服和国服。",
+            manual: "前往官方链接下载最新版。然后在官方Sellix或代购人员处购买密钥。启动程序并输入密钥，选择游戏的主程序，注意不要选择启动器程序，然后在开门后请按照菜单内的信息开启相应功能。",
         },
     ],
 }

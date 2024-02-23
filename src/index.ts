@@ -52,8 +52,10 @@ function getProxiedUrl(url: string): string {
  **/
 async function createCard(project: any): Promise<string> {
     return htmlBase.card
-        .replace("PROJECT_NAME", project.name)
+        .replace(/PROJECT_NAME/g, project.name)
         .replace("DESCRIPTION", project.desc)
+        .replace("MANUAL", project.manual)
+        .replace(/POPOVERID/g, project.name + "-popover")
         .replace("PROJECT_WEBSITE", project.website)
         .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(project.website))
         .replace("PROJECT_URL", project.url)
@@ -72,6 +74,7 @@ async function createPage(): Promise<string> {
     // try fetch css from github, if failed, use local css
     const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
         if (res.status === 200) {
+            return css;
             return res.text();
         } else {
             console.log("Failed to fetch css from github, use hard-coded css");
@@ -85,7 +88,34 @@ async function createPage(): Promise<string> {
 
 export default {
     async fetch(request: any, env: any, ctx: any) {
+        //parse the request url, switch all capital letters to lower case
         const requestUrl = new URL(request.url);
+
+        //switch case, if vising the root return the page; visiting robots.txt return the robotsTXT; visiting ads.txt return the adsTXT; else return 404
+        switch (requestUrl.pathname.toLowerCase()) {
+            case "/":
+                return new Response(
+                    await createPage(),
+                    { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "max-age=30" } }
+                );
+            case "/robots.txt":
+                return new Response( //use tobotsTXT from config, cache 1 year inmutable
+                    config.robotsTXT,
+                    { headers: { "Content-Type": "text/plain", "Cache-Control": "max-age=31536000, immutable" } }
+                );
+            case "/ads.txt":
+                return new Response( //use adsTXT from config, cache no cache
+                    config.adsTXT,
+                    { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
+                );
+            default:
+                return new Response(
+                    "404 Not Found",
+                    { status: 404, headers: { "Content-Type": "text/plain" } }
+                );
+        }
+
+
 
         return new Response(
             await createPage(),
