@@ -12,7 +12,6 @@ export const htmlBase = {
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" href="/favicon.ico">
         <style>STYLESHEET</style>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script>
         </head>
         <body>
           <header><h1>原神辅助</h1></header>
