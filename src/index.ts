@@ -88,7 +88,7 @@ async function createPage(): Promise<string> {
 
 export default {
     async fetch(request: any, env: any, ctx: any) {
-        //parse the request url, switch all capital letters to lower case
+        //parse the request url
         const requestUrl = new URL(request.url);
 
         //switch case, if vising the root return the page; visiting robots.txt return the robotsTXT; visiting ads.txt return the adsTXT; else return 404
@@ -114,13 +114,6 @@ export default {
                     { status: 404, headers: { "Content-Type": "text/plain" } }
                 );
         }
-
-
-
-        return new Response(
-            await createPage(),
-            { headers: { "Content-Type": "text/html" } }
-        );
     },
 
 };
