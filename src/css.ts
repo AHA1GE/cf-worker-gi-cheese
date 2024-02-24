@@ -68,13 +68,13 @@ main .cards-container {
 .card {
     min-width: 300px;
     max-width: 100%;
-    width: 25%;
+    width: 40%;
 
     min-height: 250px;
     max-height: 100%;
     height: auto;
 
-    margin: 2rem 3rem;
+    margin: 2rem 2.5rem 1rem 2.5rem;
     padding: 0rem 2rem 2rem 2rem;
 
     border-radius: 2rem;
@@ -82,6 +82,7 @@ main .cards-container {
     /* glossed glass */
     background: rgba(177, 177, 177, 0.5);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
 }
 
@@ -106,6 +107,7 @@ main .cards-container {
 .popover-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 /* Button styles */
