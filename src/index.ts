@@ -10,7 +10,7 @@ import { css } from "./css.js"; //写死的css样式
  * @returns {string}  以字符串返回的下载地址，例如：“https://github.com/kindawindytoday/Minty-Releases/releases/download/4.4.0.1/minty.zip”
  * @description 该函数接受项目地址，返回指定索引的asset的下载地址。
  **/
-async function getAssetsUrl(url: string, astIndex: number = 0): Promise<string> {
+async function getAssetsUrl(url: string, astIndex: number): Promise<string> {
     // 如果项目地址不是github地址，直接返回项目地址
     if (!url.startsWith("https://github.com")) { return url; } else {
         try {
@@ -60,8 +60,8 @@ async function createCard(project: any): Promise<string> {
         .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(project.website))
         .replace("PROJECT_URL", project.url)
         .replace("PROXIED_PROJECT_URL", getProxiedUrl(project.url))
-        .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url))
-        .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(await getAssetsUrl(project.url)));
+        .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url, project.astIndex))
+        .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(await getAssetsUrl(project.url, project.astIndex)));
 }
 
 /** 用来构造主页html的函数
