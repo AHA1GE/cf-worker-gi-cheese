@@ -108,6 +108,16 @@ export default {
                     config.adsTXT,
                     { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
                 );
+            case "/favicon.ico":
+                return new Response( //use faviconAddress from config, cache 1 year inmutable
+                    await fetch(config.faviconAddress + "favicon.ico").then((res) => res.blob()),
+                    { headers: { "Content-Type": "image/x-icon", "Cache-Control": "max-age=31536000, immutable" } }
+                );
+            case "apple-touch-icon.png":
+                return new Response( //use faviconAddress from config, cache 1 year inmutable
+                    await fetch(config.faviconAddress + "apple-touch-icon.png").then((res) => res.blob()),
+                    { headers: { "Content-Type": "image/png", "Cache-Control": "max-age=31536000, immutable" } }
+                );
             default:
                 return new Response(
                     "404 Not Found",

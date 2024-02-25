@@ -2,6 +2,7 @@ export const config = {
     proxier: "https://p.ahaigege.com/proxy/",
     robotsTXT: ``,
     adsTXT: `google.com, pub-5526526482489599, DIRECT, f08c47fec0942fa0`,
+    faviconAddress: `https://genshin.hoyoverse.com/`,
     readmeContent: `
                 <p>本站提供了一些Windows端的原神工具的介绍和使用教程。本站不对任何工具的安全性和使用后果负责。</p>
                 <p>在网络条件允许的情况下请直接访问，通过代理访问可能会出现各种意料之外的情况，敬请谅解！</p>
