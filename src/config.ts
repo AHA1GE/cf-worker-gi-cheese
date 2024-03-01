@@ -57,5 +57,13 @@ export const config = {
             desc: "收费！功能丰富的辅助工具，支持国际服和国服。",
             manual: "前往官方链接下载最新版。然后在官方Sellix或代购人员处购买密钥。启动程序并输入密钥，选择游戏的主程序，注意不要选择启动器程序，然后在开门后请按照菜单内的信息开启相应功能。",
         },
+        {
+            name: "辅助吧",
+            url: "https://www.fuzhu86.com",
+            astIndex: 0,
+            website: "https://www.fuzhu86.com/",
+            desc: "免费！站主收集了各种免费辅助。",
+            manual: "打开，爽用！",
+        },
     ],
 }
