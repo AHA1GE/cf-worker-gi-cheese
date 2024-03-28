@@ -40,8 +40,8 @@ async function getAssetsUrl(url: string, astIndex: number): Promise<string> {
  * @returns {string}  以字符串返回的代理访问地址，例如：“https://p.ahaigege.com/proxy/https://example.com”
  * @description 该函数接受目标地址，返回代理访问地址。
  */
-function getProxiedUrl(url: string): string {
-    return config.proxier + url;
+function getProxiedUrl(proxier: string, url: string): string {
+    return proxier + url;
 }
 
 /** 用来构造项目卡片html的函数
@@ -51,17 +51,32 @@ function getProxiedUrl(url: string): string {
  * 项目卡片的样式可以在css中修改。
  **/
 async function createCard(project: any): Promise<string> {
-    return htmlBase.card
-        .replace(/PROJECT_NAME/g, project.name)
-        .replace("DESCRIPTION", project.desc)
-        .replace("MANUAL", project.manual)
-        .replace(/POPOVERID/g, project.name + "-popover")
-        .replace("PROJECT_WEBSITE", project.website)
-        .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(project.website))
-        .replace("PROJECT_URL", project.url)
-        .replace("PROXIED_PROJECT_URL", getProxiedUrl(project.url))
-        .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url, project.astIndex))
-        .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(await getAssetsUrl(project.url, project.astIndex)));
+    if (project.isOnGithub) {
+        return htmlBase.card
+            .replace(/PROJECT_NAME/g, project.name)
+            .replace("DESCRIPTION", project.desc)
+            .replace("MANUAL", project.manual)
+            .replace(/POPOVERID/g, project.name + "-popover")
+            .replace("PROJECT_WEBSITE", project.website)
+            .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
+            .replace("PROJECT_URL", project.url)
+            .replace("PROXIED_PROJECT_URL", getProxiedUrl(config.githubProxier, project.url))
+            .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url, project.astIndex))
+            .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(config.githubProxier, await getAssetsUrl(project.url, project.astIndex)));
+    } else {
+        return htmlBase.card
+            .replace(/PROJECT_NAME/g, project.name)
+            .replace("DESCRIPTION", project.desc)
+            .replace("MANUAL", project.manual)
+            .replace(/POPOVERID/g, project.name + "-popover")
+            .replace("PROJECT_WEBSITE", project.website)
+            .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
+            .replace("PROJECT_URL", project.url)
+            .replace("PROXIED_PROJECT_URL", getProxiedUrl(config.proxier, project.url))
+            .replace(`<a class="button" href="DOWNLOAD_LINK">下载最新版本</a>`, "<spaan>请前往官网</spaan>")
+            .replace(`<a class="button" href="PROXIED_DOWNLOAD_LINK">通过代理下载最新版本</a><br>`, "<spaan>下载</spaan><br>");
+    }
+
 }
 
 /** 用来构造主页html的函数

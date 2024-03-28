@@ -1,5 +1,6 @@
 export const config = {
     proxier: "https://p.ahaigege.com/proxy/",
+    githubProxier: "https://mirror.ghproxy.com/",
     robotsTXT: ``,
     adsTXT: `google.com, pub-5526526482489599, DIRECT, f08c47fec0942fa0`,
     faviconAddress: `https://genshin.hoyoverse.com/`,
@@ -18,6 +19,7 @@ export const config = {
         //     manual: "简单使用教程", 
         // },
         {
+            isOnGithub: true,
             name: "Snap-Hutao",
             url: "https://github.com/DGP-Studio/Snap.Hutao",
             astIndex: 1,
@@ -26,6 +28,7 @@ export const config = {
             manual: "胡桃工具箱是一款以 MIT 协议开源的原神工具箱，专为现代化 Windows 平台设计，旨在改善桌面端玩家的游戏体验。通过将既有的官方资源与开发团队设计的全新 功能相结合，它提供了一套完整且实用的工具集，且无需依赖任何移动设备。它不对游戏客户端进行任何破坏性修改以确保工具箱的安全性",
         },
         {
+            isOnGithub: true,
             name: "Better-GI",
             url: "https://github.com/babalae/better-genshin-impact",
             astIndex: 0,
@@ -34,6 +37,7 @@ export const config = {
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请根据Github上的ReadMe所展示的教程操作各个功能。",
         },
         {
+            isOnGithub: true,
             name: "Minty",
             url: "https://github.com/kindawindytoday/Minty-Releases",
             astIndex: 0,
@@ -42,6 +46,7 @@ export const config = {
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
         },
         {
+            isOnGithub: true,
             name: "Korepi",
             url: "https://github.com/Cotton-Buds/calculator",
             astIndex: 0,
@@ -50,6 +55,7 @@ export const config = {
             manual: "首先前往官方Discord，获取免费使用密钥。前往官方Discord内的链接下载最新版。使用管理员权限启动你下载的程序。程序启动后会产生你的HWID。将你的HWID发送给官方Discord内的机器人，然后你会收到一个密钥文件。将密钥文件复制到程序所在的目录即可使用。",
         },
         {
+            isOnGithub: false,
             name: "Akebi",
             url: "https://genshincheat.net/#linkk",
             astIndex: 0,
@@ -58,6 +64,7 @@ export const config = {
             manual: "前往官方链接下载最新版。然后在官方Sellix或代购人员处购买密钥。启动程序并输入密钥，选择游戏的主程序，注意不要选择启动器程序，然后在开门后请按照菜单内的信息开启相应功能。",
         },
         {
+            isOnGithub: false,
             name: "辅助吧",
             url: "https://www.fuzhu86.com",
             astIndex: 0,
