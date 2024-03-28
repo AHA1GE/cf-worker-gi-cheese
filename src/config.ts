@@ -66,7 +66,7 @@ export const config = {
         {
             isOnGithub: false,
             name: "辅助吧",
-            url: "https://www.fuzhu86.com",
+            url: "https://www.fuzhu86.com/",
             astIndex: 0,
             website: "https://www.fuzhu86.com/",
             desc: "免费！站主收集了各种免费辅助。",
