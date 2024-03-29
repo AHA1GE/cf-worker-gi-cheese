@@ -11,6 +11,7 @@ export const config = {
                 `,
     projects: [
         // {
+        //     isOnGithub: true, //下载地址是否在github上
         //     name: "项目名字",
         //     url: "https://github.com/example/example", //项目的github repo地址或者下载页面的地址
         //     astIndex: 1, //项目的github release asset index
