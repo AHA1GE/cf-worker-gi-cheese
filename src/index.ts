@@ -124,6 +124,8 @@ async function createServerPage(): Promise<string> {
             <p>协议：${config.server.tls ? "https" : "http"}</p>
             <p>地址：${config.server.address}</p>
             <p>端口：${config.server.port}</p>
+            <h2>下载</h2>
+            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a>
             <h3>保留所有权利！</h2>
         </body>
         <script>
