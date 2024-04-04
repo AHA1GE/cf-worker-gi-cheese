@@ -150,31 +150,43 @@ async function createServerPage(): Promise<string> {
         </script>
     </html>`;
 }
+
+/**
+ * Function to get server status.
+ * @param serverAddress Server address, e.g., "https://example.com:8000/"
+ * @returns {Promise<string>} Server status as a string.
+ * @description This function accepts a server address and returns the server status.
+ **/
 async function serverStatus(serverAddress: string): Promise<string> {
-    //fetch server status, timeout 5s, return "正常运行" if status is 200, else return "服务器异常"
-    async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}) {
+    // Function to fetch server status with a timeout of 5 seconds.
+    // Returns "正常运行" if status is 200, otherwise "服务器异常".
+    async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}): Promise<Response> {
         const { timeout = 5000 } = options;
-
         const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), timeout);
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-        const response = await fetch(resource, {
-            ...options,
-            signal: controller.signal
-        });
-        clearTimeout(id);
-
-        return response;
+        try {
+            const response = await fetch(resource, {
+                ...options,
+                signal: controller.signal
+            });
+            return response;
+        } catch (error) {
+            throw error; // Rethrow to be handled by the caller.
+        } finally {
+            clearTimeout(timeoutId);
+        }
     }
+
     try {
-        const res = await fetchWithTimeout(serverAddress, { timeout: 5000 });
-        if (res.status === 200) {
+        const response = await fetchWithTimeout(serverAddress, { timeout: 5000 });
+        if (response.status === 200) {
             return "正常运行";
         } else {
             return "服务器异常";
         }
     } catch (error) {
-        return "服务器异常";
+        return "服务器异常"; // Catch network errors or timeouts and return a generic error message.
     }
 }
 
