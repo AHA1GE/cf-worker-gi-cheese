@@ -79,8 +79,8 @@ export const config = {
             url: "https://vnology.synology.me:5001/sharing/pYnmaMcCc", //项目的github repo地址或者下载页面的地址
             astIndex: 1, //项目的github release asset index
             website: "server", //项目的官网或者discord地址
-            desc: "免费！简介。",
-            manual: "简单使用教程",
+            desc: "私人服务器。",
+            manual: "下载并解压客户端，下载并安装cultivation。使用cultivation设置服务器地址并启动游戏。",
         },
     ],
 
