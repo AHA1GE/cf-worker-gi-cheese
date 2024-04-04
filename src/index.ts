@@ -138,15 +138,31 @@ async function createServerPage(): Promise<string> {
     </html>`;
 }
 async function serverStatus(serverAddress: string): Promise<string> {
-    return await fetch(serverAddress).then((res) => {
+    //fetch server status, timeout 5s, return "服务器正常运行" if status is 200, else return "服务器异常"
+    async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}) {
+        const { timeout = 5000 } = options;
+
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+
+        const response = await fetch(resource, {
+            ...options,
+            signal: controller.signal
+        });
+        clearTimeout(id);
+
+        return response;
+    }
+    try {
+        const res = await fetchWithTimeout(serverAddress, { timeout: 5000 });
         if (res.status === 200) {
             return "服务器正常运行";
         } else {
             return "服务器异常";
         }
-    }).catch(() => {
+    } catch (error) {
         return "服务器异常";
-    });
+    }
 }
 
 export default {
