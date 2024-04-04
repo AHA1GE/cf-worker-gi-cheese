@@ -106,5 +106,6 @@ export const config = {
         domainName: "gayshit.aha1.top",
         port: 8443,
         tls: true,
+        statusTimeout: 2, //seconds
     }
 }
