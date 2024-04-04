@@ -108,16 +108,7 @@ async function createPage(): Promise<string> {
 async function createServerPage(): Promise<string> {
     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`;
     let serverStatus = "正在获取状态";
-    // try to fetch serverAddress, if response is 200, set serverStatus to "服务器正常运行", else set serverStatus to "服务器异常"
-    await fetch(serverAddress).then((res) => {
-        if (res.status === 200) {
-            serverStatus = "服务器正常运行";
-        } else {
-            serverStatus = "服务器异常";
-        }
-    }).catch(() => {
-        serverStatus = "服务器异常";
-    });
+    // Use page js to fetch server status, api is /server/status
     return `<html>
         <head>
             <title>私人服务器</title>
@@ -125,7 +116,7 @@ async function createServerPage(): Promise<string> {
         <body>
             <h1>私人服务器</h1>
             <h2>服务器状态</h2>
-            <p>${serverStatus}</p>
+            <p id=status>${serverStatus}</p>
             <h2>服务器连接</h2>
             <p>${serverAddress}</p>
             <h2>服务器信息</h2>
@@ -134,7 +125,23 @@ async function createServerPage(): Promise<string> {
             <p>端口：${config.server.port}</p>
             <h3>保留所有权利！</h2>
         </body>
+        <script>
+            fetch("/server/status").then((res) => res.text()).then((text) => {
+                document.getElementById("status").innerText = text;
+            });
+        </script>
     </html>`;
+}
+async function serverStatus(serverAddress: string): Promise<string> {
+    return await fetch(serverAddress).then((res) => {
+        if (res.status === 200) {
+            return "服务器正常运行";
+        } else {
+            return "服务器异常";
+        }
+    }).catch(() => {
+        return "服务器异常";
+    });
 }
 
 export default {
@@ -152,6 +159,11 @@ export default {
             case "/server":
                 return new Response(
                     await createServerPage(),
+                    { headers: { "Content-Type": "text/html", "Cache-Control": "max-age=30" } }
+                );
+            case "/server/status":
+                return new Response(
+                    await serverStatus(`${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`),
                     { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
                 );
             case "/robots.txt":
