@@ -65,6 +65,24 @@ export const config = {
             manual: "前往官方链接下载最新版。然后在官方Sellix或代购人员处购买密钥。启动程序并输入密钥，选择游戏的主程序，注意不要选择启动器程序，然后在开门后请按照菜单内的信息开启相应功能。",
         },
         {
+            isOnGithub: true, //下载地址是否在github上
+            name: "KCN-GenshinServer",
+            url: "https://github.com/JDDKCN/KCN-GenshinServer/", //项目的github repo地址或者下载页面的地址
+            astIndex: 0, //项目的github release asset index
+            website: "https://github.com/JDDKCN/KCN-GenshinServer/", //项目的官网或者discord地址
+            desc: "基于Grasscutter制作的一键GUI多功能服务端。",
+            manual: "下载并解压客户端，启动。",
+        },
+        {
+            isOnGithub: true, //下载地址是否在github上
+            name: "Cultivation",
+            url: "https://github.com/Grasscutters/Cultivation/", //项目的github repo地址或者下载页面的地址
+            astIndex: 3, //项目的github release asset index
+            website: "https://grasscutter.io/", //项目的官网或者discord地址
+            desc: "游戏的启动器，内置Grasscutter。",
+            manual: "下载并安装Java17，下载并安装MongoDB，下载并安装Cultivation，启动。",
+        },
+        {
             isOnGithub: false,
             name: "辅助吧",
             url: "https://www.fuzhu86.com/",
@@ -80,7 +98,7 @@ export const config = {
             astIndex: 1, //项目的github release asset index
             website: "server", //项目的官网或者discord地址
             desc: "私人服务器。",
-            manual: "下载并解压客户端，下载并安装cultivation。使用cultivation设置服务器地址并启动游戏。",
+            manual: "下载并解压客户端，使用非官方启动器设置服务器地址并启动游戏。",
         },
     ],
 
