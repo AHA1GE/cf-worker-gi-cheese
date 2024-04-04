@@ -1,8 +1,8 @@
 export const config = {
-    proxier: "https://p.ahaigege.com/proxy/",
-    githubProxier: "https://mirror.ghproxy.com/",
     robotsTXT: ``,
     adsTXT: `google.com, pub-5526526482489599, DIRECT, f08c47fec0942fa0`,
+    proxier: "https://p.ahaigege.com/proxy/",
+    githubProxier: "https://mirror.ghproxy.com/",
     faviconAddress: `https://genshin.hoyoverse.com/`,
     readmeContent: `
                 <p>本站提供了一些Windows端的原神工具的介绍和使用教程。本站不对任何工具的安全性和使用后果负责。</p>

@@ -170,6 +170,8 @@ async function serverStatus(serverAddress: string): Promise<string> {
             fetch(serverAddress),
             timeoutPromise,
         ]);
+        // DEV log response's body
+        console.log(await res.text());
         if (res.ok) {
             return "正常运行";
         } else {
@@ -191,37 +193,37 @@ export default {
             case "/":
                 return new Response(
                     await createPage(),
-                    { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "max-age=30" } }
+                    { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600" } }
                 );
             case "/server":
                 return new Response(
                     await createServerPage(),
-                    { headers: { "Content-Type": "text/html", "Cache-Control": "max-age=30" } }
+                    { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600" } }
                 );
             case "/server/status":
                 return new Response(
                     await serverStatus(`${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`),
-                    { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
+                    { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
                 );
             case "/robots.txt":
                 return new Response( //use tobotsTXT from config, cache 1 year inmutable
                     config.robotsTXT,
-                    { headers: { "Content-Type": "text/plain", "Cache-Control": "max-age=31536000, immutable" } }
+                    { headers: { "Content-Type": "text/plain", "Cache-Control": "public, max-age=31536000, immutable" } }
                 );
             case "/ads.txt":
                 return new Response( //use adsTXT from config, cache no cache
                     config.adsTXT,
-                    { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
+                    { headers: { "Content-Type": "text/plain", "Cache-Control": "public, max-age=31536000" } }
                 );
             case "/favicon.ico":
                 return new Response( //use faviconAddress from config, cache 1 year inmutable
                     await fetch(config.faviconAddress + "favicon.ico").then((res) => res.blob()),
-                    { headers: { "Content-Type": "image/x-icon", "Cache-Control": "max-age=31536000, immutable" } }
+                    { headers: { "Content-Type": "image/x-icon", "Cache-Control": "public, max-age=31536000" } }
                 );
             case "apple-touch-icon.png":
                 return new Response( //use faviconAddress from config, cache 1 year inmutable
                     await fetch(config.faviconAddress + "apple-touch-icon.png").then((res) => res.blob()),
-                    { headers: { "Content-Type": "image/png", "Cache-Control": "max-age=31536000, immutable" } }
+                    { headers: { "Content-Type": "image/png", "Cache-Control": "max-age=31536000" } }
                 );
             default:
                 return new Response(
