@@ -151,43 +151,33 @@ async function createServerPage(): Promise<string> {
     </html>`;
 }
 
-/**
- * Function to get server status.
- * @param serverAddress Server address, e.g., "https://example.com:8000/"
- * @returns {Promise<string>} Server status as a string.
- * @description This function accepts a server address and returns the server status.
+/** 用来获取服务器状态的函数
+ * @param serverAddress 服务器地址，例如：“https://example.com:8000/”
+ * @returns {string}  以字符串返回的服务器状态。
+ * @description 该函数接受服务器地址，返回服务器状态。
  **/
 async function serverStatus(serverAddress: string): Promise<string> {
-    console.log(`Checking server status at ${serverAddress}...`);
-    // Function to fetch server status with a timeout of 5 seconds.
-    // Returns "正常运行" if status is 200, otherwise "服务器异常".
-    async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}): Promise<Response> {
-        const { timeout = 5000 } = options;
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeout);
-
-        try {
-            const response = await fetch(resource, {
-                ...options,
-                signal: controller.signal
-            });
-            return response;
-        } catch (error) {
-            throw error; // Rethrow to be handled by the caller.
-        } finally {
-            clearTimeout(timeoutId);
-        }
-    }
+    // 创建一个超时Promise
+    const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => {
+            reject(new Error("请求超时"));
+        }, 1000); // 设置超时时间为1秒
+    });
 
     try {
-        const response = await fetchWithTimeout(serverAddress, { timeout: 5000 });
-        if (response.status === 200) {
+        // 使用Promise.race来竞争fetch请求和超时Promise
+        const res = await Promise.race([
+            fetch(serverAddress),
+            timeoutPromise,
+        ]);
+        if (res.ok) {
             return "正常运行";
         } else {
             return "服务器异常";
         }
-    } catch (error) {
-        return "服务器异常"; // Catch network errors or timeouts and return a generic error message.
+    } catch (error: any) {
+        // 捕获超时或其他错误
+        return "服务器异常";
     }
 }
 
