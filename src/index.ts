@@ -117,7 +117,7 @@ async function createServerPage(): Promise<string> {
         <body>
             <h1>私人服务器</h1>
             <h2>服务器状态</h2>
-            <p id=status>${serverStatus}</p>
+            <p id=status style="background-color: yellow; color: black;">${serverStatus}</p>
             <h2>服务器连接</h2>
             <a href="${serverAddress}">${serverAddress}</a>
             <h2>服务器信息</h2>
@@ -129,10 +129,21 @@ async function createServerPage(): Promise<string> {
             <h3>保留所有权利！</h2>
         </body>
         <script>
+            // query server status every 60s, update status text
             async function updateStatus() {
+                
+                // set status text to "正在获取状态..." and yellow background
+                document.getElementById("status").innerText = "正在获取状态...";
+                document.getElementById("status").style.backgroundColor = "yellow";
+
+                // fetch server status
                 const res = await fetch("/server/status");
                 const text = await res.text();
+
+                // set status text to fetched status
                 document.getElementById("status").innerText = text;
+                // set background color to green if status is "正常运行", else set to red
+                document.getElementById("status").style.backgroundColor = text === "正常运行" ? "green" : "red";
             }
             setInterval(updateStatus, 60000);
             updateStatus();
@@ -140,7 +151,7 @@ async function createServerPage(): Promise<string> {
     </html>`;
 }
 async function serverStatus(serverAddress: string): Promise<string> {
-    //fetch server status, timeout 5s, return "服务器正常运行" if status is 200, else return "服务器异常"
+    //fetch server status, timeout 5s, return "正常运行" if status is 200, else return "服务器异常"
     async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}) {
         const { timeout = 5000 } = options;
 
@@ -158,7 +169,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
     try {
         const res = await fetchWithTimeout(serverAddress, { timeout: 5000 });
         if (res.status === 200) {
-            return "服务器正常运行";
+            return "正常运行";
         } else {
             return "服务器异常";
         }
