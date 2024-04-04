@@ -111,6 +111,7 @@ async function createServerPage(): Promise<string> {
     // Use page js to fetch server status, api is /server/status
     return `<html>
         <head>
+            <meta charset="utf-8">
             <title>私人服务器</title>
         </head>
         <body>
