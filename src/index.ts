@@ -107,7 +107,7 @@ async function createPage(): Promise<string> {
  **/
 async function createServerPage(): Promise<string> {
     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`;
-    let serverStatus = "正在获取状态";
+    let serverStatus = "正在获取状态...";
     // Use page js to fetch server status, api is /server/status, every 60s
     return `<html>
         <head>
@@ -119,7 +119,7 @@ async function createServerPage(): Promise<string> {
             <h2>服务器状态</h2>
             <p id=status>${serverStatus}</p>
             <h2>服务器连接</h2>
-            <p>${serverAddress}</p>
+            <a href="${serverAddress}">${serverAddress}</a>
             <h2>服务器信息</h2>
             <p>协议：${config.server.tls ? "https" : "http"}</p>
             <p>地址：${config.server.address}</p>
