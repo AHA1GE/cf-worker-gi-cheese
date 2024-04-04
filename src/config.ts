@@ -73,5 +73,20 @@ export const config = {
             desc: "免费！站主收集了各种免费辅助。",
             manual: "打开，爽用！",
         },
+        {
+            isOnGithub: false, //下载地址是否在github上
+            name: "我的私服",
+            url: "https://vnology.synology.me:5001/sharing/pYnmaMcCc", //项目的github repo地址或者下载页面的地址
+            astIndex: 1, //项目的github release asset index
+            website: "server", //项目的官网或者discord地址
+            desc: "免费！简介。",
+            manual: "简单使用教程",
+        },
     ],
+
+    server: {
+        address: "gayshit.ahaigege.com",
+        port: 8443,
+        tls: true,
+    }
 }

@@ -101,6 +101,42 @@ async function createPage(): Promise<string> {
     return htmlBase.page.replace("README_CONTENT", config.readmeContent).replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
 }
 
+/** 用来构造服务器运行状态页面的函数
+ * @returns {string}  以字符串返回的服务器运行状态。
+ * @description 该函数返回服务器运行状态。
+ **/
+async function createServerPage(): Promise<string> {
+    const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`;
+    let serverStatus = "正在获取状态";
+    // try to fetch serverAddress, if response is 200, set serverStatus to "服务器正常运行", else set serverStatus to "服务器异常"
+    await fetch(serverAddress).then((res) => {
+        if (res.status === 200) {
+            serverStatus = "服务器正常运行";
+        } else {
+            serverStatus = "服务器异常";
+        }
+    }).catch(() => {
+        serverStatus = "服务器异常";
+    });
+    return `<html>
+        <head>
+            <title>私人服务器</title>
+        </head>
+        <body>
+            <h1>私人服务器</h1>
+            <h2>服务器状态</h2>
+            <p>${serverStatus}</p>
+            <h2>服务器连接</h2>
+            <p>${serverAddress}</p>
+            <h2>服务器信息</h2>
+            <p>协议：${config.server.tls ? "https" : "http"}</p>
+            <p>地址：${config.server.address}</p>
+            <p>端口：${config.server.port}</p>
+            <h3>保留所有权利！</h2>
+        </body>
+    </html>`;
+}
+
 export default {
     async fetch(request: any, env: any, ctx: any) {
         //parse the request url
@@ -112,6 +148,11 @@ export default {
                 return new Response(
                     await createPage(),
                     { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "max-age=30" } }
+                );
+            case "server":
+                return new Response(
+                    await createServerPage(),
+                    { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
                 );
             case "/robots.txt":
                 return new Response( //use tobotsTXT from config, cache 1 year inmutable
