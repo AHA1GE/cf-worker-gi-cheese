@@ -103,7 +103,7 @@ export const config = {
     ],
 
     server: {
-        address: "gayshit.ahaigege.com",
+        domainName: "gayshit.aha1.top",
         port: 8443,
         tls: true,
     }

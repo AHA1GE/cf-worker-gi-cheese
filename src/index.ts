@@ -106,7 +106,7 @@ async function createPage(): Promise<string> {
  * @description 该函数返回服务器运行状态。
  **/
 async function createServerPage(): Promise<string> {
-    const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`;
+    const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`;
     let serverStatus = "正在获取状态...";
     // Use page js to fetch server status, api is /server/status, every 60s
     return `<html>
@@ -121,8 +121,9 @@ async function createServerPage(): Promise<string> {
             <h2>服务器连接</h2>
             <a href="${serverAddress}">${serverAddress}</a>
             <h2>服务器信息</h2>
+            <p>地址：${serverAddress}</p>
             <p>协议：${config.server.tls ? "https" : "http"}</p>
-            <p>地址：${config.server.address}</p>
+            <p>域名：${config.server.domainName}</p>
             <p>端口：${config.server.port}</p>
             <h2>下载</h2>
             <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a>
@@ -172,6 +173,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
         ]);
         // DEV log response's body
         console.log(await res.text());
+
         if (res.ok) {
             return "正常运行";
         } else {
@@ -202,7 +204,7 @@ export default {
                 );
             case "/server/status":
                 return new Response(
-                    await serverStatus(`${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`),
+                    await serverStatus(`${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`),
                     { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
                 );
             case "/robots.txt":
