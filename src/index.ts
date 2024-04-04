@@ -162,7 +162,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
     const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => {
             reject(new Error("请求超时"));
-        }, config.server.statusTimeot*1000); // 设置超时时间为1秒
+        }, config.server.statusTimeout*1000); // 设置超时时间
     });
 
     try {
