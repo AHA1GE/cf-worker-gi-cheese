@@ -108,7 +108,7 @@ async function createPage(): Promise<string> {
 async function createServerPage(): Promise<string> {
     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.address}:${config.server.port}`;
     let serverStatus = "正在获取状态";
-    // Use page js to fetch server status, api is /server/status
+    // Use page js to fetch server status, api is /server/status, every 60s
     return `<html>
         <head>
             <meta charset="utf-8">
@@ -127,9 +127,13 @@ async function createServerPage(): Promise<string> {
             <h3>保留所有权利！</h2>
         </body>
         <script>
-            fetch("/server/status").then((res) => res.text()).then((text) => {
+            async function updateStatus() {
+                const res = await fetch("/server/status");
+                const text = await res.text();
                 document.getElementById("status").innerText = text;
-            });
+            }
+            setInterval(updateStatus, 60000);
+            updateStatus();
         </script>
     </html>`;
 }
