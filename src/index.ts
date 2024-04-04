@@ -149,7 +149,7 @@ export default {
                     await createPage(),
                     { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "max-age=30" } }
                 );
-            case "server":
+            case "/server":
                 return new Response(
                     await createServerPage(),
                     { headers: { "Content-Type": "text/plain", "Cache-Control": "no-cache" } }
