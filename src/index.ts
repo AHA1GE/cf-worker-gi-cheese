@@ -158,6 +158,7 @@ async function createServerPage(): Promise<string> {
  * @description This function accepts a server address and returns the server status.
  **/
 async function serverStatus(serverAddress: string): Promise<string> {
+    console.log(`Checking server status at ${serverAddress}...`);
     // Function to fetch server status with a timeout of 5 seconds.
     // Returns "正常运行" if status is 200, otherwise "服务器异常".
     async function fetchWithTimeout(resource: string, options: { timeout?: number } = {}): Promise<Response> {
