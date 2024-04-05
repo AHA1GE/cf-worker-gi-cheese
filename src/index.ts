@@ -109,47 +109,11 @@ async function createServerPage(): Promise<string> {
     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`;
     let serverStatus = "正在获取状态...";
     // Use page js to fetch server status, api is /server/status, every 60s
-    return `<html>
-        <head>
-            <meta charset="utf-8">
-            <title>私人服务器</title>
-        </head>
-        <body>
-            <h1>私人服务器</h1>
-            <h2>服务器状态</h2>
-            <p id=status style="background-color: yellow; color: black;">${serverStatus}</p>
-            <h2>服务器连接</h2>
-            <a href="${serverAddress}">${serverAddress}</a>
-            <h2>服务器信息</h2>
-            <p>地址：${serverAddress}</p>
-            <p>协议：${config.server.tls ? "https" : "http"}</p>
-            <p>域名：${config.server.domainName}</p>
-            <p>端口：${config.server.port}</p>
-            <h2>下载</h2>
-            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a>
-            <h3>保留所有权利！</h2>
-        </body>
-        <script>
-            // query server status every 60s, update status text
-            async function updateStatus() {
-                
-                // set status text to "正在获取状态..." and yellow background
-                document.getElementById("status").innerText = "正在获取状态...";
-                document.getElementById("status").style.backgroundColor = "yellow";
-
-                // fetch server status
-                const res = await fetch("/server/status");
-                const text = await res.text();
-
-                // set status text to fetched status
-                document.getElementById("status").innerText = text;
-                // set background color to green if status is "正常运行", else set to red
-                document.getElementById("status").style.backgroundColor = text === "正常运行" ? "green" : "red";
-            }
-            setInterval(updateStatus, 60000);
-            updateStatus();
-        </script>
-    </html>`;
+    return htmlBase.server
+        .replace(/SERVERADDRESS/g, serverAddress)
+        .replace(/SERVERPROTOCOL/g, config.server.tls ? "https" : "http")
+        .replace(/SERVERDOMAINNAME/g, config.server.domainName)
+        .replace(/SERVERPORT/g, config.server.port.toString());
 }
 
 /** 用来获取服务器状态的函数

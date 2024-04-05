@@ -50,4 +50,55 @@ export const htmlBase = {
       </div>
     </div><br>
   `,
+  server: `
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>私人服务器</title>
+      </head>
+      <body>
+        <header>
+          <div>
+            <h1>私人服务器</h1>
+          </div>
+        </header>
+        <main>
+          <div>
+            <strong>服务器状态</strong><br>
+            <span id=status style="background-color: yellow; color: black;">正在获取状态...</span>
+          </div><br>
+          <div>
+            <strong>服务器连接</strong><br>
+            <a href="SERVERADDRESS">SERVERADDRESS</a>
+          </div><br>
+          <div>
+            <strong>服务器信息</strong><br>
+            <span>地址：SERVERADDRESS</span><br>
+            <span>协议：SERVERPROTOCOL</span><br>
+            <span>域名：SERVERDOMAINNAME</span><br>
+            <span>端口：SERVERPORT</span>
+          </div><br>
+          <div>
+            <strong>下载</strong><br>
+            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a>
+          </div><br>
+        </main>
+        <footer>
+          <p>保留所有权利！</p>
+        </footer>
+      </body>
+      <script>
+        async function updateStatus() {
+          document.getElementById("status").innerText = "正在获取状态...";
+          document.getElementById("status").style.backgroundColor = "yellow";
+          const res = await fetch("/server/status");
+          const text = await res.text();
+          document.getElementById("status").innerText = text;
+          document.getElementById("status").style.backgroundColor = text === "正常运行" ? "green" : "red";
+        }
+        setInterval(updateStatus, 60000);
+        updateStatus();
+      </script>
+    </html>
+  `,
 };
