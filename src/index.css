@@ -109,6 +109,13 @@ main .cards-container {
     -webkit-backdrop-filter: blur(20px);
 }
 
+.popover-dialog .server-popover .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
 /* Button styles */
 .button {
     background-color: #ccc;

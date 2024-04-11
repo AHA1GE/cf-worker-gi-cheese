@@ -76,7 +76,7 @@ export const htmlBase = {
             <span>地址：SERVERADDRESS</span><br>
             <span>协议：SERVERPROTOCOL</span><br>
             <span>域名：SERVERDOMAINNAME</span><br>
-            <span>端口：SERVERPORT</span>
+            <span>端口：SERVERPORT</span><br>
           </div><br>
           <div>
             <strong>下载</strong><br>
@@ -101,5 +101,73 @@ export const htmlBase = {
         updateStatus();
       </script>
     </html>
+  `,
+  serversPage: `
+    <!DOCTYPE html>
+      <html lang="zh-cn">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="私人服务器">
+        <meta name="keywords" content="原神">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>私人服务器</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" href="/favicon.ico">
+        <style>STYLESHEET</style>
+        </head>
+        <body>
+          <header><h1>私人服务器</h1></header>
+          <main>
+            <div class="readme">
+                <h2>说明</h2>
+                该页面列出了一些私人服务器。点击 “游玩该服务器” 按钮查看服务器信息。
+            </div>
+            <div class="cards-container">
+                CARDS
+            </div>
+          </main>
+          <footer><p>本站保留所有权利</p></footer>
+          <!--script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5526526482489599" crossorigin="anonymous"></script--!>
+        </body>
+      </html>
+  `,
+  serverCard: `
+    <div class="card">
+      <h2>SERVER_NAME</h2>
+      <p class="info" >服务器状态：<span id="SERVER_STATUS_ELEMENT_ID">正在获取状态...</span></p>
+      <p class="manual">服务器信息：MANUAL</p>
+      <button class="button" popovertarget="POPOVERID">游玩该服务器</button>
+      <div class="popover-dialog" id="POPOVERID" popover>
+        <div class="server-popover">
+          <h3>SERVER_NAME</h3>
+          <div class="info-container">
+          <strong>连接信息</strong><br>
+            <span>地址：SERVER_ADDRESS</span><br>
+            <span>协议：SERVER_PROTOCOL</span><br>
+            <span>域名：SERVER_DOMAINNAME</span><br>
+            <span>端口：SERVER_PORT</span><br>
+          </div>
+          <br>
+          <div class="info-container">
+            <strong>下载地址</strong><br>
+            <a href="SERVER_DOWNLOAD_LINK_0" target="_blank" rel="noreferrer">点击前往下载页面</a><br>
+            <a href="SERVER_DOWNLOAD_LINK_1" target="_blank" rel="noreferrer">点击前往备用下载页面</a>
+          </div>
+        </div>
+      </div>
+      <script>
+        async function JS_FUNC_NAME_updateStatus() {
+          document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "正在获取状态...";
+          document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
+          const res = await fetch("SERVER_STATUS_URL");
+          const text = await res.text();
+          document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = text;
+          document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = text === "正常运行" ? "green" : "red";
+        }
+        setInterval(JS_FUNC_NAME_updateStatus, 60000);
+        JS_FUNC_NAME_updateStatus();
+      </script>
+    </div><br>
   `,
 };

@@ -111,10 +111,26 @@ export const config = {
         },
     ],
 
-    server: {
-        domainName: "gayshit.aha1.top",
-        port: 8443,
-        tls: true,
-        statusTimeout: 2, //seconds
-    }
+    // server: {
+    //     domainName: "gayshit.aha1.top",
+    //     port: 8443,
+    //     tls: true,
+    //     statusTimeout: 2, //seconds
+    // },
+    serverStatusTimeout: 2, //seconds
+    servers: [
+        {
+            id: 0,
+            name: "Grasscutter服务器",
+            manual: "版本4.0，支持国际服和国服。下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。",
+            domainName: "gayshit.aha1.top",
+            port: 8443,
+            tls: true,
+            statusUrl: "/server/status/",
+            downloadLinks: [
+                "https://vnology.synology.me:5001/sharing/pYnmaMcCc",
+                "https://vno.aha1.top/sharing/pYnmaMcCc",
+            ]
+        },
+    ]
 }

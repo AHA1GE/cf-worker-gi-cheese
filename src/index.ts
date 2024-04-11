@@ -101,20 +101,20 @@ async function createPage(): Promise<string> {
     return htmlBase.page.replace("README_CONTENT", config.readmeContent).replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
 }
 
-/** 用来构造服务器运行状态页面的函数
+/** !!! deprecated, use createServersPage instead !!! 用来构造服务器运行状态页面的函数
  * @returns {string}  以字符串返回的服务器运行状态。
  * @description 该函数返回服务器运行状态。
  **/
-async function createServerPage(): Promise<string> {
-    const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`;
-    let serverStatus = "正在获取状态...";
-    // Use page js to fetch server status, api is /server/status, every 60s
-    return htmlBase.server
-        .replace(/SERVERADDRESS/g, serverAddress)
-        .replace(/SERVERPROTOCOL/g, config.server.tls ? "https" : "http")
-        .replace(/SERVERDOMAINNAME/g, config.server.domainName)
-        .replace(/SERVERPORT/g, config.server.port.toString());
-}
+// async function createServerPage(): Promise<string> {
+//     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`;
+//     let serverStatus = "正在获取状态...";
+//     // Use page js to fetch server status, api is /server/status, every 60s
+//     return htmlBase.server
+//         .replace(/SERVERADDRESS/g, serverAddress)
+//         .replace(/SERVERPROTOCOL/g, config.server.tls ? "https" : "http")
+//         .replace(/SERVERDOMAINNAME/g, config.server.domainName)
+//         .replace(/SERVERPORT/g, config.server.port.toString());
+// }
 
 /** 用来获取服务器状态的函数
  * @param serverAddress 服务器地址，例如：“https://example.com:8000/”
@@ -126,7 +126,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
     const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => {
             reject(new Error("请求超时"));
-        }, config.server.statusTimeout * 1000); // 设置超时时间
+        }, config.serverStatusTimeout * 1000); // 设置超时时间
     });
 
     try {
@@ -149,13 +149,67 @@ async function serverStatus(serverAddress: string): Promise<string> {
     }
 }
 
+/** 用来构造服务器列表页面的函数
+ * @returns {string}  以字符串返回的服务器列表页面。
+ * @description 该函数返回服务器列表页面。
+ **/
+async function createServersPage(): Promise<string> {
+    const cards = await Promise.all(config.servers.map(createServerCard));
+    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
+        if (res.status === 200) {
+            // return css; //dev css
+            return res.text();
+        } else {
+            console.log("Failed to fetch css from github, use hard-coded css");
+            return css;
+        }
+    }).catch(() => {
+        return css;
+    });
+    return htmlBase.serversPage.replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
+}
+
+/** 用来构造服务器信息卡片的函数
+ * @returns {string}  以字符串返回的服务器信息卡片。
+ * @description 该函数返回服务器信息卡片。
+ **/
+async function createServerCard(server: any): Promise<string> {
+    return htmlBase.serverCard
+        .replace(/SERVER_NAME/g, server.name)
+        .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
+        .replace("MANUAL", server.manual)
+        .replace(/POPOVERID/g, server.id + generateUniqueId()) // generate unique id
+        .replace("SERVER_ADDRESS", `${server.tls ? "https" : "http"}://${server.domainName}:${server.port}`)
+        .replace("SERVER_PROTOCOL", server.tls ? "https" : "http")
+        .replace("SERVER_DOMAINNAME", server.domainName)
+        .replace("SERVER_PORT", server.port.toString())
+        .replace("SERVER_DOWNLOAD_LINK_0", server.downloadLinks[0])
+        .replace("SERVER_DOWNLOAD_LINK_1", server.downloadLinks[1] ? server.downloadLinks[1] : server.downloadLinks[0])
+        .replace(/JS_FUNC_NAME_updateStatus/g, `updateStatus${generateUniqueId()}ServerId${server.id}`) // generate unique id
+        .replace("SERVER_STATUS_URL", server.statusUrl + "?id=" + server.id); // add id to status url
+}
+
+function generateUniqueId() {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let id = '';
+
+    for (let i = 0; i < 6; i++) {
+        // Generate a random index to pick a character from 'chars'
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        // Append the randomly selected character to the id
+        id += chars[randomIndex];
+    }
+
+    return id;
+}
 export default {
     async fetch(request: any, env: any, ctx: any) {
         //parse the request url
         const requestUrl = new URL(request.url);
-
-        //switch case, if vising the root return the page; visiting robots.txt return the robotsTXT; visiting ads.txt return the adsTXT; else return 404
-        switch (requestUrl.pathname.toLowerCase()) {
+        // maniuplate the pathName: switch to lower case, remove trailing slash. if visiting the root, add back the slash
+        const modifiedPathName = requestUrl.pathname.toLowerCase().replace(/\/$/, "") || "/";
+        //if vising the root return the page; visiting robots.txt return the robotsTXT; visiting ads.txt return the adsTXT; else return 404
+        switch (modifiedPathName) {
             case "/":
                 return new Response(
                     await createPage(),
@@ -163,12 +217,19 @@ export default {
                 );
             case "/server":
                 return new Response(
-                    await createServerPage(),
+                    await createServersPage(),
                     { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600" } }
                 );
             case "/server/status":
+                // extract id from query string
+                const id = requestUrl.searchParams.get("id") || "0";
+                // find the server by id
+                const server = config.servers.find((server) => server.id === parseInt(id)) || config.servers[0];
+                const serverAddress = `${server.tls ? "https" : "http"}://${server.domainName}:${server.port}`;
+                // DEV log server address
+                console.log("Fetching private server address:", serverAddress);
                 return new Response(
-                    await serverStatus(`${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`),
+                    await serverStatus(serverAddress),
                     { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
                 );
             case "/robots.txt":
