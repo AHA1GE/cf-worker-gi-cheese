@@ -26,14 +26,14 @@ export const config = {
             astIndex: 1,
             website: "https://hut.ao/",
             desc: "免费！开源的工具箱程序，所有服务器及云游戏均可使用。",
-            manual: "胡桃工具箱是一款以 MIT 协议开源的原神工具箱，专为现代化 Windows 平台设计，旨在改善桌面端玩家的游戏体验。通过将既有的官方资源与开发团队设计的全新 功能相结合，它提供了一套完整且实用的工具集，且无需依赖任何移动设备。它不对游戏客户端进行任何破坏性修改以确保工具箱的安全性",
+            manual: "胡桃工具箱是一款以 MIT 协议开源的原神工具箱，专为现代化 Windows 平台设计，旨在改善桌面端玩家的游戏体验。它不对游戏客户端进行任何破坏性修改以确保工具箱的安全性",
         },
         {
             isOnGithub: true,
             name: "Better-GI",
             url: "https://github.com/babalae/better-genshin-impact",
             astIndex: 0,
-            website: "https://github.com/babalae/better-genshin-impact",
+            website: "https://bgi.huiyadan.com/",
             desc: "免费！基于计算机视觉的辅助工具，所有服务器及云游戏均可使用。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请根据Github上的ReadMe所展示的教程操作各个功能。",
         },
@@ -117,7 +117,9 @@ export const config = {
     //     tls: true,
     //     statusTimeout: 2, //seconds
     // },
+
     serverStatusTimeout: 2, //seconds
+
     servers: [
         {
             id: 0,
