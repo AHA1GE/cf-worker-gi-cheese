@@ -80,7 +80,8 @@ export const htmlBase = {
           </div><br>
           <div>
             <strong>下载</strong><br>
-            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a>
+            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往下载页面</a><br>
+            <a href="https://vno.aha1.top/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往备用下载页面</a>
           </div><br>
         </main>
         <footer>

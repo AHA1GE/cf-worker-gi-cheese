@@ -14,7 +14,7 @@ export const config = {
         //     isOnGithub: true, //下载地址是否在github上
         //     name: "项目名字",
         //     url: "https://github.com/example/example", //项目的github repo地址或者下载页面的地址
-        //     astIndex: 1, //项目的github release asset index
+        //     astIndex: 0, //项目的github release asset index
         //     website: "https://example.com/", //项目的官网或者discord地址
         //     desc: "免费！简介。",
         //     manual: "简单使用教程", 
@@ -81,6 +81,15 @@ export const config = {
             website: "https://grasscutter.io/", //项目的官网或者discord地址
             desc: "游戏的启动器，内置Grasscutter。",
             manual: "下载并安装Java17，下载并安装MongoDB，下载并安装Cultivation，启动。",
+        },
+        {
+            isOnGithub: false, //下载地址是否在github上
+            name: "ReversedRoom私服",
+            url: "https://git.xeondev.com/reversedrooms/", //项目的github repo地址或者下载页面的地址
+            astIndex: 0, //项目的github release asset index
+            website: "https://discord.gg/reversedrooms", //项目的官网或者discord地址
+            desc: "由BladeXeon制作的私服。通常拥有最新的内容，但游戏特性的可用性无保障。",
+            manual: "打开下载页面，寻找正确的repo，通常最新的repo会以当前版本的热门角色命名。下载后按照Readme进行安装或编译。同时需要下载正确的客户端。完成下载和安装后按照Readme的指示启动游戏。",
         },
         {
             isOnGithub: false,
