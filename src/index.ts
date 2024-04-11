@@ -136,7 +136,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
             timeoutPromise,
         ]);
         // DEV log response's body
-        console.log(await res.text());
+        // console.log(await res.text());
 
         if (res.ok) {
             return "正常运行";
@@ -227,7 +227,7 @@ export default {
                 const server = config.servers.find((server) => server.id === parseInt(id)) || config.servers[0];
                 const serverAddress = `${server.tls ? "https" : "http"}://${server.domainName}:${server.port}`;
                 // DEV log server address
-                console.log("Fetching private server address:", serverAddress);
+                // console.log("Fetching private server address:", serverAddress);
                 return new Response(
                     await serverStatus(serverAddress),
                     { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
