@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>私人服务器</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>私人服务器</h1>
+        </div>
+    </header>
+    <main>
+        <div>
+            <strong>服务器状态</strong><br>
+            <span id=status style="background-color: yellow; color: black;">正在获取状态...</span>
+        </div><br>
+        <div>
+            <strong>服务器连接</strong><br>
+            <a href="SERVERADDRESS">SERVERADDRESS</a>
+        </div><br>
+        <div>
+            <strong>服务器信息</strong><br>
+            <span>地址：SERVERADDRESS</span><br>
+            <span>协议：SERVERPROTOCOL</span><br>
+            <span>域名：SERVERDOMAINNAME</span><br>
+            <span>端口：SERVERPORT</span><br>
+        </div><br>
+        <div>
+            <strong>下载</strong><br>
+            <a href="https://vnology.synology.me:5001/sharing/pYnmaMcCc" target="_blank"
+                rel="noreferrer">点击前往下载页面</a><br>
+            <a href="https://vno.aha1.top/sharing/pYnmaMcCc" target="_blank" rel="noreferrer">点击前往备用下载页面</a>
+        </div><br>
+    </main>
+    <footer>
+        <p>保留所有权利！</p>
+    </footer>
+</body>
+<script>
+    async function updateStatus() {
+        document.getElementById("status").innerText = "正在获取状态...";
+        document.getElementById("status").style.backgroundColor = "yellow";
+        const beijingTime = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+        const hours = beijingTime.getHours();
+        if (hours < 6 || hours > 23) {
+            document.getElementById("status").innerText = "服务器仅在北京时间6-23点运行";
+            document.getElementById("status").style.backgroundColor = "yellow";
+        } else {
+            const res = await fetch("/server/status");
+            const text = await res.text();
+            document.getElementById("status").innerText = text;
+            document.getElementById("status").style.backgroundColor = text === "正常运行" ? "green" : "red";
+        }
+    }
+    updateStatus();
+    setInterval(updateStatus, 60000);
+</script>
+
+</html>
