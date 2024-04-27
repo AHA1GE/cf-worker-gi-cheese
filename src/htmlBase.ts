@@ -109,11 +109,19 @@ export const htmlBase = {
           document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "正在获取状态...";
           document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "black";
           document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
-          const res = await fetch("SERVER_STATUS_URL");
-          const text = await res.text();
-          document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = text;
-          document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "white";
-          document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = text === "正常运行" ? "green" : "red";
+          const beijingTime = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+          const hours = beijingTime.getHours();
+          if (hours < 6 || hours > 23) {
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "服务器仅在北京时间6-23点运行";
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "black";
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
+          } else {
+            const res = await fetch("SERVER_STATUS_URL");
+            const text = await res.text();
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = text;
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "white";
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = text === "正常运行" ? "green" : "red";
+          }
         }
         JS_FUNC_NAME_updateStatus();
         setInterval(JS_FUNC_NAME_updateStatus, 60000);
