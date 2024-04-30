@@ -60,7 +60,7 @@ async function createCard(project: any): Promise<string> {
             .replace("PROJECT_WEBSITE", project.website)
             .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
             .replace("PROJECT_URL", project.url)
-            .replace("PROXIED_PROJECT_URL", getProxiedUrl(config.githubProxier, project.url))
+            .replace("PROXIED_PROJECT_URL", getProxiedUrl(config.proxier, project.url))
             .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url, project.astIndex))
             .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(config.githubProxier, await getAssetsUrl(project.url, project.astIndex)));
     } else {
