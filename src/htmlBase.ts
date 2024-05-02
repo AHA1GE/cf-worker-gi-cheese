@@ -19,7 +19,7 @@ export const htmlBase = {
             <div class="readme">
                 <h2>说明</h2>
                 README_CONTENT
-                <p><a href="https://mb.aha1.top/">留言板</a></p>
+                <p style="font-size: 1.2em; font-style: italic;"><span onclick="window.location.href='https://mb.aha1.top/';" style="cursor: pointer;">留言板</span></p>
             </div>
             <div class="cards-container">
                 CARDS
