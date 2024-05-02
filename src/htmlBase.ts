@@ -19,6 +19,7 @@ export const htmlBase = {
             <div class="readme">
                 <h2>说明</h2>
                 README_CONTENT
+                <p><a href="https://mb.aha1.top/">留言板</a></p>
             </div>
             <div class="cards-container">
                 CARDS
