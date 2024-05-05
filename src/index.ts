@@ -87,7 +87,7 @@ async function createCard(project: any): Promise<string> {
 async function createPage(): Promise<string> {
     const cards = await Promise.all(config.projects.map(createCard));
     // try fetch css from github, if failed, use local css
-    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
+    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => {
         if (res.status === 200) {
             // return css; //dev css
             return res.text();
@@ -155,7 +155,7 @@ async function serverStatus(serverAddress: string): Promise<string> {
  **/
 async function createServersPage(): Promise<string> {
     const cards = await Promise.all(config.servers.map(createServerCard));
-    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css").then((res) => {
+    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => {
         if (res.status === 200) {
             // return css; //dev css
             return res.text();
@@ -244,12 +244,12 @@ export default {
                 );
             case "/favicon.ico":
                 return new Response( //use faviconAddress from config, cache 1 year inmutable
-                    await fetch(config.faviconAddress + "favicon.ico").then((res) => res.blob()),
+                    await fetch(config.faviconAddress + "favicon.ico", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => res.blob()),
                     { headers: { "Content-Type": "image/x-icon", "Cache-Control": "public, max-age=31536000" } }
                 );
             case "apple-touch-icon.png":
                 return new Response( //use faviconAddress from config, cache 1 year inmutable
-                    await fetch(config.faviconAddress + "apple-touch-icon.png").then((res) => res.blob()),
+                    await fetch(config.faviconAddress + "apple-touch-icon.png", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => res.blob()),
                     { headers: { "Content-Type": "image/png", "Cache-Control": "max-age=31536000" } }
                 );
             default:

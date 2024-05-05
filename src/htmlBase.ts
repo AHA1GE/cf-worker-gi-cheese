@@ -20,7 +20,7 @@ export const htmlBase = {
                 <h2>说明</h2>
                 README_CONTENT
                 <p style="font-size: 1.2em; font-style: italic;">
-                  <span onclick="window.location.href='https://mb.aha1.top/';" style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">留言板</span>
+                  <span onclick="window.location.href='https://mb.aha1.top/';" style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">前往留言板 >></span>
                 </p>
             </div>
             <div class="cards-container">
