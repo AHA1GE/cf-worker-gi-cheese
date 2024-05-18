@@ -145,7 +145,7 @@ main .cards-container {
     color: #333;
 }
 
-.close-button:hover {
+.popover-dialog .popover-dialog-close-button:hover {
     background-color: #999;
     color: #fff;
 }
