@@ -134,6 +134,7 @@ main .cards-container {
 }
 
 .popover-dialog .popover-dialog-close-button {
+    box-shadow: none;
     display: inline-block;
     position: absolute;
     top: 0;
@@ -146,6 +147,7 @@ main .cards-container {
 }
 
 .popover-dialog .popover-dialog-close-button:hover {
+    box-shadow: none;
     background-color: #999;
     color: #fff;
 }
