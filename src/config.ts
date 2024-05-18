@@ -132,7 +132,8 @@ export const config = {
             statusUrl: "/server/status/",
             downloadLinks: [
                 "https://vnology.synology.me:5001/sharing/pYnmaMcCc",
-                "https://vno.aha1.top/sharing/pYnmaMcCc",
+                // "https://vno.aha1.top/sharing/pYnmaMcCc", //use baidu pan instead
+                "https://pan.baidu.com/s/"
             ]
         },
     ]
