@@ -183,8 +183,9 @@ async function createServerCard(server: any): Promise<string> {
         .replace("SERVER_PROTOCOL", server.tls ? "https" : "http")
         .replace("SERVER_DOMAINNAME", server.domainName)
         .replace("SERVER_PORT", server.port.toString())
-        .replace("SERVER_DOWNLOAD_LINK_0", server.downloadLinks[0])
-        .replace("SERVER_DOWNLOAD_LINK_1", server.downloadLinks[1] ? server.downloadLinks[1] : server.downloadLinks[0])
+        // .replace("SERVER_DOWNLOAD_LINK_0", server.downloadLinks[0])
+        // .replace("SERVER_DOWNLOAD_LINK_1", server.downloadLinks[1] ? server.downloadLinks[1] : server.downloadLinks[0])
+        .replace("<!-- DOWNLOAD_LINKS -->", server.downloadLinks.map((link: any) => `<a href="${link.url}" target="_blank" rel="noreferrer">${link.desc}</a><br>`).join(""))
         .replace(/JS_FUNC_NAME_updateStatus/g, `updateStatus${generateUniqueId()}ServerId${server.id}`) // generate unique id
         .replace("SERVER_STATUS_URL", server.statusUrl + "?id=" + server.id); // add id to status url
 }

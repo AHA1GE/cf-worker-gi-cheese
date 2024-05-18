@@ -131,10 +131,10 @@ export const config = {
             tls: true,
             statusUrl: "/server/status/",
             downloadLinks: [
-                "https://pan.baidu.com/s/1BELv_A3taTj6dVzeUnepcg?pwd=gays", //baidu pan
-                // "https://vnology.synology.me:5001/sharing/pYnmaMcCc", //synology ddns
-                // "https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs", //synology Drive
-                "https://vno.aha1.top/sharing/pYnmaMcCc", //synology tunnel
+                { url: 'https://pan.baidu.com/s/1BELv_A3taTj6dVzeUnepcg?pwd=gays', desc: "百度网盘" },
+                { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', desc: "群晖网盘" },
+                // { url: 'https://vnology.synology.me:5001/sharing/pYnmaMcCc', desc: "群晖DDNS" },
+                { url: 'https://vno.aha1.top/sharing/pYnmaMcCc', desc: "群晖隧道" },
             ]
         },
     ]

@@ -102,8 +102,7 @@ export const htmlBase = {
           <br>
           <div class="info-container">
             <strong>下载地址</strong><br>
-            <a href="SERVER_DOWNLOAD_LINK_0" target="_blank" rel="noreferrer">点击前往下载页面</a><br>
-            <a href="SERVER_DOWNLOAD_LINK_1" target="_blank" rel="noreferrer">点击前往备用下载页面</a>
+            <!-- DOWNLOAD_LINKS -->
           </div>
         </div>
       </div>
