@@ -39,6 +39,7 @@ export const htmlBase = {
       <p class="manual">使用教程：MANUAL</p>
       <button class="button" popovertarget="POPOVERID">查看链接</button>
       <div class="popover-dialog" id="POPOVERID" popover>
+        <button class="popover-dialog-close button" popovertarget="POPOVERID">X</button>
         <div class="links-popover">
           <h3 >PROJECT_NAME</h2>
           <div class="links-container">
@@ -94,7 +95,7 @@ export const htmlBase = {
         <div class="server-popover">
           <h3>SERVER_NAME</h3>
           <div class="info-container">
-          <strong>连接信息</strong><br>
+            <strong>连接信息</strong><br>
             <span>地址：SERVER_ADDRESS</span><br>
             <span>协议：SERVER_PROTOCOL</span><br>
             <span>域名：SERVER_DOMAINNAME</span><br>
