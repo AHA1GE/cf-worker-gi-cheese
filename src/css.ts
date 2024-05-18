@@ -71,7 +71,7 @@ main .cards-container {
     width: 40%;
 
     min-height: 250px;
-    max-height: 100%;
+    max-height: auto;
     height: auto;
 
     margin: 2rem 2.5rem 1rem 2.5rem;
@@ -80,7 +80,7 @@ main .cards-container {
     border-radius: 2rem;
 
     /* glossed glass */
-    background: rgba(177, 177, 177, 0.5);
+    background: rgba(205, 205, 205, 0.5);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
@@ -109,10 +109,19 @@ main .cards-container {
     backdrop-filter: blur(20px);
 }
 
+.popover-dialog .server-popover .info-container {
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
 /* Button styles */
 .button {
     background-color: #ccc;
     color: #333;
+    box-shadow: inset -2px -2px 2px 1px rgba(52, 52, 52, 0.2);
     padding: .5rem 1rem;
     border-radius: .5rem;
     text-decoration: none;
@@ -121,6 +130,28 @@ main .cards-container {
 }
 
 .button:hover {
+    background-color: #999;
+    color: #fff;
+}
+
+.popover-dialog .popover-dialog-close-button {
+    box-shadow: none;
+    border: none;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: .5rem;
+    line-height: 1.5rem;
+    padding: 0 .5rem 0 .5rem;
+    margin: 1rem 1rem 0 0;
+    background-color: #ccc;
+    color: #333;
+}
+
+.popover-dialog .popover-dialog-close-button:hover {
+    box-shadow: none;
+    border: none;
     background-color: #999;
     color: #fff;
 }
