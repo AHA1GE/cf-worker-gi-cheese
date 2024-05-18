@@ -131,9 +131,10 @@ export const config = {
             tls: true,
             statusUrl: "/server/status/",
             downloadLinks: [
-                "https://vnology.synology.me:5001/sharing/pYnmaMcCc",
+                // "https://vnology.synology.me:5001/sharing/pYnmaMcCc", //use synology Drive instead
+                "https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs",
                 // "https://vno.aha1.top/sharing/pYnmaMcCc", //use baidu pan instead
-                "https://pan.baidu.com/s/"
+                "https://pan.baidu.com/s/1BELv_A3taTj6dVzeUnepcg?pwd=gays"
             ]
         },
     ]
