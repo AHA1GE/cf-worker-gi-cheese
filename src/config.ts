@@ -131,10 +131,9 @@ export const config = {
             tls: true,
             statusUrl: "/server/status/",
             downloadLinks: [
-                { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大，提取码：gays" },
-                { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过动态DNS访问NAS，需要ipv6" },
-                // { url: 'https://vnology.synology.me:5001/sharing/pYnmaMcCc', desc: "群晖DDNS" },
-                { url: 'https://vno.aha1.top/sharing/pYnmaMcCc', name: "群晖隧道", desc: "通过赛博佛祖访问NAS，速度慢" },
+                { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
+                { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过动态DNS访问NAS，需要ipv6。" },
+                { url: 'https://vno.aha1.top/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过赛博佛反代访问NAS，速度慢。" },
             ]
         },
     ]
