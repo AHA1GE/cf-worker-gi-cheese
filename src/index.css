@@ -116,6 +116,12 @@ main .cards-container {
     align-items: start;
 }
 
+.popover-dialog .popover-dialog-close {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
 /* Button styles */
 .button {
     background-color: #ccc;

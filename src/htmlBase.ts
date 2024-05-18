@@ -90,6 +90,7 @@ export const htmlBase = {
       <p class="manual">服务器信息：MANUAL</p>
       <button class="button" popovertarget="POPOVERID">游玩该服务器</button>
       <div class="popover-dialog" id="POPOVERID" popover>
+        <button class="popover-dialog-close button" popovertarget="POPOVERID">X</button>
         <div class="server-popover">
           <h3>SERVER_NAME</h3>
           <div class="info-container">
