@@ -5,6 +5,7 @@ export const config = {
     githubProxier: "https://mirror.ghproxy.com/",
     faviconAddress: `https://genshin.hoyoverse.com/`,
     readmeContent: `
+                <p>请关注留言板获取最新的消息</p>
                 <p>本站提供了一些Windows端的原神工具的介绍和使用教程。本站不对任何工具的安全性和使用后果负责。</p>
                 <p>在网络条件允许的情况下请直接访问，通过代理访问可能会出现各种意料之外的情况，敬请谅解！</p>
                 <p>如果遇到无法访问的情况，请寻求网络技术人员的帮助！</p>
