@@ -80,9 +80,8 @@ main .cards-container {
 
     /* glossed glass */
     background: rgba(205, 205, 205, 0.5);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
+    backdrop-filter: blur(10px);
 }
 
 /* Info styles */
@@ -105,8 +104,8 @@ main .cards-container {
 
 .popover-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 .popover-dialog .server-popover .info-container {
@@ -115,13 +114,6 @@ main .cards-container {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-}
-
-.popover-dialog .popover-dialog-close {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
 }
 
 /* Button styles */
@@ -141,7 +133,11 @@ main .cards-container {
     color: #fff;
 }
 
-.close-button {
+.popover-dialog .popover-dialog-close-button {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
     border-radius: .5rem;
     padding: .5rem .5rem;
     margin: 1rem 1rem 0 0;

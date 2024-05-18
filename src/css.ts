@@ -81,9 +81,8 @@ main .cards-container {
 
     /* glossed glass */
     background: rgba(177, 177, 177, 0.5);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
+    backdrop-filter: blur(10px);
 }
 
 /* Info styles */
@@ -106,8 +105,8 @@ main .cards-container {
 
 .popover-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 /* Button styles */
