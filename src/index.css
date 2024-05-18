@@ -118,7 +118,8 @@ main .cards-container {
 }
 
 .popover-dialog .popover-dialog-close {
-    position: relative;
+    display: block;
+    position: absolute;
     top: 0;
     right: 0;
 }
