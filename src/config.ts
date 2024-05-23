@@ -130,6 +130,7 @@ export const config = {
             port: 8443,
             protocol: "https",
             statusUrl: "/server/status/",
+            statusFetchTarget: "https://gayshit.aha1.top:8443/",
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
                 { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过动态DNS访问NAS，需要ipv6。" },
@@ -144,6 +145,7 @@ export const config = {
             port: 25565,
             protocol: "tcp",
             statusUrl: "/server/status/",
+            statusFetchTarget: "https://gayshit.aha1.top:8443/",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
@@ -158,6 +160,7 @@ export const config = {
             port: 19132,
             protocol: "tcp",
             statusUrl: "/server/status/",
+            statusFetchTarget: "https://gayshit.aha1.top:8443/",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "PC官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },

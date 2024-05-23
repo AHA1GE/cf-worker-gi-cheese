@@ -121,32 +121,38 @@ async function createPage(): Promise<string> {
  * @returns {string}  以字符串返回的服务器状态。
  * @description 该函数接受服务器地址，返回服务器状态。
  **/
-async function serverStatus(serverAddress: string): Promise<string> {
-    // 创建一个超时Promise
-    const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => {
-            reject(new Error("请求超时"));
-        }, config.serverStatusTimeout * 1000); // 设置超时时间
-    });
+async function serverStatus(serverId: number): Promise<string> {
+    const server = config.servers.find((server) => server.id === serverId);
+    if (!server) {
+        return "服务器不存在";
+    } else if (server.statusFetchTarget) {
+        // 创建一个超时Promise
+        const timeoutPromise = new Promise<never>((_, reject) => {
+            setTimeout(() => {
+                reject(new Error("请求超时"));
+            }, config.serverStatusTimeout * 1000); // 设置超时时间
+        });
 
-    try {
-        // 使用Promise.race来竞争fetch请求和超时Promise
-        const res = await Promise.race([
-            fetch(serverAddress),
-            timeoutPromise,
-        ]);
-        // DEV log response's body
-        // console.log(await res.text());
+        try {
+            // 使用Promise.race来竞争fetch请求和超时Promise
+            const res = await Promise.race([
+                fetch(server.statusFetchTarget),
+                timeoutPromise,
+            ]);
 
-        if (res.ok) {
-            return "正常运行";
-        } else {
+            if (res.ok) {
+                return "正常运行";
+            } else {
+                return "服务器异常";
+            }
+        } catch (error: any) {
+            // 捕获超时或其他错误
             return "服务器异常";
         }
-    } catch (error: any) {
-        // 捕获超时或其他错误
-        return "服务器异常";
+    } else {
+        return "服务器配置错误"
     }
+
 }
 
 /** 用来构造服务器列表页面的函数
@@ -201,6 +207,7 @@ function generateUniqueId() {
 
     return id;
 }
+
 export default {
     async fetch(request: any, env: any, ctx: any) {
         //parse the request url
@@ -220,17 +227,22 @@ export default {
                     { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=3600" } }
                 );
             case "/server/status":
-                // extract id from query string
-                const id = requestUrl.searchParams.get("id") || "0";
-                // find the server by id
-                const server = config.servers.find((server) => server.id === parseInt(id)) || config.servers[0];
-                const serverAddress = `${server.protocol}://${server.domainName}:${server.port}`;
-                // DEV log server address
-                // console.log("Fetching private server address:", serverAddress);
-                return new Response(
-                    await serverStatus(serverAddress),
-                    { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
-                );
+                try {
+                    const paramId = requestUrl.searchParams.get("id");
+                    if (paramId === null) {
+                        throw "缺少参数";
+                    } else {
+                        return new Response(
+                            await serverStatus(parseInt(paramId)),
+                            { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
+                        );
+                    }
+                } catch (error: any) {
+                    return new Response(
+                        error,
+                        { status: 500, headers: { "Content-Type": "text/plain" } }
+                    );
+                }
             case "/robots.txt":
                 return new Response( //use tobotsTXT from config, cache 1 year inmutable
                     config.robotsTXT,
