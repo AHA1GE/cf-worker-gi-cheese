@@ -179,8 +179,8 @@ async function createServerCard(server: any): Promise<string> {
         .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
         .replace("MANUAL", server.manual)
         .replace(/POPOVERID/g, server.id + generateUniqueId()) // generate unique id
-        .replace("SERVER_ADDRESS", `${server.tls ? "https" : "http"}://${server.domainName}:${server.port}`)
-        .replace("SERVER_PROTOCOL", server.tls ? "https" : "http")
+        .replace("SERVER_ADDRESS", `${server.protocol}://${server.domainName}:${server.port}`)
+        .replace("SERVER_PROTOCOL", server.protocol)
         .replace("SERVER_DOMAINNAME", server.domainName)
         .replace("SERVER_PORT", server.port.toString())
         .replace("<!-- DOWNLOAD_LINKS -->", server.downloadLinks.map((link: any) => `<a class="button" href="${link.url}" target="_blank" rel="noreferrer">${link.name}</a><span> ${link.desc}</span><br>`).join(""))
@@ -224,7 +224,7 @@ export default {
                 const id = requestUrl.searchParams.get("id") || "0";
                 // find the server by id
                 const server = config.servers.find((server) => server.id === parseInt(id)) || config.servers[0];
-                const serverAddress = `${server.tls ? "https" : "http"}://${server.domainName}:${server.port}`;
+                const serverAddress = `${server.protocol}://${server.domainName}:${server.port}`;
                 // DEV log server address
                 // console.log("Fetching private server address:", serverAddress);
                 return new Response(

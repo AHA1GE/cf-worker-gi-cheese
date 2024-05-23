@@ -115,7 +115,7 @@ export const config = {
     // server: {
     //     domainName: "gayshit.aha1.top",
     //     port: 8443,
-    //     tls: true,
+    //     protocol: "https",
     //     statusTimeout: 2, //seconds
     // },
 
@@ -128,7 +128,7 @@ export const config = {
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
             port: 8443,
-            tls: true,
+            protocol: "https",
             statusUrl: "/server/status/",
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
@@ -136,5 +136,33 @@ export const config = {
                 { url: 'https://vno.aha1.top/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过赛博佛祖的隧道访问NAS，慢。" },
             ]
         },
+        {
+            id: 1,
+            name: "Minecraft Java服务器",
+            manual: "仅在北京时间06:00-23:00运行。原版purpur服务器，无插件。生存模式。下载启动器，启动游戏，输入服务器信息，加入游戏！",
+            domainName: "server.aha1.top",
+            port: 25565,
+            protocol: "tcp",
+            statusUrl: "/server/status/",
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
+                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在安卓手机上运行Java版Minecraft，好！" },
+            ]
+        },
+        {
+            id: 2,
+            name: "Minecraft Bedrock服务器",
+            manual: "仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。下载启动器，启动游戏，输入服务器信息，加入游戏！",
+            domainName: "server.aha1.top",
+            port: 19132,
+            protocol: "tcp",
+            statusUrl: "/server/status/",
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "PC官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
+                { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
+            ]
+        }
     ]
 }
