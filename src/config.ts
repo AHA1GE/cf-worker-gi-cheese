@@ -59,7 +59,8 @@ export const config = {
         {
             isOnGithub: false,
             name: "Akebi",
-            url: "https://mega.nz/file/xKtFBaaa#Rpj-HUs9Q6Sy2JHLuHoLYPQdDQbxHXkFZpoefxD45ec",
+            // url: "https://mega.nz/file/xKtFBaaa#Rpj-HUs9Q6Sy2JHLuHoLYPQdDQbxHXkFZpoefxD45ec",
+            url: "https://genshincheat.net/#linkk",
             astIndex: 0,
             website: "https://discord.gg/akebi",
             desc: "收费！功能丰富的辅助工具，支持国际服和国服。",
