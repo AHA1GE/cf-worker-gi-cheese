@@ -180,6 +180,15 @@ async function createServersPage(): Promise<string> {
  * @description 该函数返回服务器信息卡片。
  **/
 async function createServerCard(server: any): Promise<string> {
+    let portValue: number;
+    if (server.port.allocation === "static") {
+        portValue = server.port.value;
+    } else {
+        // retrive port from dweet.io
+        const response = await fetch(server.portDweet);
+        const json = await response.json() as any;
+        portValue = json.with[0].content.port;
+    }
     return htmlBase.serverCard
         .replace(/SERVER_NAME/g, server.name)
         .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
@@ -188,7 +197,7 @@ async function createServerCard(server: any): Promise<string> {
         .replace("SERVER_ADDRESS", `${server.protocol}://${server.domainName}:${server.port}`)
         .replace("SERVER_PROTOCOL", server.protocol)
         .replace("SERVER_DOMAINNAME", server.domainName)
-        .replace("SERVER_PORT", server.port.toString())
+        .replace("SERVER_PORT", portValue.toString())
         .replace("<!-- DOWNLOAD_LINKS -->", server.downloadLinks.map((link: any) => `<a class="button" href="${link.url}" target="_blank" rel="noreferrer">${link.name}</a><span> ${link.desc}</span><br>`).join(""))
         .replace(/JS_FUNC_NAME_updateStatus/g, `updateStatus${generateUniqueId()}ServerId${server.id}`) // generate unique id
         .replace("SERVER_STATUS_URL", server.statusUrl + "?id=" + server.id); // add id to status url

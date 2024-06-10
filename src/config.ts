@@ -128,7 +128,7 @@ export const config = {
             name: "Grasscutter服务器",
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
-            port: 8443,
+            port: { allocation: "static", value: 8443 },
             protocol: "https",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
@@ -140,11 +140,11 @@ export const config = {
             ]
         },
         {
-            id: 2,
+            id: 1,
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "0.0.0.0",
-            port: 19132,
+            port: { allocation: "static", value: 19132 },
             protocol: "tcp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
@@ -156,11 +156,12 @@ export const config = {
             ]
         },
         {
-            id: 1,
+            id: 2,
             name: "Minecraft Java服务器",
             manual: "24/7 原版服务器，无插件。生存模式。请在留言板提出插件需求。",
             domainName: "server.aha1.top",
-            port: 25565,
+            port: { allocation: "dynamic", value: 0 },
+            portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
