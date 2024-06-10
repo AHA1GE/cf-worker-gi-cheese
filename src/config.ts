@@ -132,6 +132,7 @@ export const config = {
             protocol: "https",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusFetchExpect: "Grasscutter",
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
                 { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过动态DNS访问NAS，需要ipv6。" },
@@ -139,34 +140,36 @@ export const config = {
             ]
         },
         {
+            id: 2,
+            name: "Minecraft Bedrock服务器",
+            manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
+            domainName: "0.0.0.0",
+            port: 19132,
+            protocol: "tcp",
+            statusUrl: "/server/status/",
+            statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusFetchExpect: "MinecraftBedrock",
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "PC官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
+                { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
+            ]
+        },
+        {
             id: 1,
             name: "Minecraft Java服务器",
-            manual: "仅在北京时间06:00-23:00运行。原版purpur服务器，无插件。生存模式。下载启动器，启动游戏，输入服务器信息，加入游戏！",
+            manual: "24/7 原版服务器，无插件。生存模式。请在留言板提出插件需求。",
             domainName: "server.aha1.top",
             port: 25565,
             protocol: "tcp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusFetchExpect: "MinecraftJava",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
                 { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在安卓手机上运行Java版Minecraft，好！" },
             ]
         },
-        {
-            id: 2,
-            name: "Minecraft Bedrock服务器",
-            manual: "仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。下载启动器，启动游戏，输入服务器信息，加入游戏！",
-            domainName: "server.aha1.top",
-            port: 19132,
-            protocol: "tcp",
-            statusUrl: "/server/status/",
-            statusFetchTarget: "https://gayshit.aha1.top:8443/",
-            downloadLinks: [
-                { url: 'https://www.minecraft.net/about-minecraft', name: "PC官方启动器", desc: "原汁原味，好！" },
-                { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
-                { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
-            ]
-        }
     ]
 }
