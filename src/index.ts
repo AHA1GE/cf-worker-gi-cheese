@@ -1,8 +1,73 @@
 // https://github.com/AHA1GE/cf-worker-gi-cheese
 import { request } from "@octokit/request";
 import { config } from "./config.js"; //页面设置
-import { htmlBase } from "./htmlBase.js"; //写死的html基础模板
+import { htmlBase } from "./htmlBase.js"; //写死的html基础模板，由build.py生成ts文件
 import { css } from "./css.js"; //写死的css样式
+
+/** 用来获取服务器状态的函数
+ * @param serverAddress 服务器地址，例如：“https://example.com:8000/”
+ * @returns {string}  以字符串返回的服务器状态。
+ * @description 该函数接受服务器地址，返回服务器状态。
+ **/
+async function serverStatus(serverId: number): Promise<Response> {
+    const status = {
+        success: { status: "正常运行", textColor: "white", bgColor: "green" },
+        notOperatingTime: { status: "非运营时间", textColor: "black", bgColor: "yellow" },
+        noStatusIndicator: { status: "未设置状态指示器", textColor: "black", bgColor: "gray" },
+        timeout: { status: "请求超时", textColor: "black", bgColor: "red" },
+        fail: { status: "服务器异常", textColor: "black", bgColor: "red" },
+        notExist: { status: "服务器不存在", textColor: "black", bgColor: "red" },
+    }
+    // 设置响应头，返回json格式，sniff off，1分钟缓存
+    const headers = new Headers();
+    headers.set("Content-Type", "application/json");
+    headers.set("X-Content-Type-Options", "nosniff");
+    headers.set("Cache-Control", "public, max-age=60");
+
+    // 从config中找到对应id的服务器
+    const server = config.servers.find((server) => server.id === serverId);
+
+    // 如果服务器不存在,没有设置statusFetchTarget,或者不在运营时间，短路返回对应状态
+    if (!server) { return new Response(JSON.stringify(status.notExist), { headers }); }
+    else if (!server.statusFetchTarget) { return new Response(JSON.stringify(status.noStatusIndicator), { headers }); }
+    else if (!server.opTime.always) {
+        // for non-always operating time, check if current time is in the operating time
+        // opTime is Beijing time
+        const start = server.opTime.start;
+        const end = server.opTime.end;
+        const currentHour = new Date().getUTCHours() + 8;
+        if (currentHour < start || currentHour >= end) {
+            return new Response(JSON.stringify(status.notOperatingTime), { headers });
+        }
+    };
+
+    // 运用statusFetchTarget获取服务器状态
+    // 设置超时Promise
+    const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => {
+            // 超时后返回错误包含statusFetchTarget
+            reject(new Error("请求超时: " + server.statusFetchTarget));
+        }, config.serverStatusTimeout * 1000); // 设置超时时间
+    });
+
+    try {
+        // 使用Promise.race来竞争fetch请求和超时Promise
+        const res = await Promise.race([
+            fetch(server.statusFetchTarget),
+            timeoutPromise,
+        ]);
+
+        if (res.ok) {
+            return new Response(JSON.stringify(status.success), { headers });
+        } else {
+            return new Response(JSON.stringify(status.fail), { headers });
+        }
+    } catch (error: any) {
+        console.error(error);
+        // 捕获超时或其他错误
+        return new Response(JSON.stringify(status.timeout), { headers });
+    }
+}
 
 /** 用来获取下载地址的函数
  * @param url 项目地址，例如：“https://github.com/kindawindytoday/Minty-Releases”
@@ -46,16 +111,16 @@ function getProxiedUrl(proxier: string, url: string): string {
 
 /** 用来构造项目卡片html的函数
  * @param project 项目信息，是config.projects中的一个元素构成。
- * @returns {string}  以字符串返回的html代码，由htmlBase.card构造而成。
+ * @returns {string}  以字符串返回的html代码，由htmlBase.mainPageCard构造而成。
  * @description 该函数接受项目信息，返回一个html代码，用来构造项目卡片。
  * 项目卡片的样式可以在css中修改。
  **/
 async function createCard(project: any): Promise<string> {
     if (project.isOnGithub) {
-        return htmlBase.card
-            .replace(/PROJECT_NAME/g, project.name)
-            .replace("DESCRIPTION", project.desc)
-            .replace("MANUAL", project.manual)
+        return htmlBase.mainPageCard
+            .replace(/<!-- PROJECT_NAME -->/g, project.name)
+            .replace("<!-- DESCRIPTION -->", project.desc)
+            .replace("<!-- MANUAL -->", project.manual)
             .replace(/POPOVERID/g, project.name + "-popover")
             .replace("PROJECT_WEBSITE", project.website)
             .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
@@ -64,10 +129,10 @@ async function createCard(project: any): Promise<string> {
             .replace("DOWNLOAD_LINK", await getAssetsUrl(project.url, project.astIndex))
             .replace("PROXIED_DOWNLOAD_LINK", getProxiedUrl(config.githubProxier, await getAssetsUrl(project.url, project.astIndex)));
     } else {
-        return htmlBase.card
-            .replace(/PROJECT_NAME/g, project.name)
-            .replace("DESCRIPTION", project.desc)
-            .replace("MANUAL", project.manual)
+        return htmlBase.mainPageCard
+            .replace(/<!-- PROJECT_NAME -->/g, project.name)
+            .replace("<!-- DESCRIPTION -->", project.desc)
+            .replace("<!-- MANUAL -->", project.manual)
             .replace(/POPOVERID/g, project.name + "-popover")
             .replace("PROJECT_WEBSITE", project.website)
             .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
@@ -80,7 +145,7 @@ async function createCard(project: any): Promise<string> {
 }
 
 /** 用来构造主页html的函数
- * @returns {string}  以字符串返回的html代码，由htmlBase.page构造而成。
+ * @returns {string}  以字符串返回的html代码，由htmlBase.mainPage构造而成。
  * @description 该函数返回最终html代码。
  * 项目页面的样式可以在css中修改。
  **/
@@ -98,61 +163,41 @@ async function createPage(): Promise<string> {
     }).catch(() => {
         return css;
     });
-    return htmlBase.page.replace("README_CONTENT", config.readmeContent).replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
+    return htmlBase.mainPage
+        .replace("/* STYLESHEET */", finalcss)
+        .replace("<!-- README_CONTENT -->", config.readmeContent)
+        .replace("<!-- CARDS -->", cards.join(""));
 }
 
-/** !!! deprecated, use createServersPage instead !!! 用来构造服务器运行状态页面的函数
- * @returns {string}  以字符串返回的服务器运行状态。
- * @description 该函数返回服务器运行状态。
+/** 用来构造服务器信息卡片的函数
+ * @returns {string}  以字符串返回的服务器信息卡片。
+ * @description 该函数返回服务器信息卡片。
  **/
-// async function createServerPage(): Promise<string> {
-//     const serverAddress = `${config.server.tls ? "https" : "http"}://${config.server.domainName}:${config.server.port}`;
-//     let serverStatus = "正在获取状态...";
-//     // Use page js to fetch server status, api is /server/status, every 60s
-//     return htmlBase.server
-//         .replace(/SERVERADDRESS/g, serverAddress)
-//         .replace(/SERVERPROTOCOL/g, config.server.tls ? "https" : "http")
-//         .replace(/SERVERDOMAINNAME/g, config.server.domainName)
-//         .replace(/SERVERPORT/g, config.server.port.toString());
-// }
-
-/** 用来获取服务器状态的函数
- * @param serverAddress 服务器地址，例如：“https://example.com:8000/”
- * @returns {string}  以字符串返回的服务器状态。
- * @description 该函数接受服务器地址，返回服务器状态。
- **/
-async function serverStatus(serverId: number): Promise<string> {
-    const server = config.servers.find((server) => server.id === serverId);
-    if (!server) {
-        return "服务器不存在";
-    } else if (server.statusFetchTarget) {
-        // 创建一个超时Promise
-        const timeoutPromise = new Promise<never>((_, reject) => {
-            setTimeout(() => {
-                reject(new Error("请求超时"));
-            }, config.serverStatusTimeout * 1000); // 设置超时时间
-        });
-
-        try {
-            // 使用Promise.race来竞争fetch请求和超时Promise
-            const res = await Promise.race([
-                fetch(server.statusFetchTarget),
-                timeoutPromise,
-            ]);
-
-            if (res.ok) {
-                return "正常运行";
-            } else {
-                return "服务器异常";
-            }
-        } catch (error: any) {
-            // 捕获超时或其他错误
-            return "服务器异常";
+async function createServerCard(server: any): Promise<string> {
+    async function retrivePortValue(server: any) {
+        if (server.port.allocation === "static") {
+            return server.port.value as string;
+        } else {
+            // retrive port from dweet.io
+            const response = await fetch(server.portDweet);
+            const json = await response.json() as any;
+            return json.with[0].content.port as string;
         }
-    } else {
-        return "服务器配置错误"
     }
-
+    const portValue = await retrivePortValue(server);
+    console.log(portValue);
+    return htmlBase.serverPageCard
+        .replace(/<!-- SERVER_NAME-->/g, server.name)
+        .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
+        .replace("<!-- MANUAL-->", server.manual)
+        .replace(/POPOVERID/g, server.id + generateUniqueId()) // generate unique id
+        .replace("<!-- SERVER_ADDRESS -->", `${server.protocol}://${server.domainName}:${portValue}`)
+        .replace("<!-- SERVER_PROTOCOL -->", server.protocol)
+        .replace("<!-- SERVER_DOMAINNAME -->", server.domainName)
+        .replace("<!-- SERVER_PORT -->", portValue)
+        .replace("<!-- DOWNLOAD_LINKS -->", server.downloadLinks.map((link: any) => `<a class="button" href="${link.url}" target="_blank" rel="noreferrer">${link.name}</a><span> ${link.desc}</span><br>`).join(""))
+        .replace(/JS_FUNC_NAME_updateStatus/g, `updateStatus${generateUniqueId()}ServerId${server.id}`) // generate unique id
+        .replace("SERVER_STATUS_URL", server.statusUrl + "?id=" + server.id); // add id to status url
 }
 
 /** 用来构造服务器列表页面的函数
@@ -172,36 +217,11 @@ async function createServersPage(): Promise<string> {
     }).catch(() => {
         return css;
     });
-    return htmlBase.serversPage.replace("CARDS", cards.join("")).replace("STYLESHEET", finalcss);
+    return htmlBase.serverPage
+        .replace("/* STYLESHEET */", finalcss)
+        .replace("<!-- CARDS -->", cards.join(""));
 }
 
-/** 用来构造服务器信息卡片的函数
- * @returns {string}  以字符串返回的服务器信息卡片。
- * @description 该函数返回服务器信息卡片。
- **/
-async function createServerCard(server: any): Promise<string> {
-    let portValue: number;
-    if (server.port.allocation === "static") {
-        portValue = server.port.value;
-    } else {
-        // retrive port from dweet.io
-        const response = await fetch(server.portDweet);
-        const json = await response.json() as any;
-        portValue = json.with[0].content.port;
-    }
-    return htmlBase.serverCard
-        .replace(/SERVER_NAME/g, server.name)
-        .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
-        .replace("MANUAL", server.manual)
-        .replace(/POPOVERID/g, server.id + generateUniqueId()) // generate unique id
-        .replace("SERVER_ADDRESS", `${server.protocol}://${server.domainName}:${server.port}`)
-        .replace("SERVER_PROTOCOL", server.protocol)
-        .replace("SERVER_DOMAINNAME", server.domainName)
-        .replace("SERVER_PORT", portValue.toString())
-        .replace("<!-- DOWNLOAD_LINKS -->", server.downloadLinks.map((link: any) => `<a class="button" href="${link.url}" target="_blank" rel="noreferrer">${link.name}</a><span> ${link.desc}</span><br>`).join(""))
-        .replace(/JS_FUNC_NAME_updateStatus/g, `updateStatus${generateUniqueId()}ServerId${server.id}`) // generate unique id
-        .replace("SERVER_STATUS_URL", server.statusUrl + "?id=" + server.id); // add id to status url
-}
 
 function generateUniqueId() {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -241,10 +261,7 @@ export default {
                     if (paramId === null) {
                         throw "缺少参数";
                     } else {
-                        return new Response(
-                            await serverStatus(parseInt(paramId)),
-                            { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" } }
-                        );
+                        return serverStatus(parseInt(paramId));
                     }
                 } catch (error: any) {
                     return new Response(

@@ -1,0 +1,38 @@
+<div class="card">
+    <h2><!-- SERVER_NAME--></h2>
+    <p class="info">服务器状态：<span id="SERVER_STATUS_ELEMENT_ID">正在获取状态...</span></p>
+    <p class="manual">服务器信息：<!-- MANUAL--></p>
+    <button class="button" popovertarget="POPOVERID">游玩该服务器</button>
+    <div class="popover-dialog" id="POPOVERID" popover>
+        <button class="popover-dialog-close-button" popovertarget="POPOVERID">x</button>
+        <div class="server-popover">
+            <h3><!-- SERVER_NAME--></h3>
+            <div class="info-container">
+                <strong>连接信息</strong><br>
+                <span>地址：<!-- SERVER_ADDRESS --></span><br>
+                <span>协议：<!-- SERVER_PROTOCOL --></span><br>
+                <span>域名：<!-- SERVER_DOMAINNAME --></span><br>
+                <span>端口：<!-- SERVER_PORT --></span><br>
+            </div>
+            <br>
+            <div class="info-container">
+                <strong>下载地址</strong><br>
+                <!-- DOWNLOAD_LINKS -->
+            </div>
+        </div>
+    </div>
+    <script>
+        async function JS_FUNC_NAME_updateStatus() {
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "正在获取状态...";
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "black";
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
+            const res = await fetch("SERVER_STATUS_URL");
+            const statusRes = await res.json();
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = statusRes.status;
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = statusRes.textColor;
+            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = statusRes.bgColor;
+        }
+        JS_FUNC_NAME_updateStatus();
+        setInterval(JS_FUNC_NAME_updateStatus, 60000);
+    </script>
+</div><br>
