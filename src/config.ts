@@ -125,6 +125,7 @@ export const config = {
     servers: [
         {
             id: 0,
+            opTime: { always: false, start: 6, end: 23 }, // {always: true, start: 0, end: 24
             name: "Grasscutter服务器",
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
@@ -141,6 +142,7 @@ export const config = {
         },
         {
             id: 1,
+            opTime: { always: false, start: 6, end: 23 }, // {always: true, start: 0, end: 24
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "0.0.0.0",
@@ -150,13 +152,14 @@ export const config = {
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
             statusFetchExpect: "MinecraftBedrock",
             downloadLinks: [
-                { url: 'https://www.minecraft.net/about-minecraft', name: "PC官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
                 { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
             ]
         },
         {
             id: 2,
+            opTime: { always: true, start: 0, end: 24 }, // {always: true, start: 0, end: 24
             name: "Minecraft Java服务器",
             manual: "24/7 原版服务器，无插件。生存模式。请在留言板提出插件需求。",
             domainName: "server.aha1.top",
@@ -164,12 +167,12 @@ export const config = {
             portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusFetchTarget: null,
             statusFetchExpect: "MinecraftJava",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
-                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在安卓手机上运行Java版Minecraft，好！" },
+                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft，好！" },
             ]
         },
     ]
