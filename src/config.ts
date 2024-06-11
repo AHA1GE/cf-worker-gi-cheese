@@ -113,13 +113,6 @@ export const config = {
         },
     ],
 
-    // server: {
-    //     domainName: "gayshit.aha1.top",
-    //     port: 8443,
-    //     protocol: "https",
-    //     statusTimeout: 2, //seconds
-    // },
-
     serverStatusTimeout: 2, //seconds
 
     servers: [
@@ -129,10 +122,10 @@ export const config = {
             name: "Grasscutter服务器",
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
-            port: { allocation: "static", value: 8443 },
+            port: { allocation: "static", value: 8443 }, // {allocation: "dynamic", value: 0}
             protocol: "https",
-            statusUrl: "/server/status/",
-            statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusUrl: "/server/status/", // When generating the card, the in-page js use this url to fetch the status of the server.
+            statusFetchTarget: "https://gayshit.aha1.top:8443/", // When worker recieve the request from client, it fetch this url to get the status of the server.
             statusFetchExpect: "Grasscutter",
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
@@ -142,7 +135,7 @@ export const config = {
         },
         {
             id: 1,
-            opTime: { always: false, start: 6, end: 23 }, // {always: true, start: 0, end: 24
+            opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "0.0.0.0",
@@ -159,15 +152,15 @@ export const config = {
         },
         {
             id: 2,
-            opTime: { always: true, start: 0, end: 24 }, // {always: true, start: 0, end: 24
+            opTime: { always: true, start: 0, end: 24 },
             name: "Minecraft Java服务器",
-            manual: "24/7 原版服务器，无插件。生存模式。请在留言板提出插件需求。",
+            manual: "24/7 原版服务器，无插件。生存模式。已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。如有插件建议或请求，请在留言板提出。",
             domainName: "server.aha1.top",
             port: { allocation: "dynamic", value: 0 },
             portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: null,
+            statusFetchTarget: null, // no health check deployed
             statusFetchExpect: "MinecraftJava",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },

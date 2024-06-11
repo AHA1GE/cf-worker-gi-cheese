@@ -5,9 +5,9 @@ import { htmlBase } from "./htmlBase.js"; //写死的html基础模板，由build
 import { css } from "./css.js"; //写死的css样式
 
 /** 用来获取服务器状态的函数
- * @param serverAddress 服务器地址，例如：“https://example.com:8000/”
- * @returns {string}  以字符串返回的服务器状态。
- * @description 该函数接受服务器地址，返回服务器状态。
+ * @param serverId 服务器id
+ * @returns {Response}  以Response对象返回的服务器状态。
+ * @description 该函数接受服务器id，返回服务器状态。
  **/
 async function serverStatus(serverId: number): Promise<Response> {
     const status = {
@@ -42,29 +42,28 @@ async function serverStatus(serverId: number): Promise<Response> {
     };
 
     // 运用statusFetchTarget获取服务器状态
-    // 设置超时Promise
-    const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => {
-            // 超时后返回错误包含statusFetchTarget
+    const timeoutPromise = new Promise<Response>((resolve, reject) => {
+        const timeoutId = setTimeout(() => {
             reject(new Error("请求超时: " + server.statusFetchTarget));
-        }, config.serverStatusTimeout * 1000); // 设置超时时间
+        }, config.serverStatusTimeout * 1000);
+
+        fetch(server.statusFetchTarget).then(res => {
+            clearTimeout(timeoutId);
+            if (res.ok) {
+                resolve(new Response(JSON.stringify(status.success), { headers }));
+            } else {
+                resolve(new Response(JSON.stringify(status.fail), { headers }));
+            }
+        }).catch(err => {
+            clearTimeout(timeoutId);
+            reject(err);
+        });
     });
 
     try {
-        // 使用Promise.race来竞争fetch请求和超时Promise
-        const res = await Promise.race([
-            fetch(server.statusFetchTarget),
-            timeoutPromise,
-        ]);
-
-        if (res.ok) {
-            return new Response(JSON.stringify(status.success), { headers });
-        } else {
-            return new Response(JSON.stringify(status.fail), { headers });
-        }
-    } catch (error: any) {
+        return await timeoutPromise;
+    } catch (error) {
         console.error(error);
-        // 捕获超时或其他错误
         return new Response(JSON.stringify(status.timeout), { headers });
     }
 }
