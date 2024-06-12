@@ -119,14 +119,14 @@ export const config = {
         {
             id: 0,
             opTime: { always: false, start: 6, end: 23 }, // {always: true, start: 0, end: 24
-            name: "Grasscutter服务器",
+            name: "GI Grasscutter服务器",
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
             port: { allocation: "static", value: 8443 }, // {allocation: "dynamic", value: 0}
             protocol: "https",
             statusUrl: "/server/status/", // When generating the card, the in-page js use this url to fetch the status of the server.
             statusFetchTarget: "https://gayshit.aha1.top:8443/", // When worker recieve the request from client, it fetch this url to get the status of the server.
-            statusFetchExpect: "Grasscutter",
+            statusFetchExpect: "Grasscutter", // placeholder
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
                 { url: 'https://vnology.synology.me:5001/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖网盘", desc: "通过动态DNS访问NAS，需要ipv6。" },
@@ -138,16 +138,15 @@ export const config = {
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
-            domainName: "0.0.0.0",
+            domainName: "localhost",
             port: { allocation: "static", value: 19132 },
-            protocol: "tcp",
+            protocol: "udp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://gayshit.aha1.top:8443/",
-            statusFetchExpect: "MinecraftBedrock",
+            statusFetchExpect: "MinecraftBedrock", // placeholder
             downloadLinks: [
-                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
-                { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
-                { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
+                { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
+                { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
             ]
         },
         {
@@ -161,11 +160,28 @@ export const config = {
             protocol: "tcp",
             statusUrl: "/server/status/",
             statusFetchTarget: null, // no health check deployed
-            statusFetchExpect: "MinecraftJava",
+            statusFetchExpect: "MinecraftJava", // placeholder
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
                 { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft，好！" },
+            ]
+        },
+        {
+            id: 3,
+            opTime: { always: false, start: 6, end: 23 },
+            name: "Minecraft Bedrock服务器 on Falix",
+            manual: "Falix上的免费服务器，不会自动运行。原版基岩服务器，无插件。生存模式。请联系我启动服务器。",
+            domainName: "aha1.falixsrv.me",
+            port: { allocation: "static", value: 56576 },
+            protocol: "udp",
+            statusUrl: "/server/status/",
+            statusFetchTarget: null,
+            statusFetchExpect: "MinecraftBedrock", // placeholder
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
+                { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
             ]
         },
     ]
