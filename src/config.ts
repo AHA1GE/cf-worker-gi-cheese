@@ -135,6 +135,34 @@ export const config = {
         },
         {
             id: 1,
+            opTime: { always: true, start: 0, end: 24 },
+            name: "Minecraft Java服务器",
+            manual: `
+                24/7 原版服务器，无插件。生存模式。
+                已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。
+                如有插件建议或请求，请在留言板提出。
+                <span onclick="window.location.href='https://servermap.aha1.top/';"
+                    style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
+                    onmouseout="this.style.textDecoration='none';">
+                    查看地图->
+                </span>
+                `,
+            domainName: "server.aha1.top",
+            port: { allocation: "dynamic", value: 0 },
+            portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
+            protocol: "tcp",
+            statusUrl: "/server/status/",
+            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
+            statusFetchTarget: "https://api.mcsrvstat.us/3/server.aha1.top:",
+            statusFetchExpect: "json",
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费启动器" },
+                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft！" },
+            ]
+        },
+        {
+            id: 2,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
@@ -147,25 +175,6 @@ export const config = {
             downloadLinks: [
                 { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
                 { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
-            ]
-        },
-        {
-            id: 2,
-            opTime: { always: true, start: 0, end: 24 },
-            name: "Minecraft Java服务器",
-            manual: "24/7 原版服务器，无插件。生存模式。已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。如有插件建议或请求，请在留言板提出。",
-            domainName: "server.aha1.top",
-            port: { allocation: "dynamic", value: 0 },
-            portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
-            protocol: "tcp",
-            statusUrl: "/server/status/",
-            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
-            statusFetchTarget: "https://api.mcsrvstat.us/3/server.aha1.top:",
-            statusFetchExpect: "json",
-            downloadLinks: [
-                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
-                { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费，好！" },
-                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft，好！" },
             ]
         },
         {
