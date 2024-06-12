@@ -125,7 +125,7 @@ export const config = {
             port: { allocation: "static", value: 8443 }, // {allocation: "dynamic", value: 0}
             protocol: "https",
             statusUrl: "/server/status/", // When generating the card, the in-page js use this url to fetch the status of the server.
-            statusFetchTarget: "https://gayshit.aha1.top:8443/", // When worker recieve the request from client, it fetch this url to get the status of the server.
+            statusFetchTarget: "https://gayshit.aha1.top:", // When worker recieve the request from client, it fetch this url to get the status of the server.
             statusFetchExpect: "Grasscutter", // placeholder
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "我的很大你忍一下。提取码：gays" },
