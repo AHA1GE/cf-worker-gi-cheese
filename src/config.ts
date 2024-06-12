@@ -169,7 +169,7 @@ export const config = {
         },
         {
             id: 3,
-            opTime: { always: false, start: 6, end: 23 },
+            opTime: { always: false, start: 24, end: 24 },
             name: "Minecraft Bedrock服务器 on Falix",
             manual: "Falix上的免费服务器，不会自动运行。原版基岩服务器，无插件。生存模式。请联系我启动服务器。",
             domainName: "aha1.falixsrv.me",
