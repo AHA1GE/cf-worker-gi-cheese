@@ -4,6 +4,17 @@ import { config } from "./config.js"; //页面设置
 import { htmlBase } from "./htmlBase.js"; //写死的html基础模板，由build.py生成ts文件
 import { css } from "./css.js"; //写死的css样式
 
+async function retrivePortValue(server: any) {
+    if (server.port.allocation === "static") {
+        return server.port.value as string;
+    } else {
+        // retrive port from dweet.io
+        const response = await fetch(server.portDweet);
+        const json = await response.json() as any;
+        return json.with[0].content.port as string;
+    }
+}
+
 /** 用来获取服务器状态的函数
  * @param serverId 服务器id
  * @returns {Response}  以Response对象返回的服务器状态。
@@ -42,12 +53,14 @@ async function serverStatus(serverId: number): Promise<Response> {
     };
 
     // 运用statusFetchTarget获取服务器状态
+    const srvHealthCheckApi = server.statusFetchTarget + await retrivePortValue(server);
+    console.log(`fetching ${srvHealthCheckApi} for server status of id ${serverId}`)
     const timeoutPromise = new Promise<Response>((resolve, reject) => {
         const timeoutId = setTimeout(() => {
-            reject(new Error("请求超时: " + server.statusFetchTarget));
+            reject(new Error("请求超时: " + srvHealthCheckApi));
         }, config.serverStatusTimeout * 1000);
 
-        fetch(server.statusFetchTarget).then(res => {
+        fetch(srvHealthCheckApi).then(res => {
             clearTimeout(timeoutId);
             if (res.ok) {
                 resolve(new Response(JSON.stringify(status.success), { headers }));
@@ -173,16 +186,6 @@ async function createPage(): Promise<string> {
  * @description 该函数返回服务器信息卡片。
  **/
 async function createServerCard(server: any): Promise<string> {
-    async function retrivePortValue(server: any) {
-        if (server.port.allocation === "static") {
-            return server.port.value as string;
-        } else {
-            // retrive port from dweet.io
-            const response = await fetch(server.portDweet);
-            const json = await response.json() as any;
-            return json.with[0].content.port as string;
-        }
-    }
     const portValue = await retrivePortValue(server);
     console.log(portValue);
     return htmlBase.serverPageCard

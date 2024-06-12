@@ -142,7 +142,7 @@ export const config = {
             port: { allocation: "static", value: 19132 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://gayshit.aha1.top:8443/",
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/mcbe.aha1.top:", // port will be appended by the worker
             statusFetchExpect: "MinecraftBedrock", // placeholder
             downloadLinks: [
                 { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
@@ -159,7 +159,7 @@ export const config = {
             portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: null, // no health check deployed
+            statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // port will be appended by the worker
             statusFetchExpect: "MinecraftJava", // placeholder
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
@@ -176,7 +176,7 @@ export const config = {
             port: { allocation: "static", value: 56576 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: null,
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/aha1.falixsrv.me:", // port will be appended by the worker
             statusFetchExpect: "MinecraftBedrock", // placeholder
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
