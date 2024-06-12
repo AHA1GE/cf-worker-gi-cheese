@@ -136,7 +136,7 @@ export const htmlBase = {
             document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = statusRes.bgColor;
         }
         JS_FUNC_NAME_updateStatus();
-        setInterval(JS_FUNC_NAME_updateStatus, 60000);
+        setInterval(JS_FUNC_NAME_updateStatus, 300000);
     </script>
 </div><br>`,
 };

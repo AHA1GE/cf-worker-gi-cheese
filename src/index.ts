@@ -21,9 +21,10 @@ async function retrivePortValue(server: any) {
  * @description 该函数接受服务器id，返回服务器状态。
  **/
 async function serverStatus(serverId: number): Promise<Response> {
+    console.log("serverStatus called for server id " + serverId);
     const status = {
         success: { status: "正常运行", textColor: "white", bgColor: "green" },
-        notOperatingTime: { status: "非运营时间", textColor: "black", bgColor: "yellow" },
+        notOperatingTime: { status: "非运行时间", textColor: "black", bgColor: "yellow" },
         noStatusIndicator: { status: "未设置状态指示器", textColor: "black", bgColor: "gray" },
         timeout: { status: "请求超时", textColor: "black", bgColor: "red" },
         fail: { status: "服务器异常", textColor: "black", bgColor: "red" },
@@ -41,8 +42,7 @@ async function serverStatus(serverId: number): Promise<Response> {
     // 如果服务器不存在,没有设置statusFetchTarget,或者不在运营时间，短路返回对应状态
     if (!server) { return new Response(JSON.stringify(status.notExist), { headers }); }
     else if (!server.statusFetchTarget) { return new Response(JSON.stringify(status.noStatusIndicator), { headers }); }
-    else if (!server.opTime.always) {
-        // for non-always operating time, check if current time is in the operating time
+    else if (!server.opTime.always) { // for non-always operating time, check if current time is in the operating time
         // opTime is Beijing time
         const start = server.opTime.start;
         const end = server.opTime.end;
@@ -54,17 +54,29 @@ async function serverStatus(serverId: number): Promise<Response> {
 
     // 运用statusFetchTarget获取服务器状态
     const srvHealthCheckApi = server.statusFetchTarget + await retrivePortValue(server);
-    console.log(`fetching ${srvHealthCheckApi} for server status of id ${serverId}`)
+
     const timeoutPromise = new Promise<Response>((resolve, reject) => {
         const timeoutId = setTimeout(() => {
             reject(new Error("请求超时: " + srvHealthCheckApi));
         }, config.serverStatusTimeout * 1000);
 
-        fetch(srvHealthCheckApi).then(res => {
+        fetch(srvHealthCheckApi).then(async res => {
             clearTimeout(timeoutId);
-            if (res.ok) {
+            if (res.ok && server.statusFetchExpect === "simple") {
+                console.log("simple check ok for server id " + serverId + " at " + srvHealthCheckApi + " with status " + res.status + " " + res.statusText);
                 resolve(new Response(JSON.stringify(status.success), { headers }));
+            } else if (res.ok && server.statusFetchExpect === "json") {
+                const healthCheckJson: any = await res.json();
+                if (healthCheckJson.online) {
+                    console.log("json check ok for server id " + serverId + " at " + srvHealthCheckApi);
+                    resolve(new Response(JSON.stringify(status.success), { headers }));
+                }
+                else {
+                    console.log("json check failed for server id " + serverId + " at " + srvHealthCheckApi + " with json " + JSON.stringify(healthCheckJson));
+                    resolve(new Response(JSON.stringify(status.fail), { headers }));
+                }
             } else {
+                console.error("check failed for server id " + serverId + " at " + srvHealthCheckApi + " with status " + res.status + " " + res.statusText + " and got " + await res.text());
                 resolve(new Response(JSON.stringify(status.fail), { headers }));
             }
         }).catch(err => {
@@ -169,7 +181,7 @@ async function createPage(): Promise<string> {
             // return css; //dev css
             return res.text();
         } else {
-            console.log("Failed to fetch css from github, use hard-coded css");
+            console.error("Failed to fetch css from github, use hard-coded css");
             return css;
         }
     }).catch(() => {
@@ -187,7 +199,6 @@ async function createPage(): Promise<string> {
  **/
 async function createServerCard(server: any): Promise<string> {
     const portValue = await retrivePortValue(server);
-    console.log(portValue);
     return htmlBase.serverPageCard
         .replace(/<!-- SERVER_NAME-->/g, server.name)
         .replace(/SERVER_STATUS_ELEMENT_ID/g, server.id + generateUniqueId()) // generate unique id
@@ -213,7 +224,7 @@ async function createServersPage(): Promise<string> {
             // return css; //dev css
             return res.text();
         } else {
-            console.log("Failed to fetch css from github, use hard-coded css");
+            console.error("Failed to fetch css from github, use hard-coded css");
             return css;
         }
     }).catch(() => {
