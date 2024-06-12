@@ -21,7 +21,6 @@ async function retrivePortValue(server: any) {
  * @description 该函数接受服务器id，返回服务器状态。
  **/
 async function serverStatus(serverId: number): Promise<Response> {
-    console.log("serverStatus called for server id " + serverId);
     const status = {
         success: { status: "正常运行", textColor: "white", bgColor: "green" },
         notOperatingTime: { status: "非运行时间", textColor: "black", bgColor: "yellow" },
@@ -63,12 +62,12 @@ async function serverStatus(serverId: number): Promise<Response> {
         fetch(srvHealthCheckApi).then(async res => {
             clearTimeout(timeoutId);
             if (res.ok && server.statusFetchExpect === "simple") {
-                console.log("simple check ok for server id " + serverId + " at " + srvHealthCheckApi + " with status " + res.status + " " + res.statusText);
+                // console.log("simple check ok for server id " + serverId + " at " + srvHealthCheckApi + " with status " + res.status + " " + res.statusText);
                 resolve(new Response(JSON.stringify(status.success), { headers }));
             } else if (res.ok && server.statusFetchExpect === "json") {
                 const healthCheckJson: any = await res.json();
                 if (healthCheckJson.online) {
-                    console.log("json check ok for server id " + serverId + " at " + srvHealthCheckApi);
+                    // console.log("json check ok for server id " + serverId + " at " + srvHealthCheckApi);
                     resolve(new Response(JSON.stringify(status.success), { headers }));
                 }
                 else {

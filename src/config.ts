@@ -159,7 +159,8 @@ export const config = {
             portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // port will be appended by the worker
+            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
+            statusFetchTarget: "https://api.mcsrvstat.us/3/server.aha1.top:",
             statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
@@ -176,7 +177,7 @@ export const config = {
             port: { allocation: "static", value: 56576 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/aha1.falixsrv.me:", // port will be appended by the worker
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/aha1.falixsrv.me:",
             statusFetchExpect: "simple", // res.ok = online, 404 = offline
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
