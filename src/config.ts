@@ -167,10 +167,10 @@ export const config = {
             name: "Minecraft Bedrock",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "localhost",
-            port: { allocation: "static", value: 19134 },
+            port: { allocation: "static", value: 19133 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // port will be appended by the worker
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcb.aha1.top:", // port will be appended by the worker
             statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
