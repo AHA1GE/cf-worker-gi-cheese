@@ -119,7 +119,7 @@ export const config = {
         {
             id: 0,
             opTime: { always: false, start: 6, end: 23 }, // {always: true, start: 0, end: 24
-            name: "GI Grasscutter服务器",
+            name: "原神 Grasscutter",
             manual: "仅在北京时间06:00-23:00运行。版本4.0，支持国际服和国服。请下载4.0客户端，使用第三方启动器设置服务器地址并启动游戏。下面的链接提供了中文语音的客户端。使用帐号test和任意密码登陆。",
             domainName: "gayshit.aha1.top",
             port: { allocation: "static", value: 8443 }, // {allocation: "dynamic", value: 0}
@@ -136,7 +136,7 @@ export const config = {
         {
             id: 1,
             opTime: { always: true, start: 0, end: 24 },
-            name: "Minecraft Java服务器",
+            name: "Minecraft Java",
             manual: `
                 24/7 原版服务器，无插件。生存模式。
                 已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。
@@ -164,7 +164,7 @@ export const config = {
         {
             id: 2,
             opTime: { always: false, start: 6, end: 23 },
-            name: "Minecraft Bedrock服务器",
+            name: "Minecraft Bedrock",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "localhost",
             port: { allocation: "static", value: 19134 },
@@ -180,7 +180,7 @@ export const config = {
         {
             id: 3,
             opTime: { always: false, start: 24, end: 24 },
-            name: "Minecraft Bedrock服务器 on Falix",
+            name: "Minecraft Bedrock on Falix",
             manual: "Falix上的免费服务器，不会自动运行。原版基岩服务器，无插件。生存模式。请联系我启动服务器。",
             domainName: "aha1.falixsrv.me",
             port: { allocation: "static", value: 56576 },
