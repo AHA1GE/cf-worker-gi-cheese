@@ -167,7 +167,7 @@ export const config = {
             name: "Minecraft Bedrock服务器",
             manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
             domainName: "localhost",
-            port: { allocation: "static", value: 19132 },
+            port: { allocation: "static", value: 19134 },
             protocol: "udp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // port will be appended by the worker
