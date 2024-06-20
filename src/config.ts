@@ -160,8 +160,8 @@ export const config = {
             id: 2,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock",
-            manual: "内网服务器，仅在北京时间06:00-23:00运行。原版基岩服务器，无插件。生存模式。请在discord上联系我获取服务器信息与连接方法。",
-            domainName: "localhost",
+            manual: "官方版BE服务器，仅在北京时间06:00-23:00运行。无插件，生存模式，正版验证。",
+            domainName: "mcbe.aha1.top",
             port: { allocation: "static", value: 19133 },
             protocol: "udp",
             statusUrl: "/server/status/",
@@ -176,7 +176,7 @@ export const config = {
             id: 3,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
-            manual: `Purpur插件服务器，Java基岩均可加入。仅在北京时间06:00-23:00运行。生存模式。基岩客户端请使用19133端口以ipv6连接。Java客户端请使用25565端口连接。
+            manual: `Purpur Via插件服务器，Java基岩均可加入，仅在北京时间06:00-23:00运行。生存模式，正版验证。基岩客户端请使用19133端口以ipv6连接。
                 <span onclick="window.location.href='https://mcje.aha1.top/map';"
                     style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
                     onmouseout="this.style.textDecoration='none';">
