@@ -149,7 +149,7 @@ export const config = {
             statusUrl: "/server/status/",
             // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
             statusFetchTarget: "https://api.mcsrvstat.us/3/server.aha1.top:",
-            statusFetchExpect: "json",
+            statusFetchExpect: "simple", // res.ok = online, 404 = offline
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费启动器" },
@@ -174,7 +174,7 @@ export const config = {
         },
         {
             id: 3,
-            opTime: { always: false, start: 24, end: 24 },
+            opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
             manual: `Purpur插件服务器，Java基岩均可加入。仅在北京时间06:00-23:00运行。生存模式。基岩客户端请使用19133端口以ipv6连接。Java客户端请使用25565端口连接。
                 <span onclick="window.location.href='https://mcje.aha1.top/map';"
@@ -188,7 +188,7 @@ export const config = {
             protocol: "tcp",
             statusUrl: "/server/status/",
             statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/mcje.aha1.top:",
-            statusFetchExpect: "simple", // res.ok = online, 404 = offline
+            statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },

@@ -29,11 +29,11 @@ async function serverStatus(serverId: number): Promise<Response> {
         fail: { status: "服务器异常", textColor: "black", bgColor: "red" },
         notExist: { status: "服务器不存在", textColor: "black", bgColor: "red" },
     }
-    // 设置响应头，返回json格式，sniff off，1分钟缓存
+    // 设置响应头，返回json格式，sniff off，5分钟缓存
     const headers = new Headers();
     headers.set("Content-Type", "application/json");
     headers.set("X-Content-Type-Options", "nosniff");
-    headers.set("Cache-Control", "public, max-age=60");
+    headers.set("Cache-Control", "public, max-age=300");
 
     // 从config中找到对应id的服务器
     const server = config.servers.find((server) => server.id === serverId);
