@@ -141,11 +141,6 @@ export const config = {
                 24/7 原版服务器，无插件。生存模式。
                 已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。
                 如有插件建议或请求，请在留言板提出。
-                <span onclick="window.location.href='https://servermap.aha1.top/';"
-                    style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
-                    onmouseout="this.style.textDecoration='none';">
-                    查看地图->
-                </span>
                 `,
             domainName: "server.aha1.top",
             port: { allocation: "dynamic", value: 0 },
@@ -170,7 +165,7 @@ export const config = {
             port: { allocation: "static", value: 19133 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcb.aha1.top:", // port will be appended by the worker
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // port will be appended by the worker
             statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
@@ -180,13 +175,19 @@ export const config = {
         {
             id: 3,
             opTime: { always: false, start: 24, end: 24 },
-            name: "Minecraft Bedrock on Falix",
-            manual: "Falix上的免费服务器，不会自动运行。原版基岩服务器，无插件。生存模式。请联系我启动服务器。",
-            domainName: "aha1.falixsrv.me",
-            port: { allocation: "static", value: 56576 },
-            protocol: "udp",
+            name: "Minecraft Via",
+            manual: `Purpur插件服务器，Java基岩均可加入。仅在北京时间06:00-23:00运行。生存模式。基岩客户端请使用19133端口以ipv6连接。Java客户端请使用25565端口连接。
+                <span onclick="window.location.href='https://mcje.aha1.top/map';"
+                    style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
+                    onmouseout="this.style.textDecoration='none';">
+                    查看地图->
+                </span>
+            `,
+            domainName: "mcje.aha1.top",
+            port: { allocation: "static", value: 25565 },
+            protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/aha1.falixsrv.me:",
+            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/mcje.aha1.top:",
             statusFetchExpect: "simple", // res.ok = online, 404 = offline
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
