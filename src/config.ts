@@ -148,7 +148,25 @@ export const config = {
             protocol: "tcp",
             statusUrl: "/server/status/",
             // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
-            statusFetchTarget: "https://api.mcsrvstat.us/3/server.aha1.top:",
+            /**
+             * ** API Endpoint **
+             * Use the following endpoint to get the status of a server: https://api.mcsrvstat.us/3/<address>
+             * For Bedrock servers, please use the following endpoint: https://api.mcsrvstat.us/bedrock/3/<address>
+             * The data is returned as application/json and is currently cached for 1 minute.
+             * 
+             * ** HTTP status code endpoint **
+             * If you only want to know if a server is online/offline, the HTTP status code endpoint is for you.
+             * This is especially useful if you use some kind of monitoring software that understands HTTP status codes.
+             * Use the following endpoint: https://api.mcsrvstat.us/simple/<address>
+             * For Bedrock servers, use this endpoint: https://api.mcsrvstat.us/bedrock/simple/<address>
+             * Will return 200 OK for online servers and 404 Not Found for offline servers.
+             * 
+             * ** Icon endpoint **
+             * While the normal endpoint will give you a Base64 version of the server icon, if one is returned by the server, sometimes a direct link to the icon is needed.
+             * Use the following endpoint: https://api.mcsrvstat.us/icon/<address>
+             * A 64x64 PNG image will always be returned. A default Minecraft icon will be returned for servers without an icon and for offline servers.
+             */
+            statusFetchTarget: "https://api.mcsrvstat.us/simple/server.aha1.top:",
             statusFetchExpect: "simple", // res.ok = online, 404 = offline
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
@@ -160,7 +178,10 @@ export const config = {
             id: 2,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock",
-            manual: "官方版BE服务器，仅在北京时间06:00-23:00运行。无插件，生存模式，正版验证。IPv4: 19134, IPv6: 19133.",
+            manual: `官方版BE服务器，仅在北京时间06:00-23:00运行。<br>
+                无插件，生存模式，正版验证。<br>
+                IPv4端口：19134，IPv6端口：19133。
+            `,
             domainName: "mcbe.aha1.top",
             port: { allocation: "static", value: 19134 },
             protocol: "udp",
@@ -176,8 +197,10 @@ export const config = {
             id: 3,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
-            manual: `Purpur Via插件服务器，Java基岩均可加入，仅在北京时间06:00-23:00运行。生存模式，正版验证。Bedrock: 19133, Java: 25565. <br>
-                <span onclick="window.location.href='https://mcje.aha1.top/map';"
+            manual: `最新Purpur服务器，带Via和Geyser，仅在北京时间06:00-23:00运行。<br>
+                生存模式，正版验证，。<br>
+                基岩端口：19132、19133；Java端口：25565. <br>
+                <span onclick="window.location.href='https://mcjemap.aha1.top';"
                     style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
                     onmouseout="this.style.textDecoration='none';">
                     查看地图->
@@ -187,7 +210,7 @@ export const config = {
             port: { allocation: "static", value: 25565 },
             protocol: "tcp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/simple/mcje.aha1.top:",
+            statusFetchTarget: "https://api.mcsrvstat.us/3/mcje.aha1.top:",
             statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
