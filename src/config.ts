@@ -115,6 +115,25 @@ export const config = {
 
     serverStatusTimeout: 5, //seconds
 
+    /** **** API Endpoints ****
+     * ** JSON API Endpoint **
+     * Use the following endpoint to get the status of a server: https://api.mcsrvstat.us/3/<address>
+     * For Bedrock servers, please use the following endpoint: https://api.mcsrvstat.us/bedrock/3/<address>
+     * The data is returned as application/json and is currently cached for 1 minute.
+     * 
+     * ** HTTP status code endpoint **
+     * If you only want to know if a server is online/offline, the HTTP status code endpoint is for you.
+     * This is especially useful if you use some kind of monitoring software that understands HTTP status codes.
+     * Use the following endpoint: https://api.mcsrvstat.us/simple/<address>
+     * For Bedrock servers, use this endpoint: https://api.mcsrvstat.us/bedrock/simple/<address>
+     * Will return 200 OK for online servers and 404 Not Found for offline servers.
+     * 
+     * ** Icon endpoint **
+     * While the normal endpoint will give you a Base64 version of the server icon, if one is returned by the server, sometimes a direct link to the icon is needed.
+     * Use the following endpoint: https://api.mcsrvstat.us/icon/<address>
+     * A 64x64 PNG image will always be returned. A default Minecraft icon will be returned for servers without an icon and for offline servers.
+    */
+
     servers: [
         {
             id: 0,
@@ -147,26 +166,8 @@ export const config = {
             portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
             protocol: "tcp",
             statusUrl: "/server/status/",
-            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos issue
-            /**
-             * ** API Endpoint **
-             * Use the following endpoint to get the status of a server: https://api.mcsrvstat.us/3/<address>
-             * For Bedrock servers, please use the following endpoint: https://api.mcsrvstat.us/bedrock/3/<address>
-             * The data is returned as application/json and is currently cached for 1 minute.
-             * 
-             * ** HTTP status code endpoint **
-             * If you only want to know if a server is online/offline, the HTTP status code endpoint is for you.
-             * This is especially useful if you use some kind of monitoring software that understands HTTP status codes.
-             * Use the following endpoint: https://api.mcsrvstat.us/simple/<address>
-             * For Bedrock servers, use this endpoint: https://api.mcsrvstat.us/bedrock/simple/<address>
-             * Will return 200 OK for online servers and 404 Not Found for offline servers.
-             * 
-             * ** Icon endpoint **
-             * While the normal endpoint will give you a Base64 version of the server icon, if one is returned by the server, sometimes a direct link to the icon is needed.
-             * Use the following endpoint: https://api.mcsrvstat.us/icon/<address>
-             * A 64x64 PNG image will always be returned. A default Minecraft icon will be returned for servers without an icon and for offline servers.
-             */
-            statusFetchTarget: "https://api.mcsrvstat.us/simple/server.aha1.top:",
+            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos prevent using this
+            statusFetchTarget: "https://api.mcsrvstat.us/simple/server.aha1.top:", // port will be appended by the worker
             statusFetchExpect: "simple", // res.ok = online, 404 = offline
             downloadLinks: [
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
@@ -186,7 +187,8 @@ export const config = {
             port: { allocation: "static", value: 19134 },
             protocol: "udp",
             statusUrl: "/server/status/",
-            statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // port will be appended by the worker
+            // statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // cf dns A record not recognized by the api
+            statusFetchTarget: "https://api.mcstatus.io/v2/status/bedrock/mcbe.aha1.top:",
             statusFetchExpect: "json",
             downloadLinks: [
                 { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
