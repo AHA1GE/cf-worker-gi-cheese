@@ -105,7 +105,7 @@ export const config = {
         {
             isOnGithub: false, //下载地址是否在github上
             name: "我的私服",
-            url: "https://vnology.synology.me:5001/sharing/pYnmaMcCc", //项目的github repo地址或者下载页面的地址
+            url: "https://vno.dofor.fun/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs", //项目的github repo地址或者下载页面的地址
             astIndex: 1, //项目的github release asset index
             website: "server", //项目的官网或者discord地址
             desc: "私人服务器。",
