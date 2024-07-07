@@ -156,8 +156,8 @@ export const config = {
             opTime: { always: true, start: 0, end: 24 },
             name: "Minecraft Java",
             manual: `
-                24/7 原版服务器，无插件。生存模式。
-                已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。
+                原版服务器，无插件，24/7运行，生存模式。<br>
+                已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。<br>
                 如有插件建议或请求，请在留言板提出。
                 `,
             domainName: "server.aha1.top",
@@ -178,8 +178,8 @@ export const config = {
             id: 2,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Bedrock",
-            manual: `官方版BE服务器，仅在北京时间06:00-23:00运行。<br>
-                无插件，生存模式，正版验证。<br>
+            manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
+                仅在北京时间06:00-23:00运行。<br>
                 IPv4端口：19134，IPv6端口：19133。
             `,
             domainName: "mcbe.aha1.top",
@@ -198,8 +198,8 @@ export const config = {
             id: 3,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
-            manual: `最新Purpur服务器，带Via和Geyser，仅在北京时间06:00-23:00运行。<br>
-                生存模式，正版验证，。<br>
+            manual: `最新Purpur服务器，双端，生存模式，正版验证。<br>
+                仅在北京时间06:00-23:00运行。<br>
                 基岩端口：19132、19133；Java端口：25565. <br>
                 <span onclick="window.location.href='https://mcjemap.aha1.top';"
                     style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
