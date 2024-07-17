@@ -180,7 +180,7 @@ export const config = {
             name: "Minecraft Bedrock",
             manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
                 仅在北京时间06:00-23:00运行。<br>
-                IPv4端口：19134，IPv6端口：19133。
+                IPv4端口：19134，IPv6端口：19133
             `,
             domainName: "mcbe.aha1.top",
             port: { allocation: "static", value: 19134 },
@@ -200,7 +200,7 @@ export const config = {
             name: "Minecraft Via",
             manual: `最新Purpur服务器，双端，生存模式，正版验证。<br>
                 仅在北京时间06:00-23:00运行。<br>
-                基岩端口：19132、19133；Java端口：25565. <br>
+                基岩端口：19132、19133；Java端口：25565 <br>
                 <span onclick="window.location.href='https://mcjemap.aha1.top';"
                     style="cursor: pointer; text-decoration: none;" onmouseover="this.style.textDecoration='underline';"
                     onmouseout="this.style.textDecoration='none';">
