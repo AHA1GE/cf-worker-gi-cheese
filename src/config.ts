@@ -94,6 +94,15 @@ export const config = {
             manual: "打开下载页面，寻找正确的repo，通常最新的repo会以当前版本的热门角色命名。下载后按照Readme进行安装或编译。同时需要下载正确的客户端。完成下载和安装后按照Readme的指示启动游戏。",
         },
         {
+            isOnGithub: false, //下载地址是否在github上
+            name: "ZZZ私服",
+            url: "https://git.xeondev.com/NewEriduPubSec/JaneDoe-ZS", //项目的github repo地址或者下载页面的地址
+            astIndex: 0, //项目的github release asset index
+            website: "https://discord.gg/reversedrooms", //项目的官网或者discord地址
+            desc: "由BladeXeon制作的开源绝区零私服。支持全部角色，采用Rust编写。",
+            manual: "首先访问discord获取最新信息。下载后按照Readme进行安装或编译。同时需要下载正确的客户端。完成下载和安装后按照Readme的指示启动游戏。",
+        },
+        {
             isOnGithub: false,
             name: "辅助吧",
             url: "https://www.fuzhu86.com/",
