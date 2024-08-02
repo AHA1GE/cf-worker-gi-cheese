@@ -114,7 +114,7 @@ export const config = {
         {
             isOnGithub: false, //下载地址是否在github上
             name: "我的私服",
-            url: "https://vno.dofor.fun/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs", //项目的github repo地址或者下载页面的地址
+            url: "https://vno.dofor.fun/sharing/UAnm9wwz2", //项目的github repo地址或者下载页面的地址
             astIndex: 1, //项目的github release asset index
             website: "server", //项目的官网或者discord地址
             desc: "私人服务器。",
@@ -157,7 +157,7 @@ export const config = {
             statusFetchExpect: "simple", // placeholder
             downloadLinks: [
                 { url: 'https://pan.baidu.com/s/1r7sWxasKZRJYqixGRRf8BQ?pwd=gays', name: "百度网盘", desc: "提取码：gays" },
-                { url: 'https://vno.dofor.fun/d/s/xvXclBjNPkWSeDt2FZ4z5j3GYql8rtAG/2FyQ3GD4ny6Xuk97V0c4Cchd1_m84rUq-LbCAJaGOXgs', name: "群晖NAS", desc: "直接下载" },
+                { url: 'https://vno.dofor.fun/sharing/UAnm9wwz2', name: "群晖NAS", desc: "直接下载" },
             ]
         },
         {
