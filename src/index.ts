@@ -12,9 +12,16 @@ async function retrivePortValue(server: any) {
             // retrive port from dweet.io
             const response = await fetch(server.portDweet);
             const json = await response.json() as any;
-            return json.with[0].content.port as string;
+            // if "this=successful" return the port
+            // if "this=fialed with=404 because='we couldn't find this'", return "OFFLINE", else return "ERROR!"
+            if (json.this === "successful") return json.with[0].content.port as string;
+            if (json.this === "failed" && json.with === 404) {
+                console.warn(`Failed to retrive dynamic port for server id ${server.id} at ${server.portDweet}, message: ${json.because}`);
+                return "OFFLINE";
+            }
+            throw json.toString();
         } catch (error: any) {
-            console.error(`Failed to retrive dynamic port for server id ${server.id} at ${server.portDweet} with error ${error}`);
+            console.error(`Failed to retrive dynamic port for server id ${server.id} at ${server.portDweet}, error: ${error}`);
             return "ERROR!";
         }
     }
