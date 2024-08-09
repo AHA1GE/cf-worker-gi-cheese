@@ -14,8 +14,8 @@ async function retrivePortValue(server: any) {
             const json = await response.json() as any;
             return json.with[0].content.port as string;
         } catch (error: any) {
-            console.error("Failed to fetch port value from " + server.port.fetchTarget + " with error: " + error);
-            return "动态端口获取错误！";
+            console.error(`Failed to retrive dynamic port for server id ${server.id} at ${server.portDweet} with error ${error}`);
+            return "ERROR!";
         }
     }
 }
