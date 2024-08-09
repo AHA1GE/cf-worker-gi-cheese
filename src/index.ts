@@ -8,10 +8,15 @@ async function retrivePortValue(server: any) {
     if (server.port.allocation === "static") {
         return server.port.value as string;
     } else {
-        // retrive port from dweet.io
-        const response = await fetch(server.portDweet);
-        const json = await response.json() as any;
-        return json.with[0].content.port as string;
+        try {
+            // retrive port from dweet.io
+            const response = await fetch(server.portDweet);
+            const json = await response.json() as any;
+            return json.with[0].content.port as string;
+        } catch (error: any) {
+            console.error("Failed to fetch port value from " + server.port.fetchTarget + " with error: " + error);
+            return "动态端口获取错误！";
+        }
     }
 }
 
