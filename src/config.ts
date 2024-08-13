@@ -161,49 +161,6 @@ export const config = {
             ]
         },
         {
-            id: 1,
-            opTime: { always: true, start: 0, end: 24 },
-            name: "Minecraft Java",
-            manual: `
-                原版服务器，无插件，24/7运行，生存模式。<br>
-                已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。<br>
-                如有插件建议或请求，请在留言板提出。
-                `,
-            domainName: "server.aha1.top",
-            port: { allocation: "dynamic", value: 0 },
-            portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
-            protocol: "tcp",
-            statusUrl: "/server/status/",
-            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos prevent using this
-            statusFetchTarget: "https://api.mcsrvstat.us/simple/server.aha1.top:", // port will be appended by the worker
-            statusFetchExpect: "simple", // res.ok = online, 404 = offline
-            downloadLinks: [
-                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
-                { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费启动器" },
-                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft！" },
-            ]
-        },
-        {
-            id: 2,
-            opTime: { always: false, start: 6, end: 23 },
-            name: "Minecraft Bedrock",
-            manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
-                仅在北京时间06:00-23:00运行。<br>
-                IPv4端口：19134，IPv6端口：19133
-            `,
-            domainName: "mcbe.aha1.top",
-            port: { allocation: "static", value: 19134 },
-            protocol: "udp",
-            statusUrl: "/server/status/",
-            // statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // cf dns A record not recognized by the api
-            statusFetchTarget: "https://api.mcstatus.io/v2/status/bedrock/mcbe.aha1.top:",
-            statusFetchExpect: "json",
-            downloadLinks: [
-                { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
-                { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
-            ]
-        },
-        {
             id: 3,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
@@ -228,5 +185,50 @@ export const config = {
                 { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
             ]
         },
+        /*         
+        {
+            id: 1,
+            opTime: { always: true, start: 0, end: 24 },
+            name: "Minecraft Java",
+            manual: `
+                    原版服务器，无插件，24/7运行，生存模式。<br>
+                    已开启正版验证，需要使用微软/Mojang账号登录才能进入服务器。<br>
+                    如有插件建议或请求，请在留言板提出。
+                    `,
+            domainName: "server.aha1.top",
+            port: { allocation: "dynamic", value: 0 },
+            portDweet: "https://dweet.io/get/latest/dweet/for/d848eca0-7f50-4450-a6cd-bdb1ec5f3f7e",
+            protocol: "tcp",
+            statusUrl: "/server/status/",
+            // statusFetchTarget: "https://mcapi.us/server/status?ip=server.aha1.top&port=", // cf ddos prevent using this
+            statusFetchTarget: "https://api.mcsrvstat.us/simple/server.aha1.top:", // port will be appended by the worker
+            statusFetchExpect: "simple", // res.ok = online, 404 = offline
+            downloadLinks: [
+                { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
+                { url: 'https://hmcl.huangyuhui.net/', name: "HMCL", desc: "免费启动器" },
+                { url: 'https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch', name: "pojavLauncher", desc: "在手机上运行Java版Minecraft！" },
+            ]
+        },
+        {
+            id: 2,
+            opTime: { always: false, start: 6, end: 23 },
+            name: "Minecraft Bedrock",
+            manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
+                    仅在北京时间06:00-23:00运行。<br>
+                    IPv4端口：19134，IPv6端口：19133
+                `,
+            domainName: "mcbe.aha1.top",
+            port: { allocation: "static", value: 19134 },
+            protocol: "udp",
+            statusUrl: "/server/status/",
+            // statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // cf dns A record not recognized by the api
+            statusFetchTarget: "https://api.mcstatus.io/v2/status/bedrock/mcbe.aha1.top:",
+            statusFetchExpect: "json",
+            downloadLinks: [
+                { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
+                { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
+            ]
+        },
+        */
     ]
 }
