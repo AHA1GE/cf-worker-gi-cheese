@@ -161,6 +161,26 @@ export const config = {
             ]
         },
         {
+            id: 2,
+            opTime: { always: false, start: 6, end: 23 },
+            name: "Minecraft Bedrock",
+            manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
+                    仅在北京时间06:00-23:00运行。<br>
+                    IPv4端口：19134，IPv6端口：19133
+                `,
+            domainName: "mcbe.aha1.top",
+            port: { allocation: "static", value: 19134 },
+            protocol: "udp",
+            statusUrl: "/server/status/",
+            // statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // cf dns A record not recognized by the api
+            statusFetchTarget: "https://api.mcstatus.io/v2/status/bedrock/mcbe.aha1.top:",
+            statusFetchExpect: "json",
+            downloadLinks: [
+                { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
+                { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
+            ]
+        },
+        {
             id: 3,
             opTime: { always: false, start: 6, end: 23 },
             name: "Minecraft Via",
@@ -183,26 +203,6 @@ export const config = {
                 { url: 'https://www.minecraft.net/about-minecraft', name: "官方启动器", desc: "原汁原味，好！" },
                 { url: 'https://apps.apple.com/us/app/minecraft/id479516143', name: "iOS APP Store", desc: "原汁原味，好！" },
                 { url: 'https://play.google.com/store/apps/details?id=com.mojang.minecraftpe', name: "Android Google Play", desc: "原汁原味，好！" },
-            ]
-        },
-        {
-            id: 2,
-            opTime: { always: false, start: 6, end: 23 },
-            name: "Minecraft Bedrock",
-            manual: `官方版BE服务器，无插件，生存模式，正版验证。<br>
-                    仅在北京时间06:00-23:00运行。<br>
-                    IPv4端口：19134，IPv6端口：19133
-                `,
-            domainName: "mcbe.aha1.top",
-            port: { allocation: "static", value: 19134 },
-            protocol: "udp",
-            statusUrl: "/server/status/",
-            // statusFetchTarget: "https://api.mcsrvstat.us/bedrock/3/mcbe.aha1.top:", // cf dns A record not recognized by the api
-            statusFetchTarget: "https://api.mcstatus.io/v2/status/bedrock/mcbe.aha1.top:",
-            statusFetchExpect: "json",
-            downloadLinks: [
-                { url: 'https://playit.gg/account/tunnels', name: "playit.gg", desc: "通过playit.gg的隧道连接" },
-                { url: 'https://www.govfrp.com/?page=panel&module=proxies', name: "SYTfrp", desc: "通过SYTfrp的隧道连接" },
             ]
         },
         /*
