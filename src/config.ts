@@ -38,12 +38,21 @@ export const config = {
             desc: "免费！基于计算机视觉的辅助工具，所有服务器及云游戏均可使用。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请根据Github上的ReadMe所展示的教程操作各个功能。",
         },
-        {
+        { // Minty is trasfered to Shika-hub, see below
             isOnGithub: true,
-            name: "Minty",
+            name: "Minty (kindawindytoday)",
             url: "https://github.com/kindawindytoday/Minty-Releases",
             astIndex: 0,
             website: "https://discord.gg/kindawindytoday",
+            desc: "免费！功能简略的辅助工具，仅限国际服。",
+            manual: "可能即将停止维护，请使用Shika！首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
+        },
+        {
+            isOnGithub: true,
+            name: "Minty (Shika-hub)",
+            url: "https://github.com/shika-hub/shika-releases",
+            astIndex: 0,
+            website: "https://discord.gg/shika-hub",
             desc: "免费！功能简略的辅助工具，仅限国际服。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
         },
