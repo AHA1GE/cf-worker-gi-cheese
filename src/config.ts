@@ -38,23 +38,23 @@ export const config = {
             desc: "免费！基于计算机视觉的辅助工具，所有服务器及云游戏均可使用。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请根据Github上的ReadMe所展示的教程操作各个功能。",
         },
-        { // Minty is trasfered to Shika-hub, see below
-            isOnGithub: true,
-            name: "Minty (kindawindytoday)",
-            url: "https://github.com/kindawindytoday/Minty-Releases",
-            astIndex: 0,
-            website: "https://discord.gg/kindawindytoday",
-            desc: "免费！功能简略的辅助工具，仅限国际服。",
-            manual: "可能即将停止维护，请使用Shika！首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
-        },
         {
             isOnGithub: true,
-            name: "Minty (Shika-hub)",
+            name: "Minty for >4.8 (Shika-hub)",
             url: "https://github.com/shika-hub/shika-releases",
             astIndex: 0,
             website: "https://discord.gg/shika-hub",
             desc: "免费！功能简略的辅助工具，仅限国际服。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
+        },
+        { // Minty is trasfered to Shika-hub, see below
+            isOnGithub: true,
+            name: "Minty old (kindawindytoday) (Deprecated)",
+            url: "https://github.com/kindawindytoday/Minty-Releases",
+            astIndex: 0,
+            website: "https://discord.gg/kindawindytoday",
+            desc: "免费！功能简略的辅助工具，仅限国际服。",
+            manual: "新版本游戏请使用Shika！该版本仅适用于4.8及以下版本的游戏，已经不再维护。",
         },
         {
             isOnGithub: true,
@@ -69,7 +69,7 @@ export const config = {
             isOnGithub: false,
             name: "Akebi",
             // url: "https://mega.nz/file/xKtFBaaa#Rpj-HUs9Q6Sy2JHLuHoLYPQdDQbxHXkFZpoefxD45ec",
-            url: "https://genshincheat.net/#linkk",
+            url: "https://genshincheat.net/",
             astIndex: 0,
             website: "https://discord.gg/akebi",
             desc: "收费！功能丰富的辅助工具，支持国际服和国服。",
@@ -100,7 +100,7 @@ export const config = {
             astIndex: 0, //项目的github release asset index
             website: "https://discord.gg/reversedrooms", //项目的官网或者discord地址
             desc: "由BladeXeon制作的私服。通常拥有最新的内容，但游戏特性的可用性无保障。",
-            manual: "打开下载页面，寻找正确的repo，通常最新的repo会以当前版本的热门角色命名。下载后按照Readme进行安装或编译。同时需要下载正确的客户端。完成下载和安装后按照Readme的指示启动游戏。",
+            manual: "打开下载页面，寻找正确的repo，通常最新的repo会以当前版本的热门角色命名。下载后按照Readme进行安装或编译。同时BT下载对应的客户端。完成下载和安装后按照Readme的指示启动游戏。",
         },
         {
             isOnGithub: false, //下载地址是否在github上
