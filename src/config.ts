@@ -22,6 +22,21 @@ export const config = {
         // },
         {
             isOnGithub: true,
+            name: "Korepi",
+            url: "https://github.com/Cotton-Buds/calculator",
+            astIndex: 0,
+            website: "https://korepi.com/zh/",
+            desc: "免费！功能丰富的辅助工具，支持国际服。付费获取更多功能和国服支持！",
+            manual: `
+            前往官方Discord，获取免费使用密钥。
+            首先点击官方Discord内的链接下载最新版。
+            然后使用管理员权限启动你下载的程序，程序启动后会产生你的HWID。
+            将你的HWID发送给官方Discord内的机器人，然后你会收到一个密钥文件。
+            将密钥文件复制到程序所在的目录即可使用。
+            </p><div><img src='https://i.postimg.cc/5y19q6yJ/korepi-qq.jpg' width=200 height=200 border='0' alt='korepi-qq'/></div><p>`,
+        },
+        {
+            isOnGithub: true,
             name: "Snap-Hutao",
             url: "https://github.com/DGP-Studio/Snap.Hutao",
             astIndex: 1,
@@ -55,15 +70,6 @@ export const config = {
             website: "https://discord.gg/kindawindytoday",
             desc: "免费！功能简略的辅助工具，仅限国际服。",
             manual: "新版本游戏请使用Shika！该版本仅适用于4.8及以下版本的游戏，已经不再维护。",
-        },
-        {
-            isOnGithub: true,
-            name: "Korepi",
-            url: "https://github.com/Cotton-Buds/calculator",
-            astIndex: 0,
-            website: "https://korepi.com/zh/",
-            desc: "免费！功能丰富的辅助工具，支持国际服。付费获取更多功能和国服支持！",
-            manual: "首先前往官方Discord，获取免费使用密钥。前往官方Discord内的链接下载最新版。使用管理员权限启动你下载的程序。程序启动后会产生你的HWID。将你的HWID发送给官方Discord内的机器人，然后你会收到一个密钥文件。将密钥文件复制到程序所在的目录即可使用。",
         },
         {
             isOnGithub: false,
