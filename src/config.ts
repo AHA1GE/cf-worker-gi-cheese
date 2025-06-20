@@ -25,7 +25,7 @@ export const config = {
             name: "Unicore",
             url: "https://discord.gg/unicore",
             astIndex: 0,
-            website: "https://korepi.com/zh/",
+            website: "https://t.me/UnicoreSupport",
             desc: "收费但提供试用！功能丰富的辅助工具，支持包括大陆服在内的所有服务器。",
             manual: `
             前往官方Discord，根据指引购买使用`,
