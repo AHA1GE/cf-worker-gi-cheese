@@ -27,8 +27,7 @@ export const config = {
             astIndex: 0,
             website: "https://t.me/UnicoreSupport",
             desc: "收费但提供试用！功能丰富的辅助工具，支持包括大陆服在内的所有服务器。",
-            manual: `
-            前往官方Discord，根据指引购买使用`,
+            manual: "前往官方Discord，根据指引试用后购买使用。",
         },
         {
             isOnGithub: true,
