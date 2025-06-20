@@ -21,6 +21,16 @@ export const config = {
         //     manual: "简单使用教程", 
         // },
         {
+            isOnGithub: false,
+            name: "Unicore",
+            url: "https://discord.gg/unicore",
+            astIndex: 0,
+            website: "https://korepi.com/zh/",
+            desc: "收费但提供试用！功能丰富的辅助工具，支持包括大陆服在内的所有服务器。",
+            manual: `
+            前往官方Discord，根据指引购买使用`,
+        },
+        {
             isOnGithub: true,
             name: "Korepi",
             url: "https://github.com/Cotton-Buds/calculator",
@@ -32,8 +42,7 @@ export const config = {
             首先点击官方Discord内的链接下载最新版。
             然后使用管理员权限启动你下载的程序，程序启动后会产生你的HWID。
             将你的HWID发送给官方Discord内的机器人，然后你会收到一个密钥文件。
-            将密钥文件复制到程序所在的目录即可使用。
-            </p><div><img src='https://i.postimg.cc/5y19q6yJ/korepi-qq.jpg' width=200 height=200 border='0' alt='korepi-qq'/></div><p>`,
+            将密钥文件复制到程序所在的目录即可使用。`,
         },
         {
             isOnGithub: true,
@@ -62,15 +71,15 @@ export const config = {
             desc: "免费！功能简略的辅助工具，仅限国际服。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
         },
-        { // Minty is trasfered to Shika-hub, see below
-            isOnGithub: true,
-            name: "Minty old (kindawindytoday) (Deprecated)",
-            url: "https://github.com/kindawindytoday/Minty-Releases",
-            astIndex: 0,
-            website: "https://discord.gg/kindawindytoday",
-            desc: "免费！功能简略的辅助工具，仅限国际服。",
-            manual: "新版本游戏请使用Shika！该版本仅适用于4.8及以下版本的游戏，已经不再维护。",
-        },
+        // { // Minty is transferred to Shika-hub, see above
+        //     isOnGithub: true,
+        //     name: "Minty old (kindawindytoday) (Deprecated)",
+        //     url: "https://github.com/kindawindytoday/Minty-Releases",
+        //     astIndex: 0,
+        //     website: "https://discord.gg/kindawindytoday",
+        //     desc: "免费！功能简略的辅助工具，仅限国际服。",
+        //     manual: "新版本游戏请使用Shika！该版本仅适用于4.8及以下版本的游戏，已经不再维护。",
+        // },
         {
             isOnGithub: false,
             name: "Akebi",
