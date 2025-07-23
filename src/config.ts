@@ -26,7 +26,7 @@ export const config = {
             url: "https://t.me/UnicoreSupport",
             astIndex: 0,
             website: "https://discord.gg/unicore",
-            desc: "收费但提供试用！功能丰富的辅助工具，支持包括大陆服在内的所有服务器。",
+            desc: "收费但提供试用！功能丰富的辅助工具，支持NA北美服务器。",
             manual: "前往官方Discord，根据指引试用后购买使用。",
         },
         {
@@ -35,7 +35,7 @@ export const config = {
             url: "https://github.com/Cotton-Buds/calculator",
             astIndex: 0,
             website: "https://korepi.com/zh/",
-            desc: "免费！功能丰富的辅助工具，支持国际服。付费获取更多功能和国服支持！",
+            desc: "免费！功能丰富的辅助工具，支持NA北美服务器。付费获取更多功能和国服支持！",
             manual: `
             前往官方Discord，获取免费使用密钥。
             首先点击官方Discord内的链接下载最新版。
@@ -63,22 +63,22 @@ export const config = {
         },
         {
             isOnGithub: true,
-            name: "Minty for >4.8 (Shika-hub)",
+            name: "Shika",
             url: "https://github.com/shika-hub/shika-releases",
             astIndex: 0,
             website: "https://discord.gg/shika-hub",
-            desc: "免费！功能简略的辅助工具，仅限国际服。",
+            desc: "功能丰富的辅助工具，仅限NA北美服务器。",
             manual: "首先前往Github下载最新版本，然后使用管理员权限启动你下载的程序。程序启动后请在弹出的文件选择框内选择你的游戏主程序，注意不要选择启动器程序。Minty会启动游戏，在开门后请按照菜单内的信息开启相应功能。",
         },
-        // { // Minty is transferred to Shika-hub, see above
-        //     isOnGithub: true,
-        //     name: "Minty old (kindawindytoday) (Deprecated)",
-        //     url: "https://github.com/kindawindytoday/Minty-Releases",
-        //     astIndex: 0,
-        //     website: "https://discord.gg/kindawindytoday",
-        //     desc: "免费！功能简略的辅助工具，仅限国际服。",
-        //     manual: "新版本游戏请使用Shika！该版本仅适用于4.8及以下版本的游戏，已经不再维护。",
-        // },
+        {
+            isOnGithub: true,
+            name: "Minty",
+            url: "https://windy.mysellauth.com/",
+            astIndex: 0,
+            website: "https://discord.gg/STJYEC3nXc",
+            desc: "大量免费试用！功能丰富的辅助工具，仅限NA北美服务器。已不再维护GI，其他米游可用。",
+            manual: "已经不再维护。",
+        },
         {
             isOnGithub: false,
             name: "Akebi",
@@ -86,7 +86,7 @@ export const config = {
             url: "https://genshincheat.net/",
             astIndex: 0,
             website: "https://discord.gg/akebi",
-            desc: "收费！功能丰富的辅助工具，支持国际服和国服。",
+            desc: "收费！功能丰富的辅助工具，支持NA北美服务器。",
             manual: "前往官方链接下载最新版。然后在官方Sellix或代购人员处购买密钥。启动程序并输入密钥，选择游戏的主程序，注意不要选择启动器程序，然后在开门后请按照菜单内的信息开启相应功能。",
         },
         {
@@ -119,7 +119,7 @@ export const config = {
         {
             isOnGithub: false, //下载地址是否在github上
             name: "ZZZ私服",
-            url: "https://git.xeondev.com/NewEriduPubSec/JaneDoe-ZS", //项目的github repo地址或者下载页面的地址
+            url: "https://git.xeondev.com", //项目的github repo地址或者下载页面的地址
             astIndex: 0, //项目的github release asset index
             website: "https://discord.gg/reversedrooms", //项目的官网或者discord地址
             desc: "由BladeXeon制作的开源绝区零私服。支持全部角色，采用Rust编写。",
