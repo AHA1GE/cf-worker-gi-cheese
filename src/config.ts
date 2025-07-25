@@ -75,7 +75,7 @@ export const config = {
             name: "Minty",
             url: "https://windy.mysellauth.com/",
             astIndex: 0,
-            website: "https://discord.gg/STJYEC3nXc",
+            website: "discord.gg/kindawindy",
             desc: "大量免费试用！功能丰富的辅助工具，仅限NA北美服务器。已不再维护GI，其他米游可用。",
             manual: "已经不再维护。",
         },
