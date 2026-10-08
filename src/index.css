@@ -1,9 +1,10 @@
 /* ============================================================
-   Futuristic neon / pixel / hack / metal theme
-   - Theme tokens via light-dark(); auto (OS) + manual override
+   Cyber theme v2 — magenta/cyan duotone on pure black
+   - flat opaque panels, chamfered clip-path corners, HUD brackets
+   - neon gradient-border buttons, subtle glitch furniture
+   - theme tokens via light-dark(); auto (OS) + manual override
      through #color-scheme radios (:has() fallback works w/o JS)
-   - Random animated background layers (.bg-*)
-   - Motion is wrapped in prefers-reduced-motion guards
+   - all motion guarded by prefers-reduced-motion
    ============================================================ */
 
 @font-face {
@@ -16,85 +17,107 @@
     --font-pixel: "Silkscreen", ui-monospace, "Courier New", monospace;
     --font-body: system-ui, "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
 
+    /* duotone neon */
+    --cyan-neon: #40c9ff;
+    --magenta-neon: #e81cff;
+
     /* ---- theme tokens ---- */
     --theme-canvas: light-dark(
-        hsl(210 25% 94%),
-        hsl(220 32% 6%)
+        hsl(210 25% 96%),
+        hsl(240 28% 3%)
     );
     --theme-text: light-dark(
-        hsl(220 30% 14%),
-        hsl(180 25% 90%)
+        hsl(230 30% 10%),
+        hsl(182 30% 92%)
     );
     --theme-text-dim: light-dark(
-        hsl(220 15% 38%),
-        hsl(185 12% 58%)
+        hsl(230 12% 42%),
+        hsl(186 14% 58%)
     );
     --theme-accent: light-dark(
-        hsl(190 95% 28%),
-        hsl(185 100% 55%)
+        hsl(196 100% 30%),
+        var(--cyan-neon)
     );
     --theme-accent-2: light-dark(
-        hsl(315 85% 36%),
-        hsl(315 100% 65%)
+        hsl(296 100% 36%),
+        var(--magenta-neon)
     );
 
-    /* metal panels */
+    --grad-neon: linear-gradient(-45deg, var(--magenta-neon) 0%, var(--cyan-neon) 100%);
+    /* glow twin is dark-mode only (blur glow does not read on white) */
+    --grad-neon-soft: linear-gradient(-45deg, light-dark(transparent, #fc00ff), light-dark(transparent, #00dbde));
+
+    /* flat opaque panels */
     --theme-panel: light-dark(
-        hsl(210 30% 98% / .58),
-        hsl(222 26% 14% / .58)
+        hsl(210 30% 99%),
+        hsl(240 22% 6%)
     );
-    --theme-panel-solid: light-dark(
-        hsl(210 30% 97%),
-        hsl(222 26% 12%)
+    --theme-panel-2: light-dark(
+        hsl(210 20% 95%),
+        hsl(240 18% 9%)
     );
-    --theme-panel-edge: light-dark(
-        hsl(215 25% 68%),
-        hsl(192 35% 28%)
+    --theme-edge: light-dark(
+        hsl(210 20% 70%),
+        hsl(196 90% 55% / .40)
     );
-    --theme-bevel-light: light-dark(
-        hsl(0 0% 100% / .9),
-        hsl(190 50% 75% / .14)
-    );
-    --theme-bevel-dark: light-dark(
-        hsl(220 30% 40% / .30),
-        hsl(220 45% 2% / .75)
-    );
-    --theme-glow: light-dark(
-        hsl(190 95% 30% / .20),
-        hsl(185 100% 55% / .30)
-    );
-    --theme-glow-strong: light-dark(
-        hsl(190 95% 30% / .35),
-        hsl(185 100% 55% / .55)
+    --theme-edge-strong: light-dark(
+        hsl(196 100% 28%),
+        hsl(196 100% 62% / .85)
     );
 
     /* buttons */
-    --button-face: light-dark(hsl(210 20% 93%), hsl(220 22% 16%));
-    --button-face-hi: light-dark(hsl(210 25% 99%), hsl(220 22% 22%));
-    --button-text: light-dark(hsl(220 30% 16%), hsl(180 25% 88%));
-    --button-edge: light-dark(hsl(215 25% 60%), hsl(192 35% 32%));
+    --btn-face: light-dark(
+        hsl(210 30% 99%),
+        hsl(240 20% 5%)
+    );
+    --btn-text: light-dark(
+        hsl(230 30% 10%),
+        hsl(182 25% 90%)
+    );
+
+    /* drop-shadow payloads: hard offset in light mode, neon glow in dark */
+    --shadow-glow: light-dark(
+        6px 6px 0 hsl(230 30% 8% / .25),
+        0 0 18px hsl(196 100% 60% / .20)
+    );
+    --shadow-glow-strong: light-dark(
+        6px 6px 0 hsl(230 30% 8% / .40),
+        0 0 26px hsl(196 100% 60% / .35)
+    );
+    --shadow-glow-magenta: light-dark(
+        0 0 0 transparent,
+        0 0 22px hsl(296 100% 60% / .28)
+    );
+
+    /* chamfered corner language (clip-path; box-shadow would be clipped,
+       so all elevation uses drop-shadow) */
+    --cut-card: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+    --cut-pop: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+    --cut-tag: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+
+    --bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     /* status badges */
-    --status-ok-fg: light-dark(hsl(150 85% 20%), hsl(150 95% 60%));
-    --status-ok-bg: light-dark(hsl(150 80% 40% / .14), hsl(150 95% 45% / .16));
-    --status-ok-edge: light-dark(hsl(150 70% 35% / .5), hsl(150 90% 45% / .55));
-    --status-warn-fg: light-dark(hsl(40 90% 26%), hsl(45 100% 60%));
-    --status-warn-bg: light-dark(hsl(40 90% 50% / .16), hsl(45 100% 50% / .14));
-    --status-warn-edge: light-dark(hsl(40 85% 45% / .5), hsl(45 100% 55% / .55));
-    --status-error-fg: light-dark(hsl(0 80% 30%), hsl(0 100% 65%));
-    --status-error-bg: light-dark(hsl(0 85% 50% / .12), hsl(0 100% 50% / .16));
-    --status-error-edge: light-dark(hsl(0 75% 45% / .5), hsl(0 100% 55% / .55));
-    --status-neutral-fg: light-dark(hsl(220 10% 30%), hsl(220 10% 68%));
-    --status-neutral-bg: light-dark(hsl(220 10% 40% / .10), hsl(220 10% 55% / .14));
-    --status-neutral-edge: light-dark(hsl(220 10% 40% / .4), hsl(220 10% 55% / .45));
+    --status-ok-fg: light-dark(hsl(158 100% 22%), hsl(158 100% 62%));
+    --status-ok-bg: light-dark(hsl(158 100% 40% / .16), hsl(158 100% 50% / .12));
+    --status-ok-edge: light-dark(hsl(158 100% 30% / .7), hsl(158 100% 50% / .6));
+    --status-warn-fg: light-dark(hsl(48 100% 24%), hsl(48 100% 60%));
+    --status-warn-bg: light-dark(hsl(48 100% 50% / .2), hsl(48 100% 50% / .10));
+    --status-warn-edge: light-dark(hsl(48 100% 40% / .7), hsl(48 100% 55% / .55));
+    --status-error-fg: light-dark(hsl(345 100% 34%), hsl(345 100% 66%));
+    --status-error-bg: light-dark(hsl(345 100% 50% / .12), hsl(345 100% 50% / .12));
+    --status-error-edge: light-dark(hsl(345 100% 45% / .7), hsl(345 100% 55% / .55));
+    --status-neutral-fg: light-dark(hsl(222 12% 28%), hsl(222 10% 68%));
+    --status-neutral-bg: light-dark(hsl(222 12% 40% / .1), hsl(222 10% 55% / .1));
+    --status-neutral-edge: light-dark(hsl(222 12% 40% / .5), hsl(222 10% 55% / .45));
 
     /* background layers (hue vars are randomized per page load by JS) */
     --bg-grid-line: light-dark(
-        hsl(215 45% 30% / .17),
-        hsl(var(--hue, 185) 95% 62% / .21)
+        hsl(215 35% 25% / .18),
+        hsl(var(--hue, 196) 100% 62% / .28)
     );
-    --bg-scanline: light-dark(hsl(220 40% 20% / .05), hsl(0 0% 0% / .16));
-    --bg-blob-a: light-dark(.10, .17);
+    --bg-scanline: light-dark(hsl(230 40% 15% / .05), hsl(0 0% 0% / .22));
+    --bg-blob-a: light-dark(.08, .14);
 
     accent-color: var(--theme-accent);
 
@@ -128,7 +151,7 @@ body {
 
 h1, h2, h3, legend, .button, [data-status] {
     font-family: var(--font-pixel);
-    letter-spacing: .04em;
+    letter-spacing: .05em;
 }
 
 a {
@@ -136,8 +159,8 @@ a {
 }
 
 ::selection {
-    background: var(--theme-accent);
-    color: var(--theme-canvas);
+    background: var(--theme-accent-2);
+    color: white;
 }
 
 :focus-visible {
@@ -154,8 +177,24 @@ a {
     overflow: hidden;
     pointer-events: none;
     background:
-        radial-gradient(130% 100% at 50% 0%, transparent 55%, light-dark(hsl(220 45% 40% / .12), hsl(224 60% 2% / .85)) 100%),
+        radial-gradient(130% 100% at 50% 0%, transparent 55%, light-dark(hsl(220 40% 45% / .12), hsl(245 60% 2% / .9)) 100%),
         var(--theme-canvas);
+}
+
+/* horizon glow line at the grid's vanishing edge */
+.bg::before {
+    content: "";
+    position: absolute;
+    top: calc(36% - 1px);
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 4%,
+        hsl(var(--hue-2, 315) 100% 60% / .45),
+        hsl(var(--hue, 196) 100% 60% / .45),
+        transparent 96%);
+    filter: drop-shadow(0 0 8px hsl(var(--hue, 196) 100% 60% / .55));
 }
 
 .bg-grid {
@@ -181,7 +220,7 @@ a {
     aspect-ratio: 1;
     translate: -50% -50%;
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, hsl(var(--hue, 185) 100% 60% / var(--bg-blob-a)), transparent 65%);
+    background: radial-gradient(circle at 50% 50%, hsl(var(--hue, 196) 100% 60% / var(--bg-blob-a)), transparent 65%);
 }
 
 .bg-blob.b2 {
@@ -194,7 +233,7 @@ a {
     left: var(--x, 50%);
     top: var(--y, 90%);
     width: 34vmax;
-    background: radial-gradient(circle at 50% 50%, hsl(calc(var(--hue, 185) + 30) 100% 60% / calc(var(--bg-blob-a) * .8)), transparent 65%);
+    background: radial-gradient(circle at 50% 50%, hsl(calc(var(--hue, 196) + 40) 90% 55% / calc(var(--bg-blob-a) * .8)), transparent 65%);
 }
 
 .bg-scanlines {
@@ -210,7 +249,7 @@ a {
     right: 0;
     top: 0;
     height: 12%;
-    background: linear-gradient(to bottom, transparent, hsl(var(--hue, 185) 100% 72% / .06), transparent);
+    background: linear-gradient(to bottom, transparent, hsl(var(--hue, 196) 100% 72% / .06), transparent);
 }
 
 .bg-glitch {
@@ -264,9 +303,9 @@ h1 {
     font-size: clamp(1.9rem, 5vw, 2.7rem);
     color: var(--theme-text);
     text-shadow:
-        0 0 10px var(--theme-glow-strong),
-        2px 0 0 color-mix(in oklab, var(--theme-accent), transparent 60%),
-        -2px 0 0 color-mix(in oklab, var(--theme-accent-2), transparent 60%);
+        3px 0 0 color-mix(in srgb, var(--magenta-neon), transparent 35%),
+        -3px 0 0 color-mix(in srgb, var(--cyan-neon), transparent 35%),
+        0 0 16px light-dark(transparent, hsl(196 100% 60% / .45));
 }
 
 main {
@@ -283,24 +322,43 @@ main h2::before {
     color: var(--theme-accent);
 }
 
-/* readme panel: brushed metal + bevel */
+/* blinking terminal cursor after section titles */
+main h2::after {
+    content: "_";
+    color: var(--theme-accent);
+    margin-left: .12em;
+}
+
+/* ---- HUD panels (cards / readme / popover) ---- */
+
+/* corner brackets shared by all HUD panels */
+.card::before,
+main .readme::before,
+.popover-dialog::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    pointer-events: none;
+    background:
+        linear-gradient(var(--theme-accent), var(--theme-accent)) top left / 16px 1px,
+        linear-gradient(var(--theme-accent), var(--theme-accent)) top left / 1px 16px,
+        linear-gradient(var(--theme-accent), var(--theme-accent)) bottom right / 16px 1px,
+        linear-gradient(var(--theme-accent), var(--theme-accent)) bottom right / 1px 16px;
+    background-repeat: no-repeat;
+    opacity: .65;
+}
+
+/* readme panel */
 main .readme {
     position: relative;
     margin: .5rem auto 1rem;
     padding: 1rem 1.5rem;
     max-width: 72rem;
     text-align: left;
-    border: 1px solid var(--theme-panel-edge);
-    border-radius: 1rem;
-    corner-shape: notch;
-    background:
-        linear-gradient(165deg, var(--theme-bevel-light), transparent 34%),
-        var(--theme-panel);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark);
+    border: 1px solid var(--theme-edge);
+    clip-path: var(--cut-pop);
+    background: var(--theme-panel);
+    filter: drop-shadow(var(--shadow-glow));
 }
 
 main .cards-container {
@@ -309,9 +367,10 @@ main .cards-container {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    counter-reset: hud-card;
 }
 
-/* ---- cards: notched metal panels ---- */
+/* ---- cards ---- */
 
 .card {
     min-width: 300px;
@@ -326,47 +385,39 @@ main .cards-container {
     padding: 0rem 2rem 2rem 2rem;
 
     position: relative;
-    border: 1px solid var(--theme-panel-edge);
-    border-radius: 1.25rem;
-    corner-shape: notch;
-
-    /* glossed glass over brushed metal */
-    background:
-        repeating-linear-gradient(0deg, transparent 0 3px, var(--bg-scanline) 3px 4px),
-        linear-gradient(160deg, var(--theme-bevel-light), transparent 30%),
-        var(--theme-panel);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark);
+    border: 1px solid var(--theme-edge);
+    clip-path: var(--cut-card);
+    background: var(--theme-panel);
+    filter: drop-shadow(var(--shadow-glow));
 }
 
-/* inner blueprint frame */
-.card::before,
-main .readme::before {
-    content: "";
+/* HUD index tag */
+.card::after {
+    content: counter(hud-card, decimal-leading-zero);
+    counter-increment: hud-card;
     position: absolute;
-    inset: 7px;
-    border: 1px dashed color-mix(in oklab, var(--theme-accent), transparent 72%);
-    border-radius: .8rem;
-    corner-shape: notch;
-    pointer-events: none;
+    top: 1.5rem;
+    right: 1.2rem;
+    font-family: var(--font-pixel);
+    font-size: .68rem;
+    letter-spacing: .18em;
+    color: var(--theme-accent);
+    opacity: .85;
+}
+
+.card:hover {
+    border-color: var(--theme-edge-strong);
+    filter: drop-shadow(var(--shadow-glow-strong)) drop-shadow(var(--shadow-glow-magenta));
 }
 
 .card h2 {
     margin-top: 1.6rem;
     padding-bottom: .5rem;
-    border-bottom: 1px solid color-mix(in oklab, var(--theme-accent), transparent 60%);
+    border-bottom: 1px solid color-mix(in srgb, var(--theme-accent), transparent 60%);
 }
 
-.card:hover {
-    border-color: color-mix(in oklab, var(--theme-accent), transparent 35%);
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark),
-        0 0 20px var(--theme-glow),
-        0 10px 28px light-dark(hsl(220 30% 20% / .25), hsl(0 0% 0% / .5));
+.card:hover h2 {
+    color: var(--theme-accent);
 }
 
 /* Info styles */
@@ -382,12 +433,12 @@ main .readme::before {
     text-align: left;
 }
 
-/* status badge */
+/* ---- status badges: angular HUD chips ---- */
+
 [data-status] {
     display: inline-block;
     padding: .1rem .55rem;
-    border-radius: .3rem;
-    corner-shape: notch;
+    clip-path: var(--cut-tag);
     border: 1px solid var(--status-neutral-edge);
     color: var(--status-neutral-fg);
     background: var(--status-neutral-bg);
@@ -420,59 +471,47 @@ main .readme::before {
     text-shadow: 0 0 8px var(--status-error-fg);
 }
 
-/* ---- buttons: beveled mechanical keys ---- */
+/* ---- buttons: neon gradient frame ---- */
 
 .button {
-    background: linear-gradient(to bottom, var(--button-face-hi), var(--button-face));
-    color: var(--button-text);
-    border: 1px solid var(--button-edge);
-    border-radius: .4rem;
-    padding: .5rem 1rem;
+    background:
+        linear-gradient(var(--btn-face), var(--btn-face)) padding-box,
+        var(--grad-neon) border-box;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    color: var(--btn-text);
+    padding: .5rem 1.2rem;
     text-decoration: none;
     display: inline-block;
     margin-top: .5rem;
     font-size: .95rem;
     cursor: pointer;
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark);
+    transition:
+        color .3s ease-out,
+        translate .3s var(--bounce),
+        filter .3s ease-out;
 }
 
 .button:hover,
 .button:focus-visible {
     color: var(--theme-accent);
-    border-color: color-mix(in oklab, var(--theme-accent), transparent 35%);
-    text-shadow: 0 0 8px var(--theme-glow-strong);
     translate: 0 -1px;
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark),
-        0 0 14px var(--theme-glow);
+    filter: drop-shadow(0 0 10px light-dark(transparent, hsl(196 100% 60% / .45)));
 }
 
 .button:active {
     translate: 0 1px;
-    box-shadow:
-        inset -2px -2px 0 var(--theme-bevel-light),
-        inset 2px 2px 0 var(--theme-bevel-dark);
 }
 
 /* ---- popover ---- */
 
 .popover-dialog {
     padding: 1rem 1.25rem 2rem 1.25rem;
-    border: 1px solid color-mix(in oklab, var(--theme-accent), transparent 40%);
-    border-radius: 1rem;
-    corner-shape: notch;
+    border: 1px solid var(--theme-edge-strong);
+    clip-path: var(--cut-pop);
     color: var(--theme-text);
-    background:
-        linear-gradient(165deg, var(--theme-bevel-light), transparent 34%),
-        color-mix(in oklab, var(--theme-panel-solid), transparent 4%);
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark),
-        0 0 28px var(--theme-glow-strong),
-        0 16px 40px light-dark(hsl(220 30% 20% / .3), hsl(0 0% 0% / .6));
+    background: var(--theme-panel-2);
+    filter: drop-shadow(var(--shadow-glow-strong)) drop-shadow(var(--shadow-glow-magenta));
     max-width: min(92vw, 30rem);
 
     /* closed state; :popover-open flips it, transitions animate it */
@@ -491,9 +530,13 @@ main .readme::before {
 }
 
 .popover-dialog::backdrop {
-    background-color: light-dark(hsl(220 30% 45% / .25), hsl(222 45% 2% / .55));
+    background-color: light-dark(hsl(220 30% 45% / .25), hsl(245 45% 2% / .65));
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
+}
+
+.popover-dialog h3 {
+    color: var(--theme-accent);
 }
 
 .popover-dialog .server-popover .info-container,
@@ -514,45 +557,38 @@ main .readme::before {
 }
 
 .popover-dialog .popover-dialog-close-button {
-    border: 1px solid var(--button-edge);
+    border: 1px solid var(--theme-edge-strong);
+    clip-path: var(--cut-tag);
     display: inline-block;
     position: absolute;
     top: 0;
     right: 0;
-    border-radius: .4rem;
-    corner-shape: notch;
     line-height: 1.5rem;
     padding: 0 .5rem 0 .5rem;
     margin: 1rem 1rem 0 0;
-    background: linear-gradient(to bottom, var(--button-face-hi), var(--button-face));
-    color: var(--button-text);
+    background: var(--theme-panel);
+    color: var(--btn-text);
     font-family: var(--font-pixel);
     cursor: pointer;
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark);
+    transition:
+        color .25s ease-out,
+        translate .25s var(--bounce),
+        filter .25s ease-out,
+        background-color .25s ease-out;
 }
 
 .popover-dialog .popover-dialog-close-button:hover,
 .popover-dialog .popover-dialog-close-button:focus-visible {
     color: var(--theme-accent);
-    border-color: color-mix(in oklab, var(--theme-accent), transparent 35%);
-    text-shadow: 0 0 8px var(--theme-glow-strong);
     translate: 0 -1px;
-    box-shadow:
-        inset 2px 2px 0 var(--theme-bevel-light),
-        inset -2px -2px 0 var(--theme-bevel-dark),
-        0 0 14px var(--theme-glow);
+    filter: drop-shadow(0 0 8px light-dark(transparent, hsl(196 100% 60% / .5)));
 }
 
 .popover-dialog .popover-dialog-close-button:active {
     translate: 0 1px;
-    box-shadow:
-        inset -2px -2px 0 var(--theme-bevel-light),
-        inset 2px 2px 0 var(--theme-bevel-dark);
 }
 
-/* ---- theme switcher (Sys / Light / Dark) ---- */
+/* ---- theme switcher (系统 / 亮色 / 暗色) ---- */
 
 #color-scheme {
     position: fixed;
@@ -564,12 +600,12 @@ main .readme::before {
     margin: 0;
     padding: .55rem .4rem .35rem;
     min-inline-size: 0;
-    border: 1px solid color-mix(in oklab, var(--theme-accent), transparent 55%);
+    border: 1px solid color-mix(in srgb, var(--theme-accent), transparent 55%);
     border-radius: 6px;
     corner-shape: notch;
-    outline: 3px ridge color-mix(in oklab, var(--theme-accent), transparent 55%);
+    outline: 3px ridge color-mix(in srgb, var(--theme-accent), transparent 55%);
     outline-offset: 2px;
-    background: color-mix(in oklab, var(--theme-panel), transparent 30%);
+    background: color-mix(in srgb, var(--theme-panel), transparent 20%);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     color: var(--theme-text);
@@ -579,7 +615,7 @@ main .readme::before {
     font-size: .62rem;
     padding: 0 .5em;
     letter-spacing: .2em;
-    color: color-mix(in oklab, var(--theme-accent), transparent 20%);
+    color: color-mix(in srgb, var(--theme-accent), transparent 20%);
 }
 
 #color-scheme label {
@@ -607,7 +643,7 @@ main .readme::before {
     border-radius: 2px;
     corner-shape: notch;
     rotate: var(--rot);
-    outline: 1px solid color-mix(in oklab, var(--theme-text), transparent 50%);
+    outline: 1px solid color-mix(in srgb, var(--theme-text), transparent 50%);
     outline-offset: 2px;
     cursor: pointer;
 }
@@ -624,11 +660,11 @@ main .readme::before {
 #color-scheme label:has(:checked) {
     background: var(--theme-text);
     color: var(--theme-canvas);
-    box-shadow: 0 0 10px var(--theme-glow);
+    box-shadow: 0 0 10px light-dark(transparent, hsl(196 100% 60% / .5));
 }
 
 #color-scheme label:has(input:focus-visible) {
-    outline: 2px solid color-mix(in oklab, var(--theme-accent), transparent 35%);
+    outline: 2px solid color-mix(in srgb, var(--theme-accent), transparent 35%);
     outline-offset: -3px;
 }
 
@@ -651,7 +687,7 @@ footer {
 
 @media (prefers-reduced-motion: no-preference) {
 
-    /* theme + hover transitions, doc-style */
+    /* theme + hover transitions */
     body,
     header,
     main,
@@ -671,31 +707,22 @@ footer {
         transition-timing-function: ease-out;
     }
 
-    .card,
-    .button,
-    .popover-dialog .popover-dialog-close-button {
-        transition-duration: .2s;
-        transition-timing-function: ease-out;
-    }
-
     /* popover open/close (needs allow-discrete for display/overlay) */
     .popover-dialog {
-        transition-property: opacity, transform, display, overlay;
+        transition-property: opacity, transform, display, overlay, filter;
         transition-duration: .25s;
         transition-timing-function: ease-out;
         transition-behavior: allow-discrete;
     }
 
-    /* staggered entry */
-    header,
-    main .readme,
-    main .cards-container .card,
-    footer {
-        animation: rise-in .55s ease-out backwards;
-    }
+    /* Dynamic.css-style entries */
+    header { animation: materialize .6s ease-out backwards; }
 
-    main .readme { animation-delay: .1s; }
-    footer { animation-delay: .25s; }
+    main .readme { animation: come-in-left .55s ease-out .1s backwards; }
+
+    main .cards-container .card { animation: .55s ease-out backwards; }
+    main .cards-container .card:nth-of-type(odd) { animation-name: come-in-left; }
+    main .cards-container .card:nth-of-type(even) { animation-name: come-in-right; }
 
     main .cards-container .card:nth-of-type(1) { animation-delay: .18s; }
     main .cards-container .card:nth-of-type(2) { animation-delay: .26s; }
@@ -706,6 +733,13 @@ footer {
     main .cards-container .card:nth-of-type(7) { animation-delay: .66s; }
     main .cards-container .card:nth-of-type(8) { animation-delay: .74s; }
     main .cards-container .card:nth-of-type(n+9) { animation-delay: .8s; }
+
+    footer { animation: come-in-up .5s ease-out .3s backwards; }
+
+    /* subtle glitch furniture */
+    h1 { animation: h1-glitch 9s linear infinite; }
+
+    main h2::after { animation: cursor-blink 1.1s linear infinite; }
 
     /* background layers */
     .bg-grid { animation: bg-grid-scroll 7s linear infinite; }
@@ -724,11 +758,59 @@ footer {
     #color-scheme input:focus-visible { transition-timing-function: ease-in; }
 }
 
-@keyframes rise-in {
+@keyframes materialize {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes come-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-42px);
+    }
+}
+
+@keyframes come-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(42px);
+    }
+}
+
+@keyframes come-in-up {
     from {
         opacity: 0;
         transform: translateY(14px);
     }
+}
+
+/* chromatic shadow jitter, brief window only */
+@keyframes h1-glitch {
+    0%, 91%, 97%, 100% {
+        text-shadow:
+            3px 0 0 color-mix(in srgb, var(--magenta-neon), transparent 35%),
+            -3px 0 0 color-mix(in srgb, var(--cyan-neon), transparent 35%),
+            0 0 16px light-dark(transparent, hsl(196 100% 60% / .45));
+    }
+    92% {
+        text-shadow:
+            1px 2px 0 var(--magenta-neon),
+            -1px -2px 0 var(--cyan-neon),
+            0 0 16px light-dark(transparent, hsl(196 100% 60% / .45));
+    }
+    94% {
+        text-shadow:
+            4px -1px 0 var(--magenta-neon),
+            -4px 1px 0 var(--cyan-neon),
+            0 0 16px light-dark(transparent, hsl(196 100% 60% / .45));
+    }
+}
+
+@keyframes cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
 }
 
 /* ---- small screens ---- */
