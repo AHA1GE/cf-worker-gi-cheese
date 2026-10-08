@@ -13,12 +13,85 @@ export const htmlBase = {
     <title>原神辅助</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" href="/favicon.ico">
+    <script>
+        // apply saved theme before first paint to avoid a flash of the wrong scheme
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.style.colorScheme = t;
+                }
+            } catch (e) { }
+        })();
+    </script>
     <style>
         /* STYLESHEET */
     </style>
 </head>
 
 <body>
+    <div class="bg" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="bg-blob"></div>
+        <div class="bg-blob b2"></div>
+        <div class="bg-blob b3"></div>
+        <div class="bg-scanlines"></div>
+        <div class="bg-glitch"></div>
+    </div>
+    <fieldset id="color-scheme">
+        <legend>主题</legend>
+        <label for="cs-system" tabindex="0">
+            <input type="radio" id="cs-system" name="theme" value="system" tabindex="-1" checked="checked" /><span>系统</span>
+        </label>
+        <label for="cs-light" tabindex="0">
+            <input type="radio" id="cs-light" name="theme" value="light" tabindex="-1" /><span>亮色</span>
+        </label>
+        <label for="cs-dark" tabindex="0">
+            <input type="radio" id="cs-dark" name="theme" value="dark" tabindex="-1" /><span>暗色</span>
+        </label>
+    </fieldset>
+    <script>
+        // persist the theme choice and apply it immediately; CSS :has() handles the no-JS fallback
+        (function () {
+            var fieldset = document.getElementById("color-scheme");
+            if (!fieldset) return;
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "light" || saved === "dark") {
+                    var radio = fieldset.querySelector('input[value="' + saved + '"]');
+                    if (radio) radio.checked = true;
+                }
+            } catch (e) { }
+            fieldset.addEventListener("change", function (e) {
+                var value = e.target.value;
+                try {
+                    if (value === "light" || value === "dark") {
+                        localStorage.setItem("theme", value);
+                        document.documentElement.style.colorScheme = value;
+                    } else {
+                        localStorage.removeItem("theme");
+                        document.documentElement.style.colorScheme = "";
+                    }
+                } catch (err) { }
+            });
+        })();
+        // randomize the animated background palette and blob layout per page load
+        (function () {
+            var bg = document.querySelector(".bg");
+            if (!bg) return;
+            var palettes = [[185, 315], [95, 185], [35, 0], [265, 185], [150, 265]];
+            var palette = palettes[Math.floor(Math.random() * palettes.length)];
+            bg.style.setProperty("--hue", palette[0]);
+            bg.style.setProperty("--hue-2", palette[1]);
+            var blobs = bg.querySelectorAll(".bg-blob");
+            for (var i = 0; i < blobs.length; i++) {
+                blobs[i].style.setProperty("--x", Math.floor(Math.random() * 80 + 5) + "%");
+                blobs[i].style.setProperty("--y", Math.floor(Math.random() * 70 + 5) + "%");
+                blobs[i].style.setProperty("--dur", Math.floor(Math.random() * 45 + 45) + "s");
+                blobs[i].style.setProperty("--del", "-" + Math.floor(Math.random() * 60) + "s");
+            }
+        })();
+    </script>
     <header>
         <h1>原神辅助</h1>
     </header>
@@ -52,7 +125,7 @@ export const htmlBase = {
     <div class="popover-dialog" id="POPOVERID" popover>
         <button class="popover-dialog-close-button" popovertarget="POPOVERID">x</button>
         <div class="links-popover">
-            <h3><!-- PROJECT_NAME --></h2>
+            <h3><!-- PROJECT_NAME --></h3>
                 <div class="links-container">
                     <a class="button" href="PROJECT_WEBSITE">访问官网或Discord</a>
                     <a class="button" href="PROXIED_PROJECT_WEBSITE">通过代理访问官网或Discord</a><br>
@@ -76,12 +149,85 @@ export const htmlBase = {
     <title>私人服务器</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" href="/favicon.ico">
+    <script>
+        // apply saved theme before first paint to avoid a flash of the wrong scheme
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") {
+                    document.documentElement.style.colorScheme = t;
+                }
+            } catch (e) { }
+        })();
+    </script>
     <style>
         /* STYLESHEET */
     </style>
 </head>
 
 <body>
+    <div class="bg" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="bg-blob"></div>
+        <div class="bg-blob b2"></div>
+        <div class="bg-blob b3"></div>
+        <div class="bg-scanlines"></div>
+        <div class="bg-glitch"></div>
+    </div>
+    <fieldset id="color-scheme">
+        <legend>主题</legend>
+        <label for="cs-system" tabindex="0">
+            <input type="radio" id="cs-system" name="theme" value="system" tabindex="-1" checked="checked" /><span>系统</span>
+        </label>
+        <label for="cs-light" tabindex="0">
+            <input type="radio" id="cs-light" name="theme" value="light" tabindex="-1" /><span>亮色</span>
+        </label>
+        <label for="cs-dark" tabindex="0">
+            <input type="radio" id="cs-dark" name="theme" value="dark" tabindex="-1" /><span>暗色</span>
+        </label>
+    </fieldset>
+    <script>
+        // persist the theme choice and apply it immediately; CSS :has() handles the no-JS fallback
+        (function () {
+            var fieldset = document.getElementById("color-scheme");
+            if (!fieldset) return;
+            try {
+                var saved = localStorage.getItem("theme");
+                if (saved === "light" || saved === "dark") {
+                    var radio = fieldset.querySelector('input[value="' + saved + '"]');
+                    if (radio) radio.checked = true;
+                }
+            } catch (e) { }
+            fieldset.addEventListener("change", function (e) {
+                var value = e.target.value;
+                try {
+                    if (value === "light" || value === "dark") {
+                        localStorage.setItem("theme", value);
+                        document.documentElement.style.colorScheme = value;
+                    } else {
+                        localStorage.removeItem("theme");
+                        document.documentElement.style.colorScheme = "";
+                    }
+                } catch (err) { }
+            });
+        })();
+        // randomize the animated background palette and blob layout per page load
+        (function () {
+            var bg = document.querySelector(".bg");
+            if (!bg) return;
+            var palettes = [[185, 315], [95, 185], [35, 0], [265, 185], [150, 265]];
+            var palette = palettes[Math.floor(Math.random() * palettes.length)];
+            bg.style.setProperty("--hue", palette[0]);
+            bg.style.setProperty("--hue-2", palette[1]);
+            var blobs = bg.querySelectorAll(".bg-blob");
+            for (var i = 0; i < blobs.length; i++) {
+                blobs[i].style.setProperty("--x", Math.floor(Math.random() * 80 + 5) + "%");
+                blobs[i].style.setProperty("--y", Math.floor(Math.random() * 70 + 5) + "%");
+                blobs[i].style.setProperty("--dur", Math.floor(Math.random() * 45 + 45) + "s");
+                blobs[i].style.setProperty("--del", "-" + Math.floor(Math.random() * 60) + "s");
+            }
+        })();
+    </script>
     <header>
         <h1>私人服务器</h1>
     </header>
@@ -126,14 +272,13 @@ export const htmlBase = {
     </div>
     <script>
         async function JS_FUNC_NAME_updateStatus() {
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "正在获取状态...";
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "black";
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
+            var statusElement = document.getElementById("SERVER_STATUS_ELEMENT_ID");
+            statusElement.innerText = "正在获取状态...";
+            statusElement.dataset.status = "pending";
             const res = await fetch("SERVER_STATUS_URL");
             const statusRes = await res.json();
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = statusRes.status;
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = statusRes.textColor;
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = statusRes.bgColor;
+            statusElement.innerText = statusRes.status;
+            statusElement.dataset.status = statusRes.kind || "neutral";
         }
         JS_FUNC_NAME_updateStatus();
         setInterval(JS_FUNC_NAME_updateStatus, 300000);

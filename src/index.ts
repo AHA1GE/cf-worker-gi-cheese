@@ -34,12 +34,12 @@ async function retrivePortValue(server: any) {
  **/
 async function serverStatus(serverId: number): Promise<Response> {
     const status = {
-        success: { status: "正常运行", textColor: "white", bgColor: "green" },
-        notOperatingTime: { status: "非运行时间", textColor: "black", bgColor: "yellow" },
-        noStatusIndicator: { status: "未设置状态指示器", textColor: "black", bgColor: "gray" },
-        timeout: { status: "请求超时", textColor: "black", bgColor: "red" },
-        fail: { status: "服务器异常", textColor: "black", bgColor: "red" },
-        notExist: { status: "服务器不存在", textColor: "black", bgColor: "red" },
+        success: { status: "正常运行", kind: "ok" },
+        notOperatingTime: { status: "非运行时间", kind: "warn" },
+        noStatusIndicator: { status: "未设置状态指示器", kind: "neutral" },
+        timeout: { status: "请求超时", kind: "error" },
+        fail: { status: "服务器异常", kind: "error" },
+        notExist: { status: "服务器不存在", kind: "error" },
     }
     // 设置响应头，返回json格式，sniff off，5分钟缓存
     const headers = new Headers();
@@ -173,8 +173,8 @@ async function createCard(project: any): Promise<string> {
             .replace("PROXIED_PROJECT_WEBSITE", getProxiedUrl(config.proxier, project.website))
             .replace("PROJECT_URL", project.url)
             .replace("PROXIED_PROJECT_URL", getProxiedUrl(config.proxier, project.url))
-            .replace(`<a class="button" href="DOWNLOAD_LINK">下载最新版本</a>`, "<spaan>请前往官网</spaan>")
-            .replace(`<a class="button" href="PROXIED_DOWNLOAD_LINK">通过代理下载最新版本</a><br>`, "<spaan>下载</spaan><br>");
+            .replace(`<a class="button" href="DOWNLOAD_LINK">下载最新版本</a>`, "<span>请前往官网</span>")
+            .replace(`<a class="button" href="PROXIED_DOWNLOAD_LINK">通过代理下载最新版本</a><br>`, "<span>下载</span><br>");
     }
 
 }
@@ -186,20 +186,9 @@ async function createCard(project: any): Promise<string> {
  **/
 async function createPage(): Promise<string> {
     const cards = await Promise.all(config.projects.map(createCard));
-    // try fetch css from github, if failed, use local css
-    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => {
-        if (res.status === 200) {
-            // return css; //dev css
-            return res.text();
-        } else {
-            console.error("Failed to fetch css from github, use hard-coded css");
-            return css;
-        }
-    }).catch(() => {
-        return css;
-    });
+    // css is bundled at deploy time (src/css.ts is generated from src/index.css by build.py)
     return htmlBase.mainPage
-        .replace("/* STYLESHEET */", finalcss)
+        .replace("/* STYLESHEET */", () => css)
         .replace("<!-- README_CONTENT -->", config.readmeContent)
         .replace("<!-- CARDS -->", cards.join(""));
 }
@@ -230,19 +219,9 @@ async function createServerCard(server: any): Promise<string> {
  **/
 async function createServersPage(): Promise<string> {
     const cards = await Promise.all(config.servers.map(createServerCard));
-    const finalcss: any = await fetch("https://raw.githubusercontent.com/AHA1GE/cf-worker-gi-cheese/master/src/index.css", { cf: { cacheTtlByStatus: { "200-299": 3600, "404": 1, "500-599": 0 } } }).then((res) => {
-        if (res.status === 200) {
-            // return css; //dev css
-            return res.text();
-        } else {
-            console.error("Failed to fetch css from github, use hard-coded css");
-            return css;
-        }
-    }).catch(() => {
-        return css;
-    });
+    // css is bundled at deploy time (src/css.ts is generated from src/index.css by build.py)
     return htmlBase.serverPage
-        .replace("/* STYLESHEET */", finalcss)
+        .replace("/* STYLESHEET */", () => css)
         .replace("<!-- CARDS -->", cards.join(""));
 }
 

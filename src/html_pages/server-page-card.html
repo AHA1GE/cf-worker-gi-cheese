@@ -23,14 +23,13 @@
     </div>
     <script>
         async function JS_FUNC_NAME_updateStatus() {
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = "正在获取状态...";
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = "black";
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = "yellow";
+            var statusElement = document.getElementById("SERVER_STATUS_ELEMENT_ID");
+            statusElement.innerText = "正在获取状态...";
+            statusElement.dataset.status = "pending";
             const res = await fetch("SERVER_STATUS_URL");
             const statusRes = await res.json();
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").innerText = statusRes.status;
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.color = statusRes.textColor;
-            document.getElementById("SERVER_STATUS_ELEMENT_ID").style.backgroundColor = statusRes.bgColor;
+            statusElement.innerText = statusRes.status;
+            statusElement.dataset.status = statusRes.kind || "neutral";
         }
         JS_FUNC_NAME_updateStatus();
         setInterval(JS_FUNC_NAME_updateStatus, 300000);
